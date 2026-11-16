@@ -1,0 +1,127 @@
+{{- /*
+  Structured data (schema.org JSON-LD).
+
+  Site-wide: Organization + WebSite on every page.
+  Product pages: Product with Offer (+ BreadcrumbList).
+  Collection pages: CollectionPage + ItemList (+ BreadcrumbList).
+  Contact page: LocalBusiness with address, geo and opening hours.
+*/ -}}
+{{- $biz := .Site.Params.business -}}
+{{- $home := .Site.BaseURL -}}
+
+{{- $org := dict
+  "@type" "Organization"
+  "@id" (printf "%s#organization" $home)
+  "name" .Site.Title
+  "url" $home
+  "sameAs" (slice .Site.Params.facebook)
+  "contactPoint" (dict
+    "@type" "ContactPoint"
+    "telephone" $biz.phone
+    "contactType" "customer support"
+    "email" .Site.Params.paypal.business
+  )
+-}}
+{{- $website := dict
+  "@type" "WebSite"
+  "@id" (printf "%s#website" $home)
+  "url" $home
+  "name" .Site.Title
+  "publisher" (dict "@id" (printf "%s#organization" $home))
+  "potentialAction" (dict
+    "@type" "SearchAction"
+    "target" (printf "%ssearch/?q={search_term_string}" $home)
+    "query-input" "required name=search_term_string"
+  )
+-}}
+{{- $graph := slice $org $website -}}
+
+{{- /* ---- LocalBusiness on the contact page ---- */ -}}
+{{- if eq .Layout "contact" -}}
+  {{- $graph = $graph | append (dict
+    "@type" "Store"
+    "@id" (printf "%s#store" $home)
+    "name" $biz.name
+    "url" $home
+    "telephone" $biz.phone
+    "email" .Site.Params.paypal.business
+    "sameAs" (slice .Site.Params.facebook)
+    "image" (absURL "img/og-default.jpg")
+    "address" (dict
+      "@type" "PostalAddress"
+      "streetAddress" $biz.street
+      "addressLocality" "Koh Samui"
+      "addressRegion" "Surat Thani"
+      "postalCode" "84310"
+      "addressCountry" "TH"
+    )
+    "geo" (dict "@type" "GeoCoordinates" "latitude" $biz.lat "longitude" $biz.lng)
+    "hasMap" $biz.mapsUrl
+    "openingHoursSpecification" (slice (dict
+      "@type" "OpeningHoursSpecification"
+      "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday")
+      "opens" "09:00"
+      "closes" "19:30"
+    ))
+  ) -}}
+{{- end -}}
+
+{{- /* ---- Product + Breadcrumb ---- */ -}}
+{{- if and (eq .Section "products") .File -}}
+  {{- $imgs := slice -}}
+  {{- range .Params.images }}{{ $imgs = $imgs | append (absURL (strings.TrimPrefix "/" .)) }}{{ end -}}
+  {{- $price := .Params.price | default .Params.priceMin -}}
+  {{- $sku := .File.ContentBaseName -}}
+  {{- with .Params.variants }}{{ with index . 0 }}{{ with .id }}{{ $sku = . }}{{ end }}{{ end }}{{ end -}}
+  {{- $prod := dict
+    "@type" "Product"
+    "@id" (printf "%s#product" (absURL (strings.TrimPrefix "/" .RelPermalink)))
+    "name" .Title
+    "url" (absURL (strings.TrimPrefix "/" .RelPermalink))
+    "image" $imgs
+    "description" (.Params.description | default .Summary | plainify | htmlUnescape | replaceRE `\s+` " " | chomp)
+    "sku" $sku
+    "brand" (dict "@type" "Brand" "name" (.Params.vendor | default "GAYA"))
+    "offers" (dict
+      "@type" "Offer"
+      "url" (absURL (strings.TrimPrefix "/" .RelPermalink))
+      "price" (printf "%.2f" (float $price))
+      "priceCurrency" "USD"
+      "availability" "https://schema.org/InStock"
+      "itemCondition" "https://schema.org/NewCondition"
+      "seller" (dict "@id" (printf "%s#organization" $home))
+    )
+  -}}
+  {{- $graph = $graph | append $prod -}}
+  {{- $crumbs := slice (dict "@type" "ListItem" "position" 1 "name" "Home" "item" $home) -}}
+  {{- with site.GetPage "/collections/all-products" }}
+    {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" 2 "name" "All Products" "item" (absURL "collections/all-products/")) -}}
+  {{- end -}}
+  {{- $crumbs = $crumbs | append (dict "@type" "ListItem" "position" (add (len $crumbs) 1) "name" $.Title "item" (absURL (strings.TrimPrefix "/" $.RelPermalink))) -}}
+  {{- $graph = $graph | append (dict "@type" "BreadcrumbList" "itemListElement" $crumbs) -}}
+{{- end -}}
+
+{{- /* ---- Collection pages ---- */ -}}
+{{- if eq .Section "collections" -}}
+  {{- $items := slice -}}
+  {{- range $i, $h := .Params.products -}}
+    {{- with site.GetPage (printf "/products/%s" $h) -}}
+      {{- $items = $items | append (dict
+        "@type" "ListItem"
+        "position" (add $i 1)
+        "url" (absURL (strings.TrimPrefix "/" .RelPermalink))
+        "name" .Title) -}}
+    {{- end -}}
+  {{- end -}}
+  {{- if $items -}}
+    {{- $graph = $graph | append (dict
+      "@type" "CollectionPage"
+      "@id" (printf "%s#collection" (absURL (strings.TrimPrefix "/" .RelPermalink)))
+      "name" .Title
+      "url" (absURL (strings.TrimPrefix "/" .RelPermalink))
+      "mainEntity" (dict "@type" "ItemList" "numberOfItems" (len $items) "itemListElement" $items)
+    ) -}}
+  {{- end -}}
+{{- end -}}
+
+<script type="application/ld+json">{{ (dict "@context" "https://schema.org" "@graph" $graph) | jsonify | safeJS }}</script>

@@ -133,5 +133,30 @@ if os.path.exists(os.path.join(ROOT, "public", "order", "index.html")):
     fail("/order/ section index must not be generated (_build.render: never)")
 print("private pages: not in sitemap, noindex verified")
 
+# 9. structured data must be valid JSON with absolute URLs
+_ld_checked = 0
+for _f in ("products/beach-bag-2", "collections/bags", "pages/contact", ""):
+    _p = os.path.join(ROOT, "public", _f, "index.html")
+    if not os.path.exists(_p):
+        continue
+    _blocks = re.findall(r'<script type=application/ld\+json>(.*?)</script>', open(_p, errors="replace").read(), re.S)
+    if not _blocks:
+        fail(f"{_f or '/'}: no JSON-LD structured data")
+        continue
+    try:
+        _d = json.loads(_blocks[0])
+    except Exception as e:
+        fail(f"{_f or '/'}: invalid JSON-LD: {e}")
+        continue
+    _types = {n.get("@type") for n in _d.get("@graph", [])}
+    if not {"Organization", "WebSite"} <= _types:
+        fail(f"{_f or '/'}: JSON-LD missing Organization/WebSite")
+    for _n in _d.get("@graph", []):
+        _u = _n.get("url")
+        if isinstance(_u, str) and _u.startswith("/"):
+            fail(f"{_f or '/'}: JSON-LD url must be absolute, got {_u}")
+    _ld_checked += 1
+print(f"structured data: {_ld_checked} pages valid")
+
 print("VERIFY OK" if ok else "VERIFY FAILED")
 sys.exit(0 if ok else 1)
