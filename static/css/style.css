@@ -69,10 +69,15 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 }
 
 /* home */
-.hero-slideshow { position: relative; height: min(88vh, 860px); min-height: 420px; overflow: hidden; background: #10151b; max-width: 1120px; margin: 0 auto; }
+/* hero slides: source images are 16:9, so the stage keeps a 16:9 box and shows the
+   whole image (contain) instead of cropping it at arbitrary viewport heights. */
+.hero-slideshow { position: relative; aspect-ratio: 16 / 9; width: 100%; max-width: 1120px; margin: 0 auto; overflow: hidden; background: #10151b; }
+@supports not (aspect-ratio: 16 / 9) {
+  .hero-slideshow { height: 0; padding-bottom: 56.25%; }
+}
 .hero-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility .9s; }
 .hero-slide.is-active { opacity: 1; visibility: visible; }
-.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+.hero-slide img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .hero-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(10,14,18,.18), rgba(10,14,18,.34)); }
 .hero-brand { color: #fff; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: .35em; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
 .hero-heading { color: #fff; font-size: clamp(2.1rem, 5.4vw, 4rem); font-weight: 400; letter-spacing: .04em; text-shadow: 0 2px 28px rgba(0,0,0,.55); text-align: center; padding: 0 16px; }
