@@ -1,0 +1,117 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: alx/fishermenpants-com
+  branch: master
+
+media_folder: static/img
+public_folder: /img
+
+collections:
+  - name: products
+    label: Products
+    label_singular: Product
+    folder: content/products
+    create: true
+    preview_path: "/products/{{slug}}/"
+    fields:
+      - { label: Title, name: title, widget: string, required: true }
+      - { label: Price (USD), name: price, widget: number, required: true }
+      - { label: Compare-At Price (USD), name: compareAtMin, widget: number, required: false }
+      - label: Type
+        name: ptype
+        widget: select
+        required: false
+        options:
+          - wrap pants
+          - Dress
+          - kimonos
+          - bags
+          - Sarongs
+          - top
+          - scarves
+          - leather bracelets
+          - island shirts
+      - { label: Vendor, name: vendor, widget: string, required: false }
+      - label: Images
+        name: images
+        widget: list
+        required: false
+        fields:
+          - { label: Image, name: image, widget: image }
+      - { label: Body, name: body, widget: markdown }
+      - { label: priceMin, name: priceMin, widget: hidden, default: 0 }
+      - { label: priceMax, name: priceMax, widget: hidden, default: 0 }
+      - { label: compareAtMax, name: compareAtMax, widget: hidden, default: 0 }
+      - { label: variants, name: variants, widget: hidden, default: [] }
+
+  - name: collections
+    label: Shop Collections
+    label_singular: Collection
+    folder: content/collections
+    create: true
+    preview_path: "/collections/{{slug}}/"
+    fields:
+      - { label: Title, name: title, widget: string, required: true }
+      - label: Products (handles, one per line)
+        name: products
+        widget: list
+        required: false
+      - { label: Description, name: body, widget: markdown, required: false }
+
+  - name: pages
+    label: Pages
+    label_singular: Page
+    folder: content/pages
+    create: true
+    preview_path: "/pages/{{slug}}/"
+    fields:
+      - { label: Title, name: title, widget: string, required: true }
+      - { label: Body, name: body, widget: markdown }
+
+singletons:
+  - name: home
+    label: Home Page
+    file: data/home.yaml
+    fields:
+      - { label: Brand, name: brand, widget: string, required: false }
+      - { label: Tagline, name: tagline, widget: text, required: false }
+      - label: Hero Slides
+        name: hero
+        widget: list
+        fields:
+          - { label: Image, name: image, widget: image }
+          - { label: Heading, name: heading, widget: string }
+      - label: Interstitials
+        name: interstitials
+        widget: list
+        fields:
+          - { label: Image, name: image, widget: image }
+          - { label: Heading, name: heading, widget: string }
+          - { label: Text, name: text, widget: text }
+          - { label: Button Text, name: cta, widget: string }
+          - { label: Button Link, name: href, widget: string }
+          - { label: Flip Layout, name: flip, widget: boolean, default: false }
+      - label: Collection Tiles
+        name: collectionTiles
+        widget: list
+        fields:
+          - { label: Collection (handle), name: handle, widget: string }
+          - { label: Label, name: label, widget: string }
+          - { label: Image, name: image, widget: image }
+      - label: What's New (product handles)
+        name: whatsNew
+        widget: list
+        required: false
+      - label: Island Vibes (product handles)
+        name: islandsVibes
+        widget: list
+        required: false
+      - label: Testimonials
+        name: testimonials
+        widget: list
+        fields:
+          - { label: Name, name: name, widget: string }
+          - { label: Text, name: text, widget: text }
+      - { label: Video Embed URL, name: video, widget: string, required: false }
+      - { label: Video Kind, name: videoKind, widget: string, required: false }

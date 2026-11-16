@@ -24,7 +24,15 @@ for f in glob.glob(os.path.join(ROOT, "content", "**", "*.md"), recursive=True):
 print(f"checked {refs} product image refs")
 
 # 2. home.json refs
-home = json.load(open(os.path.join(ROOT, "data", "home.json")))
+_hp = os.path.join(ROOT, "data", "home.yaml")
+if os.path.exists(_hp):
+    try:
+        import yaml
+        home = yaml.safe_load(open(_hp))
+    except ImportError:
+        home = json.load(open(_hp))  # JSON is valid YAML
+else:
+    home = json.load(open(os.path.join(ROOT, "data", "home.json")))
 def check_img(v, ctx):
     if v and str(v).startswith("/img/"):
         p = os.path.join(ROOT, "static", str(v).lstrip("/"))

@@ -1,10 +1,14 @@
 ---
 title: "Thai towel for female"
 priceMin: 29.0
+price: 29.0
 priceMax: 29.0
 compareAtMin: 0
 variants: [{"id": "46495401246894", "title": "Default Title", "price": 29.0, "sku": "", "available": true}]
-images: ["img/f06739_1000026719.jpg", "img/84ebf1_Screenshot_2025-04-02_121917.png"]
+images: [
+  { image: "img/f06739_1000026719.jpg" },
+  { image: "img/84ebf1_Screenshot_2025-04-02_121917.png" },
+  ]
 ptype: "Sarongs"
 vendor: "Gaya"
 ---

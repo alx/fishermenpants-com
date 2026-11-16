@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
-"""Build Hugo content (content/) + data/home.json from _crawl/parsed.json.
+"""Build Hugo content (content/) + data/home.yaml from _crawl/parsed.json.
 
 Run after crawl + parse. Output:
   content/products/<handle>.md   (one per product)
   content/collections/<handle>.md
-  data/home.json                 (hero, banners, sections, reviews)
+  data/home.yaml                 (hero, banners, sections, reviews)
 """
 import json, os, re, html as H
 
@@ -174,5 +174,5 @@ if video:
         home["video"], home["videoKind"] = f"https://www.youtube.com/embed/{video.group(2)}?enablejsapi=1&autoplay=1", "youtube"
 
 os.makedirs(DATA, exist_ok=True)
-json.dump(home, open(os.path.join(DATA, "home.json"), "w"), indent=1)
+json.dump(home, open(os.path.join(DATA, "home.yaml"), "w"), indent=1)  # JSON is valid YAML; CMS singleton edits this file
 print("home.json:", json.dumps(home, indent=1)[:1200])

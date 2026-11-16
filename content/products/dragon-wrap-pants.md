@@ -1,10 +1,13 @@
 ---
 title: "Dragon wrap pants"
 priceMin: 59.0
+price: 59.0
 priceMax: 59.0
 compareAtMin: 0
 variants: [{"id": "46469725651118", "title": "Default Title", "price": 59.0, "sku": "", "available": true}]
-images: ["img/e64245_Screenshot2025-05-12160658.png"]
+images: [
+  { image: "img/e64245_Screenshot2025-05-12160658.png" },
+  ]
 ptype: "wrap pants"
 vendor: "Gaya"
 ---

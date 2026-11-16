@@ -1,10 +1,13 @@
 ---
 title: "Beach bag"
 priceMin: 39.0
+price: 39.0
 priceMax: 39.0
 compareAtMin: 0
 variants: [{"id": "46350467760302", "title": "Default Title", "price": 39.0, "sku": "", "available": true}]
-images: ["img/f2f70c_1000026541.png"]
+images: [
+  { image: "img/f2f70c_1000026541.png" },
+  ]
 ptype: "bags"
 vendor: "Gaya"
 ---

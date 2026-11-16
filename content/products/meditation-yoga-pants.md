@@ -1,10 +1,13 @@
 ---
 title: "Meditation/Yoga Pants"
 priceMin: 59.0
+price: 59.0
 priceMax: 59.0
 compareAtMin: 0
 variants: [{"id": "46289901158574", "title": "Default Title", "price": 59.0, "sku": "Meditationpants", "available": true}]
-images: ["img/a8e1c2_Screenshot2025-05-12180137.png"]
+images: [
+  { image: "img/a8e1c2_Screenshot2025-05-12180137.png" },
+  ]
 ptype: "wrap pants"
 vendor: "Gaya"
 ---

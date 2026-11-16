@@ -1,6 +1,7 @@
 ---
 title: "EMS - Fast Shipping - 7 Days"
 priceMin: 49.0
+price: 49.0
 priceMax: 49.0
 compareAtMin: 0
 variants: [{"id": "46289906892974", "title": "Default Title", "price": 49.0, "sku": null, "available": true}]

@@ -41,10 +41,12 @@ for sec, urlfmt in (("products", "/products/{n}/"), ("collections", "/collection
         text = open(os.path.join(d, f), errors="replace").read()
         fm, body = parse_frontmatter(text)
         img = (fm.get("images") or [None])[0] if isinstance(fm.get("images"), list) else None
+        if isinstance(img, dict):
+            img = img.get("image")
         docs.append({
             "title": fm.get("title", n),
             "url": urlfmt.format(n=n),
-            "price": fm.get("priceMin") if sec == "products" else "",
+            "price": (fm.get("price") or fm.get("priceMin")) if sec == "products" else "",
             "image": img or "",
             "text": text_of(body)[:500],
         })

@@ -1,10 +1,13 @@
 ---
 title: "3/4 two tones wrap pants (Copy)"
 priceMin: 39.0
+price: 39.0
 priceMax: 39.0
 compareAtMin: 0
 variants: [{"id": "46712297521326", "title": "Default Title", "price": 39.0, "sku": "", "available": true}]
-images: ["img/d908e2_1000028161.png"]
+images: [
+  { image: "img/d908e2_1000028161.png" },
+  ]
 ptype: "wrap pants"
 vendor: "Gaya"
 ---

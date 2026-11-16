@@ -1,10 +1,13 @@
 ---
 title: "Two tones wrap pants"
 priceMin: 59.0
+price: 59.0
 priceMax: 59.0
 compareAtMin: 0
 variants: [{"id": "46687182094510", "title": "Default Title", "price": 59.0, "sku": "", "available": true}]
-images: ["img/340b6f_1000027962.png"]
+images: [
+  { image: "img/340b6f_1000027962.png" },
+  ]
 ptype: "wrap pants"
 vendor: "Gaya"
 ---

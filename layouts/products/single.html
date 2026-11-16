@@ -1,12 +1,13 @@
 {{ define "main" }}
 {{- $v := .Params.variants -}}
-{{- $min := .Params.priceMin | default 0 -}}
-{{- $max := .Params.priceMax | default 0 -}}
+{{- $p := .Params.price -}}
+{{- $min := $p | default (.Params.priceMin | default 0) -}}
+{{- $max := $p | default (.Params.priceMax | default $min) -}}
 <article class="product" data-handle="{{ .File.ContentBaseName }}" data-title="{{ .Title }}">
   <div class="wrap product-grid">
     <div class="p-gallery">
       {{- range .Params.images }}
-      <img class="p-img" src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+      <img class="p-img" src="{{ .image | relURL }}" alt="{{ $.Title }}" loading="lazy">
       {{- else }}
       <img class="p-img" src="{{ "img/placeholder.svg" | relURL }}" alt="{{ .Title }}">
       {{- end }}
@@ -26,8 +27,9 @@
       </label>
       {{ end }}
       <select id="variant-select-single" hidden>
+        {{- $multi := and $v (gt (len $v) 1) -}}
         {{- range $v }}
-        <option value="{{ .id }}" data-price="{{ .price }}" {{ if not .available }}disabled{{ end }}>{{ .title }} — ${{ (float .price) | printf "%.2f" }} USD</option>
+        <option value="{{ .id }}" data-price="{{ if $multi }}{{ .price }}{{ else }}{{ $min }}{{ end }}" {{ if not .available }}disabled{{ end }}>{{ .title }} — ${{ (float .price) | printf "%.2f" }} USD</option>
         {{- end }}
       </select>
 
