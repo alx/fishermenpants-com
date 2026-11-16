@@ -44,6 +44,10 @@
       </div>
 
       <button id="add-to-cart" class="btn-primary">Add to Cart</button>
+      <a class="p-ask" href="https://wa.me/{{ replaceRE `[^0-9]` "" .Site.Params.business.phone }}?text={{ printf "Hi GAYA, I have a question about: %s" .Title | urlquery }}"
+         target="_blank" rel="noopener">
+        <span aria-hidden="true">&#128172;</span> Ask about this on WhatsApp
+      </a>
       <div class="paypal-slot" id="paypal-buttons"></div>
 
       <div class="p-desc">{{ .Content }}</div>
@@ -59,6 +63,34 @@
     </div>
   </div>
 </article>
+
+{{- /* Related: same category first, then anything else from the same collection. */ -}}
+{{- $cur := .File.ContentBaseName -}}
+{{- $pool := slice -}}
+{{- $seen := slice $cur -}}
+{{- range .Params.collections -}}
+  {{- $ch := . -}}
+  {{- with site.GetPage (printf "/collections/%s" $ch) -}}
+    {{- range .Params.products -}}
+      {{- if and (not (in $seen .)) (lt (len $pool) 12) -}}
+        {{- $pool = $pool | append . -}}
+        {{- $seen = $seen | append . -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- if $pool }}
+<section class="wrap related">
+  <h2>You may also like</h2>
+  <div class="related-grid">
+    {{- range first 4 $pool }}
+      {{- with site.GetPage (printf "/products/%s" .) }}
+        {{ partial "product-card.html" . }}
+      {{- end }}
+    {{- end }}
+  </div>
+</section>
+{{- end }}
 <script>
   window.FP_PRODUCT = {{ .Params | jsonify }};
 </script>

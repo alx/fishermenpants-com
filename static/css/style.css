@@ -346,3 +346,11 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .nf-actions { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
 .nf-actions .btn-primary { text-decoration: none; }
 .nf-link { color: var(--sea-dark, #123); font-size: .94rem; }
+
+/* product page: WhatsApp ask + related products */
+.p-ask { display: inline-flex; align-items: center; gap: 8px; margin: 12px 0 4px; font-size: .92rem; color: var(--sea-dark, #123); text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.15); padding-bottom: 1px; }
+.p-ask:hover { border-bottom-color: currentColor; }
+.related { margin: 10px auto 60px; max-width: 1120px; }
+.related h2 { margin: 40px 0 16px; font-size: 1.5rem; }
+.related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
+@media (max-width: 560px) { .related-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }

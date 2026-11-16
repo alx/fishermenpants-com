@@ -43,8 +43,7 @@
 {{- end -}}
 
 {{- $origURL := $src | relURL -}}
-{{- $dim := "" -}}
-{{- with .width }}{{ $dim = printf ` width="%d"` . }}{{ end -}}
+{{- $w := .width -}}
 {{- $loading := cond $eager "eager" "lazy" -}}
 {{- $fetchprio := cond $eager "high" "auto" -}}
 
@@ -53,11 +52,11 @@
 <picture>
   <source type="image/webp" srcset="{{ delimit $webpSrcset ", " | safeHTMLAttr }}" sizes="{{ $sizes }}">
   <source type="image/jpeg" srcset="{{ delimit $jpgSrcset ", " | safeHTMLAttr }}" sizes="{{ $sizes }}">
-  <img src="{{ $origURL }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ $dim }} loading="{{ $loading }}" decoding="async" fetchpriority="{{ $fetchprio }}">
+  <img src="{{ $origURL }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $w }} width="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async" fetchpriority="{{ $fetchprio }}">
 </picture>
 {{- else -}}
-<img src="{{ $origURL }}" srcset="{{ delimit $webpSrcset ", " | safeHTMLAttr }}" sizes="{{ $sizes }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ $dim }} loading="{{ $loading }}" decoding="async" fetchpriority="{{ $fetchprio }}">
+<img src="{{ $origURL }}" srcset="{{ delimit $webpSrcset ", " | safeHTMLAttr }}" sizes="{{ $sizes }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $w }} width="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async" fetchpriority="{{ $fetchprio }}">
 {{- end -}}
 {{- else -}}
-<img src="{{ $origURL }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ $dim }} loading="{{ $loading }}" decoding="async">
+<img src="{{ $origURL }}" alt="{{ $alt }}"{{ with $class }} class="{{ . }}"{{ end }}{{ with $w }} width="{{ . }}"{{ end }} loading="{{ $loading }}" decoding="async">
 {{- end -}}
