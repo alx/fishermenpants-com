@@ -1,0 +1,39 @@
+{
+ "heroImage": "/img/test1.jpg",
+ "brand": "GAYA",
+ "tagline": "Elegant and sustainable beachwear for the adventurous trendsetters.",
+ "banners": [
+  {
+   "heading": "Explore nature",
+   "image": "/img/test1.jpg"
+  },
+  {
+   "heading": "Breathe the air",
+   "image": "/img/test2.jpg"
+  },
+  {
+   "heading": "Exercise heavy travel light",
+   "image": "/img/test1.jpg"
+  }
+ ],
+ "whatsNew": [
+  "test-pants"
+ ],
+ "islandsVibes": [
+  "test-pants"
+ ],
+ "collectionTiles": [
+  {
+   "handle": "fisherman-pants",
+   "label": "Thai wrap pants",
+   "image": "/img/test1.jpg"
+  }
+ ],
+ "testimonials": [
+  {
+   "name": "Raghuvir C",
+   "text": "Wonderful place to visit."
+  }
+ ],
+ "video": null
+}

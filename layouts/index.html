@@ -1,0 +1,86 @@
+{{ define "main" }}
+{{- $d := hugo.Data.home -}}
+
+<section class="hero">
+  {{ with $d.heroImage }}<img src="{{ . }}" alt="">{{ end }}
+  <div class="hero-overlay"><span class="hero-brand">{{ $d.brand }}</span></div>
+</section>
+
+<section class="strip"><p class="tagline">{{ $d.tagline }}</p></section>
+
+<section class="section">
+  <h2>What's new</h2>
+  <div class="product-row">
+    {{- $pg := . }}
+    {{- range $h := $d.whatsNew }}
+      {{- with $pg.Site.GetPage (printf "/products/%s" $h) }}{{ partial "product-card.html" . }}{{ end }}
+    {{- end }}
+  </div>
+</section>
+
+{{ if gt (len $d.banners) 0 }}
+{{- $b0 := index $d.banners 0 }}
+<section class="banner"><img src="{{ $b0.image }}" alt=""></section>
+{{ end }}
+
+{{ if $d.video }}
+<section class="section video-section">
+  <h2>Like no other</h2>
+  <div class="video-frame"><video controls preload="none" src="{{ $d.video }}"></video></div>
+</section>
+{{ end }}
+
+<section class="section">
+  <h2>Collections</h2>
+  <div class="tile-row">
+    {{- range $d.collectionTiles }}
+    <a class="tile" href="{{ printf "/collections/%s/" .handle | relURL }}">
+      {{ with .image }}<span class="tile-img"><img src="{{ . }}" alt=""></span>{{ end }}
+      <span class="tile-label">{{ .label }}</span>
+    </a>
+    {{- end }}
+  </div>
+</section>
+
+{{ if gt (len $d.banners) 1 }}
+{{- $b1 := index $d.banners 1 }}
+<section class="banner"><img src="{{ $b1.image }}" alt=""></section>
+{{ end }}
+
+<section class="section">
+  <h2>What people say</h2>
+  <div class="review-row">
+    {{- range $d.testimonials }}
+    <figure class="review">
+      <blockquote>{{ .text }}</blockquote>
+      <figcaption>— {{ .name }}</figcaption>
+    </figure>
+    {{- end }}
+  </div>
+</section>
+
+{{ if gt (len $d.banners) 2 }}
+{{- $b2 := index $d.banners 2 }}
+<section class="banner"><img src="{{ $b2.image }}" alt=""></section>
+{{ end }}
+
+<section class="section">
+  <h2>Islands vibes</h2>
+  <div class="product-row">
+    {{- $pg := . }}
+    {{- range $h := $d.islandsVibes }}
+      {{- with $pg.Site.GetPage (printf "/products/%s" $h) }}{{ partial "product-card.html" . }}{{ end }}
+    {{- end }}
+  </div>
+</section>
+
+<section class="section newsletter" id="newsletter">
+  <h2>Get 10% off your first order</h2>
+  <p>Join our newsletter for island news and a welcome discount.</p>
+  <form id="formspree-form" action="{{ .Site.Params.formspree.endpoint }}" method="POST">
+    <input type="email" name="email" required placeholder="Your email address" aria-label="Email address">
+    <button type="submit">Subscribe</button>
+    <span class="form-note" id="form-note" hidden></span>
+  </form>
+</section>
+{{ end }}

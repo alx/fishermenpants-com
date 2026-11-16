@@ -1,0 +1,54 @@
+{{ define "main" }}
+{{- $v := .Params.variants -}}
+{{- $min := .Params.priceMin | default 0 -}}
+{{- $max := .Params.priceMax | default 0 -}}
+<article class="product" data-handle="{{ .File.ContentBaseName }}" data-title="{{ .Title }}">
+  <div class="wrap product-grid">
+    <div class="p-gallery">
+      {{- range .Params.images }}
+      <img class="p-img" src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      {{- else }}
+      <img class="p-img" src="{{ "img/placeholder.svg" | relURL }}" alt="{{ .Title }}">
+      {{- end }}
+    </div>
+    <div class="p-info">
+      <h1>{{ .Title }}</h1>
+      <p class="p-price">
+        {{ if gt (float $max) (float $min) }}${{ (float $min) | printf "%.2f" }} – ${{ (float $max) | printf "%.2f" }} USD{{ else }}${{ (float $min) | printf "%.2f" }} USD{{ end }}
+      </p>
+      {{ if $v }}
+      <label>Options
+        <select id="variant-select">
+          {{- range $v }}
+          <option value="{{ .id }}" data-price="{{ .price }}" {{ if not .available }}disabled{{ end }}>{{ .title }} — ${{ (float .price) | printf "%.2f" }} USD</option>
+          {{- end }}
+        </select>
+      </label>
+      {{ end }}
+      <select id="variant-select-single" hidden>
+        {{- range $v }}
+        <option value="{{ .id }}" data-price="{{ .price }}" {{ if not .available }}disabled{{ end }}>{{ .title }} — ${{ (float .price) | printf "%.2f" }} USD</option>
+        {{- end }}
+      </select>
+
+      <div class="qty-row">
+        <label>Qty <input id="qty-input" type="number" min="1" max="99" value="1"></label>
+      </div>
+
+      <button id="add-to-cart" class="btn-primary">Add to Cart</button>
+      <div class="paypal-slot" id="paypal-buttons"></div>
+
+      <div class="p-desc">{{ .Content }}</div>
+      <ul class="p-meta">
+        <li><a href="{{ "collections/all/" | relURL }}">← All products</a></li>
+        {{- range .Params.collections }}
+        <li><a href="{{ printf "/collections/%s/" . | relURL }}">{{ . }}</a></li>
+        {{- end }}
+      </ul>
+    </div>
+  </div>
+</article>
+<script>
+  window.FP_PRODUCT = {{ .Params | jsonify }};
+</script>
+{{ end }}

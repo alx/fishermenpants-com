@@ -1,0 +1,32 @@
+<footer class="site-footer">
+  <div class="wrap footer-grid">
+    <div>
+      <h3>Menu</h3>
+      <ul>
+        <li><a href="{{ "collections/all/" | relURL }}">All Products</a></li>
+        <li><a href="{{ "collections/new-arrivals/" | relURL }}">New Arrivals</a></li>
+        <li><a href="{{ "collections/shop-for-her/" | relURL }}">Shop for Her</a></li>
+        <li><a href="{{ "collections/fisherman-pants/" | relURL }}">Fisherman Pants</a></li>
+        <li><a href="{{ "pages/payment-methods/" | relURL }}">Payment Methods</a></li>
+        <li><a href="{{ "pages/privacy-policy/" | relURL }}">Privacy Policy</a></li>
+      </ul>
+    </div>
+    <div>
+      <h3>Payment Methods</h3>
+      <p class="pay-badges"><span>PayPal</span><span>Visa</span><span>Mastercard</span><span>Amex</span></p>
+    </div>
+    <div>
+      <h3>Social Media</h3>
+      <p><a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook — fishermenpants</a></p>
+    </div>
+    <div>
+      <h3>Country/region</h3>
+      <select id="country-select-footer" class="country-select" aria-label="Shipping country">
+        <option value="">Select country</option>
+      </select>
+    </div>
+  </div>
+  <div class="wrap footer-bottom">
+    <span>&copy; {{ now.Year }} Fishermen Pants — Lamai Beach, Koh Samui</span>
+  </div>
+</footer>

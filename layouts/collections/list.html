@@ -1,0 +1,16 @@
+{{ define "main" }}
+{{- $pg := . }}
+<div class="wrap">
+  <h1>{{ .Title }}</h1>
+</div>
+<div class="wrap product-row product-row-grid">
+  {{- $n := 0 }}
+  {{- range $h := .Params.products }}
+    {{- with $pg.Site.GetPage (printf "/products/%s" $h) }}
+    {{ partial "product-card.html" . }}
+    {{- $n = add $n 1 }}
+    {{- end }}
+  {{- end }}
+  {{ if eq $n 0 }}<p class="muted">No products in this collection yet.</p>{{ end }}
+</div>
+{{ end }}

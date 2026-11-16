@@ -1,0 +1,31 @@
+<header class="site-header">
+  <div class="wrap header-inner">
+    <a class="brand" href="{{ "/" | relURL }}">{{ .Site.Params.brand | default "GAYA" }}</a>
+    <button class="nav-toggle" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
+    <nav class="main-nav">
+      <a href="{{ "collections/new-arrivals/" | relURL }}">New Arrivals</a>
+      <div class="has-drop">
+        <span class="drop-title">Shop</span>
+        <div class="dropdown">
+          <a href="{{ "collections/shop-for-her/" | relURL }}">Shop for Her</a>
+          <a href="{{ "collections/fisherman-pants/" | relURL }}">Fisherman Pants</a>
+          <a href="{{ "collections/island-shirts/" | relURL }}">Island Shirts</a>
+          <a href="{{ "collections/scarves/" | relURL }}">Scarves</a>
+          <a href="{{ "collections/sarongs/" | relURL }}">Sarongs</a>
+          <a href="{{ "collections/bags/" | relURL }}">Bags</a>
+          <a href="{{ "collections/jewelry/" | relURL }}">Jewelry</a>
+          <a href="{{ "collections/accessories-1/" | relURL }}">Accessories</a>
+          <a href="{{ "collections/all/" | relURL }}">All Products</a>
+        </div>
+      </div>
+      <a href="{{ "search/" | relURL }}">Search</a>
+    </nav>
+    <a class="cart-link" href="{{ "cart/" | relURL }}" aria-label="Cart">
+      &#128722;<span id="cart-count" class="cart-count" hidden>0</span>
+    </a>
+  </div>
+</header>
+<form class="search-bar" role="search" action="{{ "search/" | relURL }}" method="get">
+  <input type="search" name="q" placeholder="Search products, collections…" autocomplete="off">
+  <button type="submit">Search</button>
+</form>
