@@ -37,7 +37,7 @@ jobs:
           hugo version
 
       - name: Build site
-        run: HUGO_BASEURL="${{ vars.BASE_URL || 'https://alx.github.io/fishermenpants-com/' }}" ./build.sh
+        run: HUGO_BASEURL="${{ vars.BASE_URL || 'https://www.fishermenpants.com/' }}" ./build.sh
         env:
           BASE_URL: ${{ vars.BASE_URL }}
 

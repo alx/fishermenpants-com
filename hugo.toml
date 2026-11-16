@@ -1,4 +1,4 @@
-baseURL = "/"
+baseURL = "https://www.fishermenpants.com/"
 languageCode = "en-us"
 title = "Fishermen Pants"
 enableRobotsTXT = true
