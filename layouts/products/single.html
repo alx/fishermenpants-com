@@ -6,7 +6,7 @@
   <div class="wrap product-grid">
     <div class="p-gallery">
       {{- range .Params.images }}
-      <img class="p-img" src="{{ . }}" alt="{{ $.Title }}" loading="lazy">
+      <img class="p-img" src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
       {{- else }}
       <img class="p-img" src="{{ "img/placeholder.svg" | relURL }}" alt="{{ .Title }}">
       {{- end }}

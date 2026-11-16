@@ -24,10 +24,10 @@ def local_for(url):
         return None
     key = url.split("?")[0].replace("https://www.fishermenpants.com/", "").replace("//www.fishermenpants.com/", "")
     if key in manifest:
-        return f"/img/{manifest[key]}"
+        return f"img/{manifest[key]}"
     m = re.match(r"cdn/(shop|collections)/(.+)$", key)
     if m:
-        return f"/img/{os.path.basename(key)}"
+        return f"img/{os.path.basename(key)}"
     return None
 
 def gallery(prod):
@@ -109,25 +109,29 @@ print(f"built: {count_c} collections")
 # ---------- home.json ----------
 home_html = open(os.path.join(CR, "html", "home.html"), errors="replace").read()
 
-home = {"heroImage": None, "brand": "GAYA",
+home = {"hero": [], "brand": "GAYA",
         "tagline": "Elegant and sustainable beachwear for the adventurous trendsetters.",
-        "banners": [], "whatsNew": [], "islandsVibes": [],
+        "interstitials": [], "whatsNew": [], "islandsVibes": [],
         "collectionTiles": [], "testimonials": [], "video": None, "videoKind": None}
 
-# hero: first large product/collection image in the page body
-for m in re.finditer(r'src="(//[^"]+?cdn/[A-Za-z0-9_\-./]+\.(?:jpg|jpeg|png|webp))[^"]*"', home_html):
-    u = m.group(1)
-    if any(x in u for x in ("avatar", "logo", "icon", "/t/")):
-        continue
-    home["heroImage"] = local_for(u)
-    break
+# hero slideshow (verified: 2-slide hero of the original)
+home["hero"] = [
+    {"image": local_for("//www.fishermenpants.com/cdn/shop/files/Wrap_pants.png"),
+     "heading": "Explore nature"},
+    {"image": local_for("//www.fishermenpants.com/cdn/shop/files/Samui_collection.png"),
+     "heading": "Breath the air"},
+]
 
 # banners (verified from crawled DOM)
-home["banners"] = [
-    {"heading": "Explore nature", "image": local_for("//www.fishermenpants.com/cdn/shop/files/Wrap_pants.png")},
-    {"heading": "Breath the air", "image": local_for("//www.fishermenpants.com/cdn/shop/files/Samui_collection.png")},
-    {"heading": "Exercise heavy travel light", "image": local_for("//www.fishermenpants.com/cdn/shop/files/Screenshot_2025-03-28_145605.png")},
-    {"heading": "Great Traveling Pants", "image": local_for("//www.fishermenpants.com/cdn/shop/files/Screenshot_2025-03-12_105305.png")},
+home["interstitials"] = [
+    {"image": local_for("//www.fishermenpants.com/cdn/shop/files/Screenshot_2025-03-28_145605.png"),
+     "heading": "Exercise heavy travel light",
+     "text": "Versatile and unisex pants designed for yoga, the beach, and beyond.",
+     "cta": "Shop pants", "href": "/collections/fisherman-pants/", "flip": False},
+    {"image": local_for("//www.fishermenpants.com/cdn/shop/files/Screenshot_2025-03-12_105305.png"),
+     "heading": "Great Traveling Pants",
+     "text": "",
+     "cta": "Shop pants", "href": "/collections/fisherman-pants/", "flip": True},
 ]
 
 # what's new (verified slider order)

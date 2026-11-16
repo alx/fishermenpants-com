@@ -4,7 +4,7 @@ priceMin: 89.0
 priceMax: 89.0
 compareAtMin: 0
 variants: [{"id": "46473104228526", "title": "Blue", "price": 89.0, "sku": "", "available": true}, {"id": "46473104261294", "title": "Brown", "price": 89.0, "sku": "", "available": true}, {"id": "46473104326830", "title": "Purple", "price": 89.0, "sku": "", "available": true}, {"id": "46473104359598", "title": "Maroon", "price": 89.0, "sku": "", "available": true}, {"id": "46473104392366", "title": "Gold", "price": 89.0, "sku": "", "available": true}]
-images: ["/img/d9bd22_Screenshot2025-05-13121542.png"]
+images: ["img/d9bd22_Screenshot2025-05-13121542.png"]
 ptype: "wrap pants"
 vendor: "Gaya"
 ---

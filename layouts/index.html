@@ -1,9 +1,20 @@
 {{ define "main" }}
 {{- $d := hugo.Data.home -}}
 
-<section class="hero">
-  {{ with $d.heroImage }}<img src="{{ . }}" alt="">{{ end }}
-  <div class="hero-overlay"><span class="hero-brand">{{ $d.brand }}</span></div>
+<section class="hero hero-slideshow" id="hero-slideshow" aria-roledescription="carousel" aria-label="Featured">
+  {{- range $i, $slide := $d.hero }}
+  <div class="hero-slide{{ if eq $i 0 }} is-active{{ end }}" role="group" aria-label="{{ add $i 1 }} of {{ len $d.hero }}">
+    <img src="{{ $slide.image | relURL }}" alt="{{ $slide.heading }}" {{ if ne $i 0 }}loading="lazy"{{ end }}>
+    <div class="hero-overlay"><span class="hero-heading">{{ $slide.heading }}</span></div>
+  </div>
+  {{- end }}
+  <button class="hero-arrow hero-arrow--prev" type="button" aria-label="Previous slide">&#8592;</button>
+  <button class="hero-arrow hero-arrow--next" type="button" aria-label="Next slide">&#8594;</button>
+  <div class="hero-dots" role="tablist">
+    {{- range $i, $slide := $d.hero }}
+    <button class="hero-dot{{ if eq $i 0 }} is-active{{ end }}" type="button" role="tab" aria-label="Slide {{ add $i 1 }}"></button>
+    {{- end }}
+  </div>
 </section>
 
 <section class="strip"><p class="tagline">{{ $d.tagline }}</p></section>
@@ -17,11 +28,6 @@
     {{- end }}
   </div>
 </section>
-
-{{ if gt (len $d.banners) 0 }}
-{{- $b0 := index $d.banners 0 }}
-<section class="banner"><img src="{{ $b0.image }}" alt=""></section>
-{{ end }}
 
 {{ if $d.video }}
 <section class="section video-section">
@@ -38,18 +44,25 @@
   <h2>Collections</h2>
   <div class="tile-row">
     {{- range $d.collectionTiles }}
-    <a class="tile" href="{{ printf "/collections/%s/" .handle | relURL }}">
-      {{ with .image }}<span class="tile-img"><img src="{{ . }}" alt=""></span>{{ end }}
-      <span class="tile-label">{{ .label }}</span>
+    {{- $t := . }}
+    <a class="tile" href="{{ printf "/collections/%s/" $t.handle | relURL }}">
+      {{ with $t.image }}<span class="tile-img"><img src="{{ . | relURL }}" alt="{{ $t.label }}"></span>{{ end }}
+      <span class="tile-label">{{ $t.label }}</span>
     </a>
     {{- end }}
   </div>
 </section>
 
-{{ if gt (len $d.banners) 1 }}
-{{- $b1 := index $d.banners 1 }}
-<section class="banner"><img src="{{ $b1.image }}" alt=""></section>
-{{ end }}
+{{- range $i, $it := $d.interstitials }}
+<section class="iwt{{ if $it.flip }} iwt--flip{{ end }}">
+  <div class="iwt-media"><img src="{{ $it.image | relURL }}" alt="{{ $it.heading }}" loading="lazy"></div>
+  <div class="iwt-content">
+    <h2>{{ $it.heading }}</h2>
+    {{- with $it.text }}<p>{{ . }}</p>{{ end }}
+    {{- with $it.cta }}<a class="btn btn--secondary" href="{{ $it.href | relURL }}">{{ . }}</a>{{ end }}
+  </div>
+</section>
+{{- end }}
 
 <section class="section">
   <h2>What people say</h2>
@@ -62,11 +75,6 @@
     {{- end }}
   </div>
 </section>
-
-{{ if gt (len $d.banners) 2 }}
-{{- $b2 := index $d.banners 2 }}
-<section class="banner"><img src="{{ $b2.image }}" alt=""></section>
-{{ end }}
 
 <section class="section">
   <h2>Islands vibes</h2>

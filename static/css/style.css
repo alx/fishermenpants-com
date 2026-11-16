@@ -1,3 +1,17 @@
+@font-face {
+  font-family: "Asul";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("../fonts/asul-n4.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Asul";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("../fonts/asul-n7.woff2") format("woff2");
+}
 :root {
   --ink: #1c2430;
   --muted: #6b7280;
@@ -7,8 +21,8 @@
   --accent: #b45309;
   --card: #ffffff;
   --line: #e5e0d5;
-  --serif: "Cormorant Garamond", Georgia, serif;
-  --sans: "Inter", system-ui, -apple-system, sans-serif;
+  --serif: "Asul", "Inter", system-ui, -apple-system, sans-serif;
+  --sans: "Asul", "Inter", system-ui, -apple-system, sans-serif;
 }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
@@ -55,10 +69,39 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 }
 
 /* home */
-.hero { position: relative; }
-.hero img { width: 100%; max-height: 78vh; object-fit: cover; }
-.hero-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: rgba(15,23,42,.25); }
-.hero-brand { color: #fff; font-family: var(--serif); font-size: clamp(3rem, 10vw, 7rem); letter-spacing: .35em; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.hero-slideshow { position: relative; height: min(88vh, 860px); min-height: 420px; overflow: hidden; background: #10151b; }
+.hero-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility .9s; }
+.hero-slide.is-active { opacity: 1; visibility: visible; }
+.hero-slide img { width: 100%; height: 100%; object-fit: cover; }
+.hero-overlay { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; background: linear-gradient(rgba(10,14,18,.18), rgba(10,14,18,.34)); }
+.hero-brand { color: #fff; font-size: clamp(3rem, 10vw, 7rem); letter-spacing: .35em; text-shadow: 0 2px 24px rgba(0,0,0,.5); }
+.hero-heading { color: #fff; font-size: clamp(2.1rem, 5.4vw, 4rem); font-weight: 400; letter-spacing: .04em; text-shadow: 0 2px 28px rgba(0,0,0,.55); text-align: center; padding: 0 16px; }
+.hero-dots { position: absolute; bottom: 20px; left: 0; right: 0; display: flex; gap: 10px; justify-content: center; z-index: 3; }
+.hero-dot { width: 26px; height: 4px; border-radius: 2px; border: 0; padding: 0; background: rgba(255,255,255,.45); cursor: pointer; transition: background .2s; }
+.hero-dot.is-active { background: #fff; }
+.hero-arrow { position: absolute; top: 50%; transform: translateY(-50%); z-index: 3; width: 46px; height: 46px; border-radius: 50%; border: 1px solid rgba(255,255,255,.55); background: rgba(20,26,33,.28); color: #fff; font-size: 1.25rem; cursor: pointer; backdrop-filter: blur(3px); transition: background .2s; }
+.hero-arrow:hover { background: rgba(20,26,33,.55); }
+.hero-arrow--prev { left: 18px; }
+.hero-arrow--next { right: 18px; }
+@media (max-width: 640px) { .hero-arrow { display: none; } }
+
+/* image-with-text interstitials */
+.iwt { display: grid; grid-template-columns: 1.12fr 1fr; min-height: 540px; }
+.iwt-media { position: relative; min-height: 380px; }
+.iwt-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.iwt-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 56px 44px; background: #efe9df; }
+.iwt-content h2 { font-size: clamp(1.7rem, 3vw, 2.5rem); font-weight: 400; letter-spacing: .02em; margin: 0; }
+.iwt-content p { max-width: 420px; color: var(--muted); margin: 0; }
+.iwt--flip .iwt-media { order: 2; }
+.btn { display: inline-block; border: 1px solid #10151b; color: #10151b; padding: 13px 30px; font-size: .95rem; letter-spacing: .05em; background: transparent; cursor: pointer; transition: background .2s, color .2s; }
+.btn:hover { background: #10151b; color: #fff; }
+.btn--secondary { text-decoration: none; }
+@media (max-width: 860px) {
+  .iwt { grid-template-columns: 1fr; }
+  .iwt--flip .iwt-media { order: 0; }
+  .iwt-media { min-height: 340px; aspect-ratio: 4/3; }
+  .iwt-content { padding: 40px 24px; }
+}
 .strip { background: var(--sand); text-align: center; padding: 18px; }
 .tagline { font-family: var(--serif); font-size: 1.35rem; font-style: italic; margin: 0; }
 .banner img { width: 100%; max-height: 68vh; object-fit: cover; }

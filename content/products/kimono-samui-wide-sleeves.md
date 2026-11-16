@@ -4,7 +4,7 @@ priceMin: 179.0
 priceMax: 179.0
 compareAtMin: 0
 variants: [{"id": "46478743437486", "title": "1", "price": 179.0, "sku": "", "available": true}, {"id": "46478743470254", "title": "2", "price": 179.0, "sku": "", "available": true}]
-images: ["/img/bb7746_Screenshot2025-05-14113921.png", "/img/c9ee03_Screenshot2025-05-14114130.png", "/img/257548_Screenshot2025-05-14114200.png"]
+images: ["img/bb7746_Screenshot2025-05-14113921.png", "img/c9ee03_Screenshot2025-05-14114130.png", "img/257548_Screenshot2025-05-14114200.png"]
 ptype: "kimonos"
 vendor: "Gaya"
 ---

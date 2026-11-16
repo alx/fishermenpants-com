@@ -4,7 +4,7 @@ priceMin: 34.9
 priceMax: 34.9
 compareAtMin: 0
 variants: [{"id": "46467472982190", "title": "1", "price": 34.9, "sku": "", "available": true}, {"id": "46467473014958", "title": "2", "price": 34.9, "sku": "", "available": true}, {"id": "46467473047726", "title": "3", "price": 34.9, "sku": "", "available": true}, {"id": "46467473080494", "title": "4", "price": 34.9, "sku": "", "available": true}, {"id": "46467473113262", "title": "5", "price": 34.9, "sku": "", "available": true}, {"id": "46467473146030", "title": "6", "price": 34.9, "sku": "", "available": true}]
-images: ["/img/9c87fb_1000026568.jpg", "/img/32295d_Screenshot2025-04-02122616.png"]
+images: ["img/9c87fb_1000026568.jpg", "img/32295d_Screenshot2025-04-02122616.png"]
 ptype: "Sarongs"
 vendor: "Gaya"
 ---
