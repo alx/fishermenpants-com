@@ -1,0 +1,12 @@
+{{ define "main" }}
+<div class="wrap notfound-page">
+  <p class="nf-code">404</p>
+  <h1>We can’t find that page</h1>
+  <p class="nf-lede">The link may be old, or the item may have sold out. Here are a few good places to go next.</p>
+  <p class="nf-actions">
+    <a class="btn-primary" href="{{ "" | relURL }}">Back to the shop</a>
+    <a class="nf-link" href="{{ "collections/all-products/" | relURL }}">Browse all products</a>
+    <a class="nf-link" href="{{ "pages/contact/" | relURL }}">Contact us</a>
+  </p>
+</div>
+{{ end }}

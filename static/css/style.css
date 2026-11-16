@@ -322,3 +322,27 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .ty-line-price { white-space: nowrap; font-weight: 600; }
 .ty-card address { font-style: normal; line-height: 1.7; }
 .ty-btn { display: inline-block; text-decoration: none; margin-top: 8px; }
+
+/* content pages (about, shipping, size guide) */
+.text-page { max-width: 780px; padding: 34px 0 64px; }
+.tp-body { line-height: 1.75; color: #2d363d; }
+.tp-body h2 { margin: 34px 0 10px; font-size: 1.35rem; }
+.tp-body h2:first-child { margin-top: 8px; }
+.tp-body p { margin: 0 0 14px; }
+.tp-body ul, .tp-body ol { margin: 0 0 16px; padding-left: 22px; }
+.tp-body li { margin-bottom: 8px; }
+.tp-body table { width: 100%; border-collapse: collapse; margin: 14px 0 20px; font-size: .93rem; }
+.tp-body th, .tp-body td { text-align: left; padding: 9px 12px; border-bottom: 1px solid #ece7de; }
+.tp-body thead th, .tp-body table tr:first-child th { background: #f7f5f1; font-weight: 600; }
+.tp-body a { color: var(--sea-dark, #123); }
+.tp-body code { background: #f7f5f1; border: 1px solid #ece7de; border-radius: 4px; padding: 1px 5px; font-size: .88em; }
+.tp-body strong { font-weight: 600; }
+
+/* 404 */
+.notfound-page { max-width: 640px; padding: 70px 0 90px; text-align: center; }
+.nf-code { font-size: clamp(3.5rem, 12vw, 7rem); font-weight: 600; line-height: 1; color: #e3ddd2; margin: 0 0 6px; letter-spacing: .04em; }
+.notfound-page h1 { margin: 0 0 12px; }
+.nf-lede { color: #5b6670; max-width: 440px; margin: 0 auto 26px; }
+.nf-actions { display: flex; gap: 14px; justify-content: center; align-items: center; flex-wrap: wrap; }
+.nf-actions .btn-primary { text-decoration: none; }
+.nf-link { color: var(--sea-dark, #123); font-size: .94rem; }
