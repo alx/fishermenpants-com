@@ -1,5 +1,6 @@
 ---
 title: "Ethnic wrap pants"
+aliases: ["/products/traveling-pants-copy-1/"]
 priceMin: 79.0
 price: 79.0
 priceMax: 79.0

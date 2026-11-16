@@ -1,5 +1,6 @@
 ---
 title: "Samui kaftan's"
+aliases: ["/products/marin-kaftan-copy/"]
 priceMin: 129.0
 price: 129.0
 priceMax: 129.0

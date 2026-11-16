@@ -1,5 +1,6 @@
 ---
 title: "Two tones wrap pants"
+aliases: ["/products/vintage-wrap-pants-copy/"]
 priceMin: 59.0
 price: 59.0
 priceMax: 59.0

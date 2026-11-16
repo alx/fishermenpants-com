@@ -1,5 +1,6 @@
 ---
 title: "Sarong wrap pants"
+aliases: ["/products/printed-wrap-pants-copy/"]
 priceMin: 59.0
 price: 59.0
 priceMax: 59.0

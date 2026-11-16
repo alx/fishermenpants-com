@@ -1,5 +1,6 @@
 ---
 title: "Basic thai kimono"
+aliases: ["/products/kimono-thailand-organic-tie-dye-copy/"]
 priceMin: 39.0
 price: 39.0
 priceMax: 39.0

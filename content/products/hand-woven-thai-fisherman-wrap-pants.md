@@ -1,5 +1,6 @@
 ---
 title: "Hand woven Thai Fisherman wrap pants"
+aliases: ["/products/hemp-ethnic-pants-copy/"]
 priceMin: 149.0
 price: 149.0
 priceMax: 149.0

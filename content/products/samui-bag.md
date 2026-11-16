@@ -1,5 +1,6 @@
 ---
 title: "Samui  bag"
+aliases: ["/products/beach-bag-copy/"]
 priceMin: 79.0
 price: 79.0
 priceMax: 79.0

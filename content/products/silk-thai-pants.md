@@ -1,5 +1,6 @@
 ---
 title: "Silk Thai pants"
+aliases: ["/products/organic-tye-dye-fisherman-pants-copy/"]
 priceMin: 99.0
 price: 99.0
 priceMax: 99.0

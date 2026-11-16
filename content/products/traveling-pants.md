@@ -1,5 +1,6 @@
 ---
 title: "Traveling pants"
+aliases: ["/products/kimono-samui-slim-sleeves-copy/"]
 priceMin: 49.0
 price: 49.0
 priceMax: 49.0
