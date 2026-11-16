@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:stonewash-fisherman-pants -->
 Introducing our Stonewash Fisherman Pants, made from 100% cotton for a soft and breathable feel. The comfortable fit makes them perfect for yoga, lounging, or running errands. These versatile pants are unisex, making them a great addition to any wardrobe. The stonewashed finish adds a unique touch of style, making them trendy and fashionable. Don't miss out on the chance to add these must-have pan

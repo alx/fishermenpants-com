@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:kimono-samui-slim-sleeves-copy -->
 Mind and appearance goes together simple design, basic cotton fabric. no zipper, no button, unisex, free size Size; L 40 inch W 52 inch

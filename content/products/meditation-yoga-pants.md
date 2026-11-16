@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:meditation-yoga-pants -->
 Mind and appearance goes together it is very important when you meditate you will feel comfortable. no zipper, no button, unisex, free size Size; L 40 inch W 52 inch.

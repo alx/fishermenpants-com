@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "leather bracelets"
 vendor: "Gaya"
+collections: ["accessories", "jewelry"]
 ---
 <!-- product:samui-leather-bracelets -->
 Discover the perfect holiday accessory with our vintage leather bracelets. Handcrafted in Thailand's beautiful Koh Samui,

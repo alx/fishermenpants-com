@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:stonewash-samui -->
 Special designs for amazing time

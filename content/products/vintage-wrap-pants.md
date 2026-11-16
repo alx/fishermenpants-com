@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:vintage-wrap-pants -->
 In Thailand this cotton fabric is a "working uniform" we combine it with unique print, our inspiration comes from the simple people who works in he field and plant rise. Size; L 40 inch W 52 inch

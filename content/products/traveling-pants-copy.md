@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:traveling-pants-copy -->
 Cotton sarong pants with 5-part edges, with pockets, various colors, 50-inch wide waist, 32-inch length. great as a traveling pants, yoga pants. Ethnic designs with modern flair.

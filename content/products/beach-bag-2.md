@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "bags"
 vendor: "Gaya"
+collections: ["accessories", "bags"]
 ---
 <!-- product:beach-bag-2 -->
 life is too short Our cool beach bag inspire from "net".it is perfect for a sand beach shack one shack it twice all the send go out. W - 47 cm L - 31 cm

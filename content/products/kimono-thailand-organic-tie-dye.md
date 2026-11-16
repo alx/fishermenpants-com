@@ -13,6 +13,7 @@ images: [
   ]
 ptype: "kimonos"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:kimono-thailand-organic-tie-dye -->
 Hotels and Resorts must have! Printed exotic kimono, easy and very light, loose fit organic color

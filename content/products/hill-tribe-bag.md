@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "bags"
 vendor: "Gaya"
+collections: ["accessories", "bags"]
 ---
 <!-- product:hill-tribe-bag -->
 Tribe Bag Fit perfect Koh Samui Vibes

@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "bags"
 vendor: "Gaya"
+collections: ["accessories", "bags"]
 ---
 <!-- product:beach-bag-copy -->
 l Main Material: Canvas Handbags Type: Shoulder Bags Types of bags: Shoulder & Handbags Shape: Casual Tote Closure Type: Zipper Gender: Women Hardness: Soft Interior :Cell Phone Pocket, Interior Zipper Pocket Item Type: Handbags Pattern Type: Anchor, Strips Types Of Bag: Female Shoulder Bag, Handbags, Tote Occasion: Shopping, Travel, Party, Beach, Holiday, Trip Fashion Elements: Anchor, Strips, St

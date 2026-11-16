@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "kimonos"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:cotton-linen-vintage-kimono-women -->
 Special design for amazing time

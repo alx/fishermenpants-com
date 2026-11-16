@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["bags", "fisherman-pants"]
 ---
 <!-- product:handmade-painted-indigo-pants -->
 Limited edition, unique design handmade painted , small quantity , unisex, one size fits all. W - 64 inch L - 41 inch width leg - 22 inch normal leg - 14 inch

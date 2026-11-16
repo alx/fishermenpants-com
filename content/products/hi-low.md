@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "top"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:hi-low -->
 Holiday wear for amazing time very functional for beach , gym or just go out

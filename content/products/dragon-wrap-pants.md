@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:dragon-wrap-pants -->
 Men's dragon pattern pants, tied at the waist, long trousers, wide legs, wear at home, wear to sleep, comfortable to wear. soft fabric, comfortable to wear, washable, color won't fade, fabric doesn't lint. Colorful, beautiful patterns It's unique and unique.

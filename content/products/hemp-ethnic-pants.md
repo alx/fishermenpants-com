@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:hemp-ethnic-pants -->
 Navy blue hemp fabric pants, sadd shape (with a badge), decorated with traditional cotton fabric, painted with candles, width 58", length 41", has side pockets. Can be worn by both men and women. Antique fabric, beautiful, classic, valuable. Not glued together

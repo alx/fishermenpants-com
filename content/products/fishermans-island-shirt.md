@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "island shirts"
 vendor: "Gaya"
+collections: ["island-shirts"]
 ---
 <!-- product:fishermans-island-shirt -->
 Mind and appearance goes together it is very important when you meditate you will feel comfortable. ,unisex, free size

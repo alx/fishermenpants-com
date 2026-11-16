@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:zoo-dress -->
 "Specially designed for your happy vacation" Europe size M special breathing fabric .

@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:handmade-cotton-fishermen-pants-with-embroidery -->
 Limited edition, unique design with embroidery, small quantity , unisex, one size fits all. W - 54inchL - 40 inch

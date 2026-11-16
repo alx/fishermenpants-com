@@ -33,7 +33,7 @@ collectionTiles:
   - handle: fisherman-pants
     label: "Thai wrap pants"
     image: /img/83f43b_acesessories_e8277ea4-cfc9-4f01-a3c6-a70aea26e1ac.jpg
-  - handle: accessories-1
+  - handle: accessories
     label: Accessories
     image: /img/5f084f_Screenshot_2025-03-11_191924.png
 testimonials:

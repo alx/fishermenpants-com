@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:vintage-wrap-pants-copy -->
 In Thailand this cotton fabric is very thin and breathable great for exotic weather, amazing as a traveling pants . free size , unisex Size; L 40 inch W 52 inch

@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:island-night-long-sleeve -->
 Long sleeve shirt perfect during holidays and casual wear after holidays. Europe size M

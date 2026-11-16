@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:open-shoulder -->
 Limited edition Special designs for amazing time

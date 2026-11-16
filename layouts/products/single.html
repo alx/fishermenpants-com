@@ -50,7 +50,10 @@
       <ul class="p-meta">
         <li><a href="{{ "collections/all-products/" | relURL }}">← All products</a></li>
         {{- range .Params.collections }}
-        <li><a href="{{ printf "/collections/%s/" . | relURL }}">{{ . }}</a></li>
+        {{- $h := . }}
+        {{- with site.GetPage (printf "/collections/%s" $h) }}
+        <li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end }}
         {{- end }}
       </ul>
     </div>

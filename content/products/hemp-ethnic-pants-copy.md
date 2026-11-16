@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:hemp-ethnic-pants-copy -->
 Introducing our hand-woven Thai Fisherman wrap pants, made from 100% organic cotton using traditional Thai techniques. These unisex pants are not only comfortable and stylish, but also eco-friendly and sustainable.

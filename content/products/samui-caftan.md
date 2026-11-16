@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:samui-caftan -->
 Inspired by the Organic Shapes of Nature this Collection has been Carefully Handcrafted Blending a Unique Combination of Ancestral Batik Style Dye, Geometrical Hand-screen and Ancient Hand Block Printing Techniques

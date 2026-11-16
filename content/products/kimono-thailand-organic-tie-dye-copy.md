@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "kimonos"
 vendor: "Gaya"
+collections: ["island-shirts", "shop-for-her"]
 ---
 <!-- product:kimono-thailand-organic-tie-dye-copy -->
 Simple Thai kimono made out of cotton fabric . ethnic designs with modern flair one size , unisex . made in Thailand. size: chest 34-44 inches, shoulder 22 inch , length 25-27 inch .

@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:tai-chi-pants -->
 Our tai chi pants made out of thin Thai cotton ,great for tropical weather and hot summer, could use also for the beach or stay at home after shower, very functional pants. Size; L 40 inch W 52 inch.

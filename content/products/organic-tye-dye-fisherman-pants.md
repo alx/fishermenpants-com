@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:organic-tye-dye-fisherman-pants -->
 Organic Tie Dye Ethnic Design with Modern Flair. Limited Edition Last Piece

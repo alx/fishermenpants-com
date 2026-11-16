@@ -74,6 +74,49 @@ print(f"search index: {len(idx['docs'])} docs")
 n_img = len([f for f in os.listdir(os.path.join(ROOT, "static", "img")) if not f.startswith("placeholder")])
 print(f"local images: {n_img}")
 
+# 8. catalogue integrity: every product is in a collection, every handle resolves
+import re as _re
+_prod_dir = os.path.join(ROOT, "content", "products")
+_col_dir = os.path.join(ROOT, "content", "collections")
+_prods = set()
+for _f in os.listdir(_prod_dir):
+    if not _f.endswith(".md"):
+        continue
+    if _re.search(r'^service:\s*true', open(os.path.join(_prod_dir, _f), errors="replace").read(), _re.M):
+        continue  # a shipping add-on, not a catalogue product
+    _prods.add(_f[:-3])
+_listed = set()
+for cf in glob.glob(os.path.join(_col_dir, "*.md")):
+    cm = _re.search(r'^products:\s*\[(.*?)\]', open(cf, errors="replace").read(), _re.M | _re.S)
+    handles = _re.findall(r'"([^"]+)"', cm.group(1)) if cm else []
+    for h in handles:
+        _listed.add(h)
+        if h not in _prods:
+            fail(f"{os.path.basename(cf)}: referenced product '{h}' does not exist")
+# a product must appear in at least one *specific* collection (catch-alls don't count)
+_skip = {"all-products", "new-arrivals", "best-sellers"}
+_specific = set()
+for cf in glob.glob(os.path.join(_col_dir, "*.md")):
+    if os.path.basename(cf)[:-3] in _skip:
+        continue
+    cm = _re.search(r'^products:\s*\[(.*?)\]', open(cf, errors="replace").read(), _re.M | _re.S)
+    if cm:
+        _specific.update(_re.findall(r'"([^"]+)"', cm.group(1)))
+_orphans = _prods - _specific
+# products may also declare collections directly in front matter
+for pf in glob.glob(os.path.join(_prod_dir, "*.md")):
+    if _re.search(r'^collections:\s*\[', open(pf, errors='replace').read(), _re.M):
+        _orphans.discard(os.path.basename(pf)[:-3])
+for o in sorted(_orphans):
+    fail(f"product '{o}' belongs to no collection (orphan)")
+ap = os.path.join(_col_dir, "all-products.md")
+if os.path.exists(ap):
+    cm = _re.search(r'^products:\s*\[(.*?)\]', open(ap, errors="replace").read(), _re.M | _re.S)
+    n = len(set(_re.findall(r'"([^"]+)"', cm.group(1)))) if cm else 0
+    if n != len(_prods):
+        fail(f"all-products lists {n} products, content has {len(_prods)}")
+print(f"catalogue: {len(_prods)} products, all in a collection, all handles resolve")
+
 # 7. private pages must not be in the sitemap or indexable
 sm = os.path.join(ROOT, "public", "sitemap.xml")
 if os.path.exists(sm):

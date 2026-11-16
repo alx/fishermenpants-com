@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:printed-wrap-pants-copy -->
 Sarong pattern pants, tied at the waist, long trousers, wide legs, wear at home, wear to sleep, comfortable to wear. soft fabric, comfortable to wear, washable, color won't fade, fabric doesn't lint. Colorful, beautiful patterns It's unique and unique. unisex, free sizes Size; L 43 inch W 52 inch

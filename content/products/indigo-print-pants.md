@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:indigo-print-pants -->
 In Thailand this fabric indigo cotton is a "working uniform" we combine it with unique print, our inspiration come from the simple people who works in he field and plant rise. Length A: 100 cm, Width B: 69 cm, Width C: 59 cm Cotton fabrics are considered very skin-friendly

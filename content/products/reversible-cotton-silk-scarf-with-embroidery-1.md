@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "scarves"
 vendor: "Gaya"
+collections: ["accessories", "scarves"]
 ---
 <!-- product:reversible-cotton-silk-scarf-with-embroidery-1 -->
 Product Details

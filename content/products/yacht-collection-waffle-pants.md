@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:yacht-collection-waffle-pants -->
 Yacht Collection Designed with an exotic Asian flair that lets you move freely Fine fabrics with top-quality workmanship No zippers or buttons Perfect fit - no matter what your size Looks stylish whether you’re in the studio practicing, on your way to class or out for a ‘night on the town Size; L 41 inch W 52 inch.

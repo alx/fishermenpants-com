@@ -12,6 +12,7 @@ images: [
   ]
 ptype: "kimonos"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:kimono-samui-wide-sleeves -->
 Special design for amazing time

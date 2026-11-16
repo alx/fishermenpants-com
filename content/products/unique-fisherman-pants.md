@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:unique-fisherman-pants -->
 Ethnic Design with Modern Flair. Limited Edition

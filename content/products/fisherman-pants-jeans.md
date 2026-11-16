@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:fisherman-pants-jeans -->
 hi there great strong pants , very durable pants ,limited edition

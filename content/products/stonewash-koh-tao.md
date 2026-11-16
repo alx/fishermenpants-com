@@ -11,6 +11,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:stonewash-koh-tao -->
 Special designs for amazing time

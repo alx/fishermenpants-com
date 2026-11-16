@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "wrap pants"
 vendor: "Gaya"
+collections: ["fisherman-pants"]
 ---
 <!-- product:organic-tye-dye-fisherman-pants-copy -->
 Unisex ethnic Thai pants made from luxurious silk fabric. Enjoy comfort and style with these traditional pants, perfect for any occasion. these pants offer a unique and elegant look that is both comfortable and versatile. A must-have for any fashion-savvy individual.

@@ -10,6 +10,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:tribal-bay-copy -->
 Ethnic design with modern flair . fabric & care: cotton mix hand wash / separately in cold water chest - 40 hip - 43 length 48

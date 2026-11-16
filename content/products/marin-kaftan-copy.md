@@ -13,6 +13,7 @@ images: [
   ]
 ptype: "Dress"
 vendor: "Gaya"
+collections: ["shop-for-her"]
 ---
 <!-- product:marin-kaftan-copy -->
 Multifunctional Kaftan that goes with swim suit during holidays and casual wear after holidays.
