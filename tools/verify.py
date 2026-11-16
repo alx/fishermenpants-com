@@ -74,5 +74,21 @@ print(f"search index: {len(idx['docs'])} docs")
 n_img = len([f for f in os.listdir(os.path.join(ROOT, "static", "img")) if not f.startswith("placeholder")])
 print(f"local images: {n_img}")
 
+# 7. private pages must not be in the sitemap or indexable
+sm = os.path.join(ROOT, "public", "sitemap.xml")
+if os.path.exists(sm):
+    xml = open(sm, errors="replace").read()
+    for blocked in ("/order/", "/cart/", "/search/"):
+        if blocked in xml:
+            fail(f"sitemap.xml must not contain {blocked}")
+ty = os.path.join(ROOT, "public", "order", "thank-you", "index.html")
+if os.path.exists(ty):
+    html = open(ty, errors="replace").read()
+    if "noindex" not in html:
+        fail("/order/thank-you/ must carry a robots noindex meta tag")
+if os.path.exists(os.path.join(ROOT, "public", "order", "index.html")):
+    fail("/order/ section index must not be generated (_build.render: never)")
+print("private pages: not in sitemap, noindex verified")
+
 print("VERIFY OK" if ok else "VERIFY FAILED")
 sys.exit(0 if ok else 1)

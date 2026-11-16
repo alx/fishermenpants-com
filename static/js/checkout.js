@@ -3,6 +3,7 @@
 (function () {
   const CUST_KEY = "fp_customer_v1";
   const ORDER_KEY = "fp_order_v1";
+  const NOTIFY_KEY = "fp_notified_v1";
 
   const form = document.getElementById("checkout-form");
   if (!form) return;
@@ -76,6 +77,55 @@
     try { localStorage.setItem(CUST_KEY, JSON.stringify(d)); } catch {}
   }
 
+  function endpoint() {
+    const cfg = (window.FP_CONFIG && window.FP_CONFIG.formspree) || {};
+    return cfg.endpoint || "";
+  }
+
+  // Email the seller a copy of the order, so an order exists even if the
+  // payment provider notification never reaches us. Idempotent per order ref.
+  function notify(order) {
+    const url = endpoint();
+    if (!url || url.includes("your-form-id")) return Promise.resolve(false);
+    if (!order || !order.ref) return Promise.resolve(false);
+    try {
+      const sent = JSON.parse(localStorage.getItem(NOTIFY_KEY)) || {};
+      if (sent[order.ref]) return Promise.resolve(true); // already sent
+    } catch {}
+
+    const c = order.customer || {};
+    const lines = (order.items || [])
+      .map(it => `${it.qty} x ${it.name}${it.description ? " (" + it.description + ")" : ""} — $${(it.price * it.qty).toFixed(2)}`)
+      .join("\n");
+
+    const fd = new FormData();
+    fd.set("_subject", `New order ${order.ref} — fishermenpants.com`);
+    fd.set("order_reference", order.ref);
+    fd.set("customer_name", c.name || "");
+    fd.set("email", c.email || "");
+    fd.set("phone", c.phone || "");
+    fd.set("ship_to", [c.address1, c.address2, c.city, c.state, c.zip, c.country].filter(Boolean).join(", "));
+    fd.set("items", lines);
+    fd.set("subtotal", "$" + Number(order.total).toFixed(2) + " USD");
+    fd.set("notes", c.notes || "");
+    fd.set("placed_at", order.createdAt || new Date().toISOString());
+    fd.set("payment", order.payment || "paypal");
+
+    return fetch(url, { method: "POST", body: fd, headers: { Accept: "application/json" } })
+      .then(res => {
+        if (res.ok) {
+          try {
+            const sent = JSON.parse(localStorage.getItem(NOTIFY_KEY)) || {};
+            sent[order.ref] = new Date().toISOString();
+            localStorage.setItem(NOTIFY_KEY, JSON.stringify(sent));
+          } catch {}
+          return true;
+        }
+        return false;
+      })
+      .catch(() => false);
+  }
+
   function showPayment() {
     const d = readForm();
     const missing = valid(d);
@@ -98,6 +148,7 @@
       total: cart.items.reduce((s, i) => s + i.qty * i.price, 0)
     };
     try { localStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch {}
+    notify(order);
 
     if (refEl) refEl.textContent = order.ref;
     payBlock.hidden = false;
@@ -124,6 +175,7 @@
     order() {
       try { return JSON.parse(localStorage.getItem(ORDER_KEY)) || null; } catch { return null; }
     },
+    notify(order) { return notify(order); },
     clear() {
       try { localStorage.removeItem(ORDER_KEY); } catch {}
     }

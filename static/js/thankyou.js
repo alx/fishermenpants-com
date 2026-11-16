@@ -44,4 +44,15 @@
   }
   const emailEl = document.getElementById("ty-email");
   if (emailEl) emailEl.textContent = c.email || "your address";
+
+  // Safety net: if the seller email did not go out before payment (page reloaded,
+  // notification failed, crypto payment), send it now. notify() is idempotent per ref.
+  if (window.FPCheckout && window.FPCheckout.notify) window.FPCheckout.notify(order);
+
+  // The purchase is placed: empty the cart so the buyer cannot pay twice.
+  try {
+    localStorage.removeItem("fp_cart_v1");
+    const badge = document.getElementById("cart-count");
+    if (badge) { badge.textContent = "0"; badge.hidden = true; }
+  } catch {}
 })();
