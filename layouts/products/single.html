@@ -42,7 +42,7 @@
 
       <div class="p-desc">{{ .Content }}</div>
       <ul class="p-meta">
-        <li><a href="{{ "collections/all/" | relURL }}">← All products</a></li>
+        <li><a href="{{ "collections/all-products/" | relURL }}">← All products</a></li>
         {{- range .Params.collections }}
         <li><a href="{{ printf "/collections/%s/" . | relURL }}">{{ . }}</a></li>
         {{- end }}
