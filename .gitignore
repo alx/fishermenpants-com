@@ -7,3 +7,4 @@ _crawl/
 tools/node_modules/
 tools/package*.json
 tools/__pycache__/
+static/img/_gen/

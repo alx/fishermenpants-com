@@ -4,7 +4,8 @@
 <section class="hero hero-slideshow" id="hero-slideshow" aria-roledescription="carousel" aria-label="Featured">
   {{- range $i, $slide := $d.hero }}
   <div class="hero-slide{{ if eq $i 0 }} is-active{{ end }}" role="group" aria-label="{{ add $i 1 }} of {{ len $d.hero }}">
-    <img src="{{ $slide.image | relURL }}" alt="{{ $slide.heading }}" {{ if ne $i 0 }}loading="lazy"{{ end }}>
+    {{- partial "img.html" (dict "src" $slide.image "alt" $slide.heading
+          "sizes" "(max-width: 1120px) 100vw, 1120px" "eager" (eq $i 0)) }}
     <div class="hero-overlay"><span class="hero-heading">{{ $slide.heading }}</span></div>
   </div>
   {{- end }}
@@ -45,7 +46,7 @@
     {{- range $d.collectionTiles }}
     {{- $t := . }}
     <a class="tile" href="{{ printf "/collections/%s/" $t.handle | relURL }}">
-      {{ with $t.image }}<span class="tile-img"><img src="{{ . | relURL }}" alt="{{ $t.label }}"></span>{{ end }}
+      {{ with $t.image }}<span class="tile-img">{{ partial "img.html" (dict "src" . "alt" $t.label "sizes" "(max-width: 700px) 100vw, 33vw") }}</span>{{ end }}
       <span class="tile-label">{{ $t.label }}</span>
     </a>
     {{- end }}
@@ -54,7 +55,7 @@
 
 {{- range $i, $it := $d.interstitials }}
 <section class="iwt{{ if $it.flip }} iwt--flip{{ end }}">
-  <div class="iwt-media"><img src="{{ $it.image | relURL }}" alt="{{ $it.heading }}" loading="lazy"></div>
+  <div class="iwt-media">{{ partial "img.html" (dict "src" $it.image "alt" $it.heading "sizes" "(max-width: 900px) 100vw, 50vw") }}</div>
   <div class="iwt-content">
     <h2>{{ $it.heading }}</h2>
     {{- with $it.text }}<p>{{ . }}</p>{{ end }}

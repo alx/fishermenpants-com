@@ -11,8 +11,9 @@
          data-description="{{ $desc }}" data-sku="{{ $sku }}">
   <div class="wrap product-grid">
     <div class="p-gallery">
-      {{- range .Params.images }}
-      <img class="p-img" src="{{ . | relURL }}" alt="{{ $.Title }}" loading="lazy">
+      {{- range $i, $img := .Params.images }}
+      {{- partial "img.html" (dict "src" $img "alt" $.Title "class" "p-img"
+            "sizes" "(max-width: 700px) 100vw, 50vw" "eager" (eq $i 0)) }}
       {{- else }}
       <img class="p-img" src="{{ "img/placeholder.svg" | relURL }}" alt="{{ .Title }}">
       {{- end }}
