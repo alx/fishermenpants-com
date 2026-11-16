@@ -1,17 +1,43 @@
 {{ define "main" }}
 <div class="wrap cart-page">
   <h1>Your Cart</h1>
-  <p class="country-row">
-    <label for="country-select-cart">Shipping to:
-      <select id="country-select-cart" class="country-select"></select>
-    </label>
-    <small class="muted">Shipping options and costs are calculated at checkout.</small>
-  </p>
   <div id="cart-items"></div>
   <div id="cart-empty" class="muted" hidden>Your cart is empty. <a href="{{ "collections/all-products/" | relURL }}">Continue shopping</a>.</div>
-  <div class="cart-totals">
-    <div class="total-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00 USD</strong></div>
+
+  <section class="checkout-block" id="checkout-block" hidden>
+    <h2>Checkout details</h2>
+    <p class="muted checkout-hint">We need these to send your order. Nothing is charged until you confirm with the payment provider.</p>
+    <form id="checkout-form" novalidate>
+      <div class="co-grid">
+        <label>Full name <input name="name" required autocomplete="name"></label>
+        <label>Email <input name="email" type="email" required autocomplete="email"></label>
+        <label>Phone <input name="phone" type="tel" autocomplete="tel"></label>
+        <label>Country
+          <select name="country" id="co-country" required autocomplete="country-name"></select>
+        </label>
+        <label class="co-wide">Address <input name="address1" required autocomplete="street-address"></label>
+        <label class="co-wide">Apartment, suite, etc. <span class="muted">(optional)</span><input name="address2" autocomplete="address-line2"></label>
+        <label>City <input name="city" required autocomplete="address-level2"></label>
+        <label>State / Province <input name="state" autocomplete="address-level1"></label>
+        <label>Postal code <input name="zip" required autocomplete="postal-code"></label>
+        <label class="co-wide">Order notes <span class="muted">(optional)</span><textarea name="notes" rows="2"></textarea></label>
+      </div>
+      <p class="co-error" id="co-error" hidden></p>
+      <div class="cart-totals">
+        <div class="total-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00 USD</strong></div>
+        <div class="total-row total-row--note"><span class="muted">Shipping calculated after we confirm your address.</span></div>
+      </div>
+      <div class="co-actions">
+        <button type="button" id="co-continue" class="btn-primary">Continue to payment</button>
+      </div>
+    </form>
+  </section>
+
+  <section class="checkout-block" id="payment-block" hidden>
+    <h2>Payment</h2>
+    <p class="muted">Order reference: <strong id="co-ref"></strong> — please quote it when you contact us.</p>
     <div class="paypal-slot" id="paypal-buttons-cart"></div>
-  </div>
+    <p class="muted pay-alt">Prefer crypto? <a href="{{ "pages/payment-methods/" | relURL }}">See crypto payment options</a> and quote your order reference.</p>
+  </section>
 </div>
 {{ end }}

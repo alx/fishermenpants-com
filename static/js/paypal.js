@@ -96,6 +96,33 @@
       form.appendChild(field("amount", money(opts.unitPrice)));
       form.appendChild(field("quantity", String(opts.qty)));
     }
+    if (opts.order) {
+      const c = opts.order.customer || {};
+      const split = nm => {
+        const parts = String(nm || "").trim().split(/\s+/);
+        return [parts.shift() || "", parts.join(" ")];
+      };
+      const [first, last] = split(c.name);
+      if (c.email) form.appendChild(field("email", c.email));
+      if (first) form.appendChild(field("first_name", first));
+      if (last) form.appendChild(field("last_name", last));
+      if (c.address1) form.appendChild(field("address1", c.address1));
+      if (c.address2) form.appendChild(field("address2", c.address2));
+      if (c.city) form.appendChild(field("city", c.city));
+      if (c.state) form.appendChild(field("state", c.state));
+      if (c.zip) form.appendChild(field("zip", c.zip));
+      if (c.country) form.appendChild(field("country", c.country));
+      if (c.phone) form.appendChild(field("night_phone_b", c.phone));
+      if (opts.order.ref) form.appendChild(field("invoice", opts.order.ref));
+      if (c.notes) form.appendChild(field("custom", String(c.notes).slice(0, 255)));
+      form.appendChild(field("no_shipping", "1")); // address already collected
+      form.appendChild(field("no_note", "0"));
+    }
+    if (opts.returnUrl) {
+      form.appendChild(field("return", opts.returnUrl));
+      form.appendChild(field("rm", "1")); // GET, so the browser lands back on our page
+      form.appendChild(field("cancel_return", opts.cancelUrl || opts.returnUrl));
+    }
     form.appendChild(payButton(opts.buttonLabel));
     slot.innerHTML = "";
     slot.appendChild(form);
@@ -136,10 +163,14 @@
         cart.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
         return;
       }
+      const order = (window.FPCheckout && window.FPCheckout.order()) || null;
       buildForm(cart, {
         cmd: "_cart",
         items,
-        buttonLabel: "Checkout"
+        order,
+        returnUrl: order ? new URL("order/thank-you/", window.FP_BASE || location.origin + "/").href : "",
+        cancelUrl: new URL("cart/", window.FP_BASE || location.origin + "/").href,
+        buttonLabel: order ? "Pay with PayPal" : "Checkout"
       });
     }
   }

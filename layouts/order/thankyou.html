@@ -1,0 +1,26 @@
+{{ define "main" }}
+<div class="wrap thankyou-page">
+  <h1>Thank you!</h1>
+  <p class="ty-lede" id="ty-lede">Your order is being confirmed.</p>
+
+  <div class="ty-card">
+    <h2>Order reference</h2>
+    <p class="ty-ref"><code id="ty-ref">—</code></p>
+    <p class="muted">Keep this reference. Quote it in any email to us and in your crypto transaction.</p>
+  </div>
+
+  <div class="ty-card" id="ty-items-card">
+    <h2>What you ordered</h2>
+    <div id="ty-items"></div>
+    <div class="total-row"><span>Subtotal</span><strong id="ty-total">—</strong></div>
+  </div>
+
+  <div class="ty-card" id="ty-ship-card">
+    <h2>Shipping to</h2>
+    <address id="ty-ship"></address>
+  </div>
+
+  <p class="muted">We’ll email you at <strong id="ty-email">your address</strong> once the payment is confirmed and the parcel is on its way.</p>
+  <p><a class="btn-primary ty-btn" href="{{ "" | relURL }}">Continue shopping</a></p>
+</div>
+{{ end }}
