@@ -22,6 +22,8 @@
       <p class="pay-note">Payments go to <strong>{{ $pp.business }}</strong>.</p>
     </section>
 
+    <hr class="pay-sep">
+
     <section class="pay-card">
       <div class="pay-card-head">
         <img src="{{ "img/crypto-metamask.png" | relURL }}" alt="MetaMask wallet QR code" class="pay-qr" width="198" height="197" loading="lazy">
@@ -42,6 +44,8 @@
       </div>
       <p class="pay-note">Ethereum network only — funds sent on another chain can be lost.</p>
     </section>
+
+    <hr class="pay-sep">
 
     <section class="pay-card">
       <div class="pay-card-head">
@@ -65,6 +69,8 @@
     </section>
 
   </div>
+
+  <hr class="pay-sep pay-sep--wide">
 
   <p class="pay-help">Not sure which method to use, or need a different arrangement? We’re happy to help.</p>
   <a class="pay-cta" href="mailto:{{ $pp.business }}?subject=Question%20about%20payment">

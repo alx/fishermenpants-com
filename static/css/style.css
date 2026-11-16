@@ -268,3 +268,26 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
   .pay-qr { width: 76px; }
   .pay-cta { flex-direction: column; text-align: center; gap: 10px; }
 }
+
+/* separators on the payment methods page */
+.pay-sep { border: 0; height: 1px; background: linear-gradient(to right, transparent, #e2dccf 12%, #e2dccf 88%, transparent); margin: 4px 0; }
+/* On wide screens the cards sit in one row, so the in-grid dividers render as
+   vertical rules between columns instead of wrapping the cards onto new rows. */
+@media (min-width: 1001px) {
+  /* One row: card | rule | card | rule | card */
+  .pay-grid { grid-template-columns: 1fr auto 1fr auto 1fr; }
+  .pay-grid > .pay-sep {
+    grid-row: 1;
+    width: 1px;
+    height: 100%;
+    margin: 0 6px;
+    background: linear-gradient(to bottom, transparent, #e2dccf 10%, #e2dccf 90%, transparent);
+  }
+  .pay-grid > .pay-sep:nth-of-type(1) { grid-column: 2; }
+  .pay-grid > .pay-sep:nth-of-type(2) { grid-column: 4; }
+}
+.pay-sep--wide { margin: 34px auto 0; max-width: 640px; }
+@media (max-width: 1000px) {
+  /* cards stack; the dividers sit between them like normal horizontal rules */
+  .pay-grid > .pay-sep { margin: 6px 0; }
+}
