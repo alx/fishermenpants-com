@@ -92,6 +92,9 @@
         const qty = Math.max(1, Math.min(99, parseInt(qtyInput.value, 10) || 1));
         if (optDisabled(s.vid)) return;
         window.FPCart.add({ ...s, qty });
+        document.dispatchEvent(new CustomEvent("fp:added", {
+          detail: { handle: s.handle, price: s.price, qty }
+        }));
         window.fpToast(`Added "${s.name}" to cart`);
         window.FPPaypal && window.FPPaypal.refreshProduct();
       });

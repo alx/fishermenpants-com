@@ -54,6 +54,13 @@
   <meta name="twitter:image" content="{{ $ogURL }}">
   <!-- 100% privacy-first analytics -->
   <script async data-hostname="fishermenpants.com" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
+  <script async data-hostname="fishermenpants.com" src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script>
+  <script>
+    // Placeholder so sa_event() never throws before the script loads, or when it is blocked.
+    window.sa_event = window.sa_event || function () {
+      (window.sa_event.q = window.sa_event.q || []).push(arguments);
+    };
+  </script>
   <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
@@ -78,5 +85,6 @@
   <script defer src="{{ "js/newsletter.js" | relURL }}"></script>
   <script defer src="{{ "js/checkout.js" | relURL }}"></script>
   <script defer src="{{ "js/thankyou.js" | relURL }}"></script>
+  <script defer src="{{ "js/analytics-events.js" | relURL }}"></script>
 </body>
 </html>

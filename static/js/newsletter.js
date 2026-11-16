@@ -23,6 +23,7 @@
       if (res.ok) {
         note.textContent = "Thank you! Check your inbox for your 10% off code.";
         form.reset();
+        document.dispatchEvent(new CustomEvent("fp:newsletter"));
       } else {
         note.textContent = data.message || "Something went wrong — please email us directly.";
       }

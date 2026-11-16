@@ -149,8 +149,14 @@
     };
     try { localStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch {}
     notify(order);
+    document.dispatchEvent(new CustomEvent("fp:order_placed", {
+      detail: { items: order.items.length, total: order.total }
+    }));
 
     if (refEl) refEl.textContent = order.ref;
+    document.dispatchEvent(new CustomEvent("fp:checkout_started", {
+      detail: { items: order.items.length, total: order.total }
+    }));
     payBlock.hidden = false;
     window.FPPaypal && window.FPPaypal.refreshCart();
     payBlock.scrollIntoView({ behavior: "smooth", block: "center" });
