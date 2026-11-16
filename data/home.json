@@ -1,39 +1,58 @@
 {
- "heroImage": "/img/test1.jpg",
+ "heroImage": "/img/216b9f_Screenshot_2025-03-12_110132.png",
  "brand": "GAYA",
  "tagline": "Elegant and sustainable beachwear for the adventurous trendsetters.",
  "banners": [
   {
    "heading": "Explore nature",
-   "image": "/img/test1.jpg"
+   "image": "/img/777a87_Wrap_pants.png"
   },
   {
-   "heading": "Breathe the air",
-   "image": "/img/test2.jpg"
+   "heading": "Breath the air",
+   "image": "/img/e45d05_Samui_collection.png"
   },
   {
    "heading": "Exercise heavy travel light",
-   "image": "/img/test1.jpg"
+   "image": "/img/d1122a_Screenshot_2025-03-28_145605.png"
+  },
+  {
+   "heading": "Great Traveling Pants",
+   "image": "/img/b7096e_Screenshot_2025-03-12_105305.png"
   }
  ],
  "whatsNew": [
-  "test-pants"
+  "hemp-ethnic-pants-copy",
+  "samui-caftan",
+  "yacht-collection-waffle-pants",
+  "unique-fisherman-pants"
  ],
  "islandsVibes": [
-  "test-pants"
+  "yacht-collection-waffle-pants",
+  "unique-fisherman-pants"
  ],
  "collectionTiles": [
   {
+   "handle": "shop-for-her",
+   "label": "Samui collection",
+   "image": "/img/a31d7a_Screenshot_2025-03-28_145738.png"
+  },
+  {
    "handle": "fisherman-pants",
    "label": "Thai wrap pants",
-   "image": "/img/test1.jpg"
+   "image": "/img/83f43b_acesessories_e8277ea4-cfc9-4f01-a3c6-a70aea26e1ac.jpg"
+  },
+  {
+   "handle": "accessories-1",
+   "label": "Accessories",
+   "image": "/img/5f084f_Screenshot_2025-03-11_191924.png"
   }
  ],
  "testimonials": [
   {
    "name": "Raghuvir C",
-   "text": "Wonderful place to visit."
+   "text": "What a nice shop, a breath of fresh air amongst many of the all the same kind of shops everywhere. This man has put his creativity in his design of the merchandise he sells, the building, the garden....he is a living artist. Always ready to serve you a tea and a self made piece of his fantastic cakes. The quality of his fisherman pants is also unique in Thailand, Great stuff and gorgeous designs. Warmly recommended for anybody looking for something different."
   }
  ],
- "video": null
+ "video": "https://www.youtube.com/embed/LyRfKCei_IY?enablejsapi=1&autoplay=1",
+ "videoKind": "youtube"
 }

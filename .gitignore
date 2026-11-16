@@ -1,5 +1,7 @@
-public/
 resources/_gen/
 .hugo_build.lock
 *.log
 .DS_Store
+_crawl/
+tools/node_modules/
+tools/package*.json

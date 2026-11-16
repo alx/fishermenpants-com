@@ -1,21 +1,21 @@
 #!/usr/bin/env python3
-"""Paced crawler for fishermenpants.com (respects Retry-After on 429).
+"""Crawl support for the fishermenpants.com migration.
 
-Phase A: fetch home, collections, products, static pages (from sitemap URL list).
-Phase B: download every referenced CDN image locally (CDN is not throttled).
-Phase C: parse into _crawl/parsed.json (see build_content.py for Hugo emit).
+Phase A (page fetching) lives in crawl_browser.mjs (Playwright Firefox — the
+Shopify edge 403/429s plain HTTP clients). This module provides the job list,
+Phase B (image downloads) and Phase C (parsing).
+
+Usage:
+  python3 tools/crawl2.py jobs            # write _crawl/jobs.json for the browser
+  python3 tools/crawl2.py bc              # run phase B (images) + C (parse)
 """
-import json, os, re, sys, time, html as H
-import urllib.request, urllib.error
-import email
+import json, os, re, sys, time, hashlib, urllib.request, urllib.error
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BASE = "https://www.fishermenpants.com"
 UA = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0 Safari/537.36"
 HTML_DIR = os.path.join(ROOT, "_crawl", "html")
 IMG_DIR = os.path.join(ROOT, "static", "img")
-PACE = 30          # seconds between page fetches
-MAX_RETRY = 8      # retries per URL on 429
 
 COLLECTIONS = ["all-products", "fisherman-pants", "island-shirts", "shop-for-her",
                "new-arrivals", "best-sellers", "scarves", "accessories-1",
@@ -39,80 +39,21 @@ PRODUCTS = ["kimono-samui-slim-sleeves","dragon-wrap-pants","hemp-ethnic-pants",
 
 def log(m): print(time.strftime("[%H:%M:%S] ") + m, flush=True)
 
-def fetch(path, timeout=60):
-    """One GET. Returns (bytes_or_None, retry_after_seconds_or_None)."""
-    req = urllib.request.Request(BASE + path, headers={
-        "User-Agent": UA, "Accept": "text/html,application/xhtml+xml",
-
-        "Accept-Language": "en-US,en;q=0.9"})
-    try:
-        with urllib.request.urlopen(req, timeout=timeout) as r:
-            return r.read(), None
-    except urllib.error.HTTPError as e:
-        if e.code == 429:
-            ra = e.headers.get("Retry-After")
-            try:
-                ra = int(ra)
-            except Exception:
-                ra = 60
-            try:
-                e.read()
-            except Exception:
-                pass
-            return None, ra
-        if e.code == 404:
-            return b"404", None
-        log(f"  HTTP {e.code} {path}")
-        return None, 10
-    except Exception as ex:
-        log(f"  {path}: {ex}")
-        return None, 10
-
-def fetch_with_retry(path):
-    for attempt in range(MAX_RETRY):
-        data, ra = fetch(path)
-        if data is not None:
-            return data
-        wait = (ra or 60) + 5
-        log(f"  429 on {path}, retry-after {ra}s -> wait {wait}s (try {attempt + 1}/{MAX_RETRY})")
-        time.sleep(wait)
-    return None
-
-def save(path, name, data):
-    fp = os.path.join(HTML_DIR, f"{name}.html")
-    open(fp, "wb").write(data)
-    log(f"saved {name}.html ({len(data)}b)")
-
-def main():
-    os.makedirs(HTML_DIR, exist_ok=True)
-    os.makedirs(IMG_DIR, exist_ok=True)
-    os.system(f"touch {ROOT}/_crawl/crawl.done")
-    open(os.path.join(ROOT, "_crawl", "crawl.log"), "a").close()
+def all_jobs():
     jobs = [("/", "home")]
     jobs += [(f"/collections/{c}", f"collection-{c}") for c in COLLECTIONS]
     jobs += [(f"/products/{p}", f"product-{p}") for p in PRODUCTS]
     jobs += [(f"/pages/{p}", f"page-{p}") for p in PAGES]
     jobs += [("/policies/privacy-policy", "page-privacy-policy")]
-    ok, failed = 0, []
-    for i, (path, name) in enumerate(jobs):
-        fp = os.path.join(HTML_DIR, f"{name}.html")
-        if os.path.exists(fp) and os.path.getsize(fp) > 2000 and not os.path.exists(fp + ".force"):
-            ok += 1
-            continue
-        if i > 0:
-            time.sleep(PACE)
-        data = fetch_with_retry(path)
-        if data is None:
-            failed.append(path)
-            continue
-        save(path, name, data)
-        ok += 1
-        log(f"progress {i + 1}/{len(jobs)} ok={ok} failed={len(failed)}")
-    log(f"PHASE A done: ok={ok} failed={len(failed)}")
-    if failed:
-        log("FAILED: " + ", ".join(failed))
+    return jobs
 
-    # ---- Phase B: images ----
+def write_jobs():
+    os.makedirs(HTML_DIR, exist_ok=True)
+    json.dump(all_jobs(), open(os.path.join(ROOT, "_crawl", "jobs.json"), "w"), indent=1)
+    log(f"wrote jobs.json ({len(all_jobs())} urls)")
+
+def phase_b():
+    """Download every CDN image referenced by the crawled HTML."""
     manifest = {}
     mf = os.path.join(ROOT, "_crawl", "manifest.json")
     if os.path.exists(mf):
@@ -126,10 +67,8 @@ def main():
             if m not in manifest:
                 todo.append(m)
     log(f"PHASE B: {len(todo)} images to download")
-    import hashlib
     for u in todo:
-        m = re.match(r'cdn/(shop|collections)/(.+)$', u)
-        if not m:
+        if not re.match(r'cdn/(shop|collections)/', u):
             continue
         name = os.path.basename(u.split("?")[0])
         ext = os.path.splitext(name)[1].lower() or ".jpg"
@@ -154,9 +93,10 @@ def main():
     json.dump(manifest, open(mf, "w"), indent=1)
     log(f"PHASE B done: {len(manifest)} images mapped")
 
-    # ---- Phase C: parse ----
+def phase_c():
+    """Parse product/collection HTML into _crawl/parsed.json."""
     sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-    from crawl import parse_product, product_handles_from  # reuse parser
+    from crawl import parse_product, product_handles_from
     prods = []
     for p in PRODUCTS:
         fp = os.path.join(HTML_DIR, f"product-{p}.html")
@@ -174,8 +114,18 @@ def main():
         cols[c] = {"handles": product_handles_from(ch), "title": c}
     json.dump({"products": prods, "collections": cols},
               open(os.path.join(ROOT, "_crawl", "parsed.json"), "w"), indent=1)
-    log("DONE crawl -> parsed.json")
-    os.remove(os.path.join(ROOT, "_crawl", "crawl.done"))
+    log("PHASE C done -> parsed.json")
 
 if __name__ == "__main__":
-    main()
+    cmd = sys.argv[1] if len(sys.argv) > 1 else "jobs"
+    if cmd == "jobs":
+        write_jobs()
+    elif cmd == "bc":
+        phase_b()
+        phase_c()
+    elif cmd == "b":
+        phase_b()
+    elif cmd == "c":
+        phase_c()
+    else:
+        raise SystemExit("usage: crawl2.py [jobs|b|c|bc]")
