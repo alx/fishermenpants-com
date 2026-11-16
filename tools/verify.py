@@ -117,6 +117,30 @@ if os.path.exists(ap):
         fail(f"all-products lists {n} products, content has {len(_prods)}")
 print(f"catalogue: {len(_prods)} products, all in a collection, all handles resolve")
 
+# 10. every product handle referenced in data/home.yaml must exist
+try:
+    import yaml as _yaml
+    _home = _yaml.safe_load(open(os.path.join(ROOT, "data", "home.yaml"), errors="replace"))
+    _refd = list(_home.get("whatsNew") or []) + list(_home.get("islandsVibes") or [])
+    for _k in ("hero", "interstitials", "collectionTiles"):
+        for _entry in (_home.get(_k) or []):
+            for _field in ("image",):
+                _img = (_entry or {}).get(_field)
+                if _img and not os.path.exists(os.path.join(ROOT, "static", str(_img).lstrip("/"))):
+                    fail(f"home.yaml {_k}: missing image {_img}")
+    for _h in _refd:
+        if _h not in _prods:
+            fail(f"home.yaml references unknown product '{_h}'")
+    for _t in (_home.get("collectionTiles") or []):
+        _c = (_t or {}).get("handle")
+        if _c and not os.path.exists(os.path.join(ROOT, "content", "collections", str(_c) + ".md")):
+            fail(f"home.yaml collectionTile: unknown collection '{_c}'")
+    print(f"home.yaml: {len(_refd)} product refs and all tile images resolve")
+except ImportError:
+    print("home.yaml: skipped (pyyaml not installed)")
+except FileNotFoundError:
+    pass
+
 # 7. private pages must not be in the sitemap or indexable
 sm = os.path.join(ROOT, "public", "sitemap.xml")
 if os.path.exists(sm):

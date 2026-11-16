@@ -33,6 +33,28 @@ collections:
           - leather bracelets
           - island shirts
       - { label: Vendor, name: vendor, widget: string, required: false }
+      - label: Collections
+        name: collections
+        widget: select
+        multiple: true
+        required: false
+        comment: >-
+          Which shop categories this product appears in. "all-products",
+          "new-arrivals" and "best-sellers" are maintained by tools/ rather than by
+          hand, so prefer leaving them out here.
+        options:
+          - accessories
+          - all-products
+          - bags
+          - best-sellers
+          - fisherman-pants
+          - island-shirts
+          - jewelry
+          - new-arrivals
+          - sarongs
+          - scarves
+          - shop-for-her
+
       - label: Images
         name: images
         widget: image
