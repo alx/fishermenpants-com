@@ -6,7 +6,7 @@ priceMax: 129.0
 compareAtMin: 0
 variants: [{"id": "46289903976622", "title": "Default Title", "price": 129.0, "sku": null, "available": true}]
 images: [
-  { image: "img/c216cc_Screenshot2025-05-14121713.png" },
+  "/img/c216cc_Screenshot2025-05-14121713.png",
   ]
 ptype: "Dress"
 vendor: "Gaya"

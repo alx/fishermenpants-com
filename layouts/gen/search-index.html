@@ -3,7 +3,7 @@
 {{- $price := "" -}}
 {{- $pf := .Params.price | default .Params.priceMin -}}{{- if $pf -}}{{- $price = ($pf | float | printf "%.2f") -}}{{- end -}}
 {{- $img := "" -}}
-{{- if .Params.images -}}{{- $img = (index .Params.images 0).image -}}{{- end -}}
+{{- if .Params.images -}}{{- $img = index .Params.images 0 -}}{{- end -}}
 {{- $doc := dict "title" .Title "url" (.Permalink | relLangURL) "price" $price "image" $img "text" (.Plain | truncate 500) -}}
 {{- $docs = $docs | append $doc -}}
 {{- end -}}

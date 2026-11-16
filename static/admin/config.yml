@@ -35,10 +35,11 @@ collections:
       - { label: Vendor, name: vendor, widget: string, required: false }
       - label: Images
         name: images
-        widget: list
+        widget: image
+        multiple: true
         required: false
-        fields:
-          - { label: Image, name: image, widget: image }
+        media_folder: /static/img
+        public_folder: /img
       - { label: Body, name: body, widget: markdown }
       - { label: priceMin, name: priceMin, widget: hidden, default: 0 }
       - { label: priceMax, name: priceMax, widget: hidden, default: 0 }

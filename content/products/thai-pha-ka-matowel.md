@@ -6,8 +6,8 @@ priceMax: 24.0
 compareAtMin: 0
 variants: [{"id": "46467308486830", "title": "Default Title", "price": 24.0, "sku": "", "available": true}]
 images: [
-  { image: "img/57c0f9_Screenshot2025-05-11121845.png" },
-  { image: "img/c02049_Sarong.png" },
+  "/img/57c0f9_Screenshot2025-05-11121845.png",
+  "/img/c02049_Sarong.png",
   ]
 ptype: "Sarongs"
 vendor: "Gaya"

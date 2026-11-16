@@ -6,8 +6,8 @@ priceMax: 49.0
 compareAtMin: 0
 variants: [{"id": "46467517382830", "title": "Default Title", "price": 49.0, "sku": "", "available": true}]
 images: [
-  { image: "img/4b26ed_Screenshot2025-05-10134128.png" },
-  { image: "img/4d626a_Screenshot_2025-05-11_140700.png" },
+  "/img/4b26ed_Screenshot2025-05-10134128.png",
+  "/img/4d626a_Screenshot_2025-05-11_140700.png",
   ]
 ptype: "bags"
 vendor: "Gaya"

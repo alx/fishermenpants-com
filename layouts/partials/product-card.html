@@ -1,7 +1,7 @@
 {{- $min := .Params.price | default (.Params.priceMin | default 0) -}}
 {{- $max := .Params.price | default (.Params.priceMax | default $min) -}}
 <a class="product-card" href="{{ .Permalink }}">
-  <span class="pc-img"><img src="{{ if .Params.images }}{{ (index .Params.images 0).image | relURL }}{{ else }}{{ "img/placeholder.svg" | relURL }}{{ end }}" alt="{{ .Title }}" loading="lazy"></span>
+  <span class="pc-img"><img src="{{ if .Params.images }}{{ index .Params.images 0 | relURL }}{{ else }}{{ "img/placeholder.svg" | relURL }}{{ end }}" alt="{{ .Title }}" loading="lazy"></span>
   <span class="pc-info">
     <span class="pc-title">{{ .Title }}</span>
     <span class="pc-price">{{ if gt (float $max) (float $min) }}from ${{ (float $min) | printf "%.2f" }} USD{{ else }}${{ (float $min) | printf "%.2f" }} USD{{ end }}{{ with .Params.compareAtMin }}{{ if gt (float .) (float $min) }} <s>${{ (float .) | printf "%.2f" }}</s>{{ end }}{{ end }}</span>

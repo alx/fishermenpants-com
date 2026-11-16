@@ -6,7 +6,7 @@ priceMax: 109.0
 compareAtMin: 0
 variants: [{"id": "46289894375598", "title": "Default Title", "price": 109.0, "sku": null, "available": true}]
 images: [
-  { image: "img/1dde80_Screenshot2025-03-31111749.png" },
+  "/img/1dde80_Screenshot2025-03-31111749.png",
   ]
 ptype: null
 vendor: "Gaya"

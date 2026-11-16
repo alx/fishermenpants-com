@@ -6,7 +6,7 @@ priceMax: 199.0
 compareAtMin: 0
 variants: [{"id": "46623039094958", "title": "Default Title", "price": 199.0, "sku": "", "available": true}]
 images: [
-  { image: "img/bc87e7_1000027498.png" },
+  "/img/bc87e7_1000027498.png",
   ]
 ptype: "wrap pants"
 vendor: "Gaya"

@@ -6,9 +6,9 @@ priceMax: 39.9
 compareAtMin: 0
 variants: [{"id": "46464623378606", "title": "Default Title", "price": 39.9, "sku": "", "available": true}]
 images: [
-  { image: "img/0d89a5_Screenshot2025-05-10120918.png" },
-  { image: "img/43a50a_scarves.png" },
-  { image: "img/223eba_Screenshot2025-05-10120556.png" },
+  "/img/0d89a5_Screenshot2025-05-10120918.png",
+  "/img/43a50a_scarves.png",
+  "/img/223eba_Screenshot2025-05-10120556.png",
   ]
 ptype: "scarves"
 vendor: "Gaya"
