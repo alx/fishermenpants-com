@@ -69,7 +69,7 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 }
 
 /* home */
-.hero-slideshow { position: relative; height: min(88vh, 860px); min-height: 420px; overflow: hidden; background: #10151b; }
+.hero-slideshow { position: relative; height: min(88vh, 860px); min-height: 420px; overflow: hidden; background: #10151b; max-width: 1120px; margin: 0 auto; }
 .hero-slide { position: absolute; inset: 0; opacity: 0; visibility: hidden; transition: opacity .9s ease, visibility .9s; }
 .hero-slide.is-active { opacity: 1; visibility: visible; }
 .hero-slide img { width: 100%; height: 100%; object-fit: cover; }
@@ -86,7 +86,7 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 @media (max-width: 640px) { .hero-arrow { display: none; } }
 
 /* image-with-text interstitials */
-.iwt { display: grid; grid-template-columns: 1.12fr 1fr; min-height: 540px; }
+.iwt { display: grid; grid-template-columns: 1.12fr 1fr; min-height: 540px; max-width: 1120px; margin: 0 auto; }
 .iwt-media { position: relative; min-height: 380px; }
 .iwt-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .iwt-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 56px 44px; background: #efe9df; }
@@ -124,11 +124,12 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .review { background: var(--sand); border-radius: 10px; padding: 18px; margin: 0; }
 .review blockquote { margin: 0 0 10px; font-size: .95rem; }
 .review figcaption { color: var(--muted); font-size: .85rem; }
-.video-frame { max-width: 760px; }
+.video-frame { max-width: 760px; margin: 0 auto; }
+.video-section { text-align: center; }
 .video-frame video { width: 100%; border-radius: 10px; }
 
 /* newsletter / formspree */
-.newsletter { background: var(--sea-dark); color: #fff; border-radius: 14px; text-align: center; margin: 10px 20px 50px; }
+.newsletter { background: var(--sea-dark); color: #fff; border-radius: 14px; text-align: center; margin: 10px auto 50px; max-width: 1120px; }
 .newsletter h2 { margin-bottom: 4px; }
 .newsletter p { opacity: .9; }
 .newsletter form { display: flex; gap: 10px; justify-content: center; flex-wrap: wrap; margin-top: 14px; }

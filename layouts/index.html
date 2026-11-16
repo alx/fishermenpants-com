@@ -31,7 +31,6 @@
 
 {{ if $d.video }}
 <section class="section video-section">
-  <h2>Like no other</h2>
   {{ if eq $d.videoKind "youtube" }}
   <div class="video-frame"><iframe class="yt-embed" src="{{ $d.video }}" frameborder="0" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture" allowfullscreen title="Like no other"></iframe></div>
   {{ else }}
