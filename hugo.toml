@@ -15,10 +15,23 @@ hasCJKLanguage = false
     # Business account that receives payments (used by the classic checkout button).
     business = "thaifishpants@gmail.com"
 
+  [params.business]
+    name = "GAYA - boutique by the sea"
+    phone = "+66895865263"
+    phoneDisplay = "+66 89 586 5263"
+    street = "156, beach 7 Had Lamai Rd, Tambon Maret"
+    city = "Koh Samui, Surat Thani 84310"
+    country = "Thailand"
+    postal = "F29X+PM"
+    hours = "Monday – Sunday, 9:00 am – 7:30 pm"
+    mapsUrl = "https://maps.app.goo.gl/7ccyCNLymWZHUXz38"
+    lat = 9.4693212
+    lng = 100.0491771
+
   [params.formspree]
     # Create a free form at https://formspree.io and paste the endpoint here.
     # e.g. https://formspree.io/f/abcdwxyz — replace with your form's id
-    endpoint = "https://formspree.io/f/your-form-id"
+    endpoint = "https://formspree.io/f/xppdpbqk"
 
 [markup]
   [markup.goldmark]

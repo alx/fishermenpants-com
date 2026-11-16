@@ -1,0 +1,51 @@
+{{ define "main" }}
+{{- $b := .Site.Params.business -}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<div class="wrap contact-page">
+  <h1>{{ .Title }}</h1>
+  <p class="contact-lede">{{ .Site.Params.description }}</p>
+
+  <div class="contact-grid">
+    <section class="contact-card">
+      <h2>Find us</h2>
+      <address>
+        <strong>{{ $b.name }}</strong><br>
+        {{ $b.street }}<br>
+        {{ $b.city }}<br>
+        {{ $b.country }}<br>
+        <span class="muted">Plus code: {{ $b.postal }}</span>
+      </address>
+      <p><a class="btn-primary contact-btn" href="{{ $b.mapsUrl }}" target="_blank" rel="noopener">Open in Google Maps</a></p>
+    </section>
+
+    <section class="contact-card">
+      <h2>Contact</h2>
+      <ul class="contact-list">
+        <li><span class="ci">&#128222;</span> <a href="tel:{{ $b.phone }}">{{ $b.phoneDisplay }}</a></li>
+        <li><span class="ci">&#128311;</span> <a href="https://www.facebook.com/fishermenpants/" target="_blank" rel="noopener">Facebook — fishermenpants</a></li>
+        <li><span class="ci">&#128205;</span> <a href="{{ $b.mapsUrl }}" target="_blank" rel="noopener">Directions on Google Maps</a></li>
+      </ul>
+    </section>
+
+    <section class="contact-card">
+      <h2>Opening hours</h2>
+      <table class="hours">
+        {{ range slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday" }}
+        <tr><th scope="row">{{ . }}</th><td>9:00 am – 7:30 pm</td></tr>
+        {{ end }}
+      </table>
+      <p class="muted">Open every day, including public holidays.</p>
+    </section>
+  </div>
+
+  <h2 class="contact-map-title">Where we are</h2>
+  <div id="contact-map" class="contact-map" role="application"
+       aria-label="Map showing {{ $b.name }} in Lamai Beach, Koh Samui"
+       data-lat="{{ $b.lat }}" data-lng="{{ $b.lng }}"
+       data-name="{{ $b.name }}" data-maps="{{ $b.mapsUrl }}"></div>
+  <p class="muted map-hint">Lamai Beach, Koh Samui — look for the yellow shop by the sea.</p>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="{{ "js/contact-map.js" | relURL }}"></script>
+{{ end }}

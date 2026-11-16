@@ -205,3 +205,30 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 #fp-toast.show { opacity: 1; transform: translateX(-50%) translateY(0); }
 
 .video-frame iframe.yt-embed { width: 100%; aspect-ratio: 16/9; border: 0; border-radius: 10px; }
+
+/* contact page */
+.contact-page { padding: 34px 0 60px; max-width: 1120px; }
+.contact-page h1 { margin: 0 0 6px; }
+.contact-lede { color: #5b6670; max-width: 620px; margin: 0 0 26px; }
+.contact-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
+.contact-card { background: #fff; border: 1px solid #e8e3da; border-radius: 14px; padding: 22px 24px; box-shadow: 0 2px 10px rgba(16,24,32,.04); }
+.contact-card h2 { margin: 0 0 12px; font-size: 1.25rem; }
+.contact-card address { font-style: normal; line-height: 1.7; }
+.contact-list { list-style: none; margin: 0; padding: 0; line-height: 2.1; }
+.contact-list li { display: flex; gap: 10px; align-items: baseline; }
+.contact-list a { color: var(--sea-dark, #123); text-decoration: none; border-bottom: 1px solid rgba(0,0,0,.15); }
+.contact-list a:hover { border-bottom-color: currentColor; }
+.ci { opacity: .8; }
+.hours { width: 100%; border-collapse: collapse; }
+.hours th, .hours td { text-align: left; padding: 5px 0; font-weight: 400; }
+.hours th { color: #263038; width: 45%; }
+.hours td { color: #5b6670; }
+.contact-btn { display: inline-block; margin-top: 14px; text-decoration: none; }
+.muted { color: #6b7680; font-size: .92rem; }
+.contact-map-title { margin: 38px 0 12px; }
+.contact-map { width: 100%; height: 420px; border-radius: 14px; border: 1px solid #e8e3da; z-index: 0; background: #eef1f4; }
+.contact-map .leaflet-container { border-radius: 14px; font-family: inherit; }
+.map-hint { margin-top: 10px; }
+@media (max-width: 620px) {
+  .contact-map { height: 320px; }
+}
