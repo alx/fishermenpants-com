@@ -7,6 +7,8 @@ hasCJKLanguage = false
 [params]
   description = "Boutique by the sea in Lamai Beach, Koh Samui — beachwear, wrap pants, kimonos, caftans"
   facebook = "https://www.facebook.com/fishermenpants/"
+  # Default social share image (1200x630), used when a page has no image of its own.
+  ogImage = "/img/og-default.jpg"
 
   [params.paypal]
     # PayPal REST API client id (live: AX... / sandbox: sb). Replace to enable SDK buttons.
