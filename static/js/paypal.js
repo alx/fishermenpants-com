@@ -24,7 +24,8 @@
       const qty = Math.max(1, parseInt((document.getElementById("qty-input") || {}).value, 10) || 1);
       api.productLine = {
         name: art.dataset.title,
-        description: desc,
+        description: desc || art.dataset.description || "",
+        sku: art.dataset.sku || art.dataset.handle || "",
         qty,
         unitPrice: Number((opt && opt.dataset.price) || 0)
       };
@@ -70,17 +71,29 @@
     form.appendChild(field("currency_code", currency));
     if (opts.cmd === "_cart") form.appendChild(field("upload", "1"));
     if (opts.items) {
+      const clean = v => String(v == null ? "" : v).replace(/Default Title/g, "").replace(/\s+/g, " ").trim();
       opts.items.forEach((it, idx) => {
         const n = idx + 1;
-        const desc = it.description && it.description !== "Default Title" ? it.description : "";
-        const name = desc ? (it.name + " — " + desc) : it.name;
-        form.appendChild(field("item_name_" + n, name));
+        const desc = clean(it.description);
+        // PayPal: amount_N is the UNIT price; the quantity multiplies it.
+        form.appendChild(field("item_name_" + n, clean(it.name) || "Item " + n));
+        if (desc) {
+          form.appendChild(field("on" + (n - 1), "Description"));
+          form.appendChild(field("os" + (n - 1), desc.slice(0, 127)));
+        }
+        if (it.sku) form.appendChild(field("item_number_" + n, clean(it.sku)));
         form.appendChild(field("quantity_" + n, String(it.qty)));
-        form.appendChild(field("amount_" + n, money(it.unitPrice * it.qty)));
+        form.appendChild(field("amount_" + n, money(it.unitPrice)));
       });
     } else {
-      form.appendChild(field("item_name", opts.name));
-      form.appendChild(field("amount", money(opts.unitPrice * opts.qty)));
+      const clean = v => String(v == null ? "" : v).replace(/Default Title/g, "").replace(/\s+/g, " ").trim();
+      form.appendChild(field("item_name", clean(opts.name) || "Item"));
+      if (opts.description && clean(opts.description)) {
+        form.appendChild(field("on0", "Description"));
+        form.appendChild(field("os0", clean(opts.description).slice(0, 127)));
+      }
+      if (opts.sku) form.appendChild(field("item_number", clean(opts.sku)));
+      form.appendChild(field("amount", money(opts.unitPrice)));
       form.appendChild(field("quantity", String(opts.qty)));
     }
     form.appendChild(payButton(opts.buttonLabel));
@@ -96,7 +109,9 @@
       if (l && l.unitPrice > 0) {
         buildForm(prod, {
           cmd: "_xclick",
-          name: l.description ? (l.name + " — " + l.description) : l.name,
+          name: l.name,
+          description: l.description,
+          sku: l.sku,
           unitPrice: l.unitPrice,
           qty: l.qty,
           buttonLabel: "Pay for item"
@@ -110,7 +125,13 @@
     if (cart) {
       const items = (api.cartItems || [])
         .filter(i => i.qty > 0 && i.price > 0)
-        .map(i => ({ name: i.name, description: i.title, qty: i.qty, unitPrice: i.price }));
+        .map(i => ({
+          name: i.name,
+          description: i.description || (i.title && i.title !== "Default Title" ? i.title : ""),
+          sku: i.sku,
+          qty: i.qty,
+          unitPrice: i.price
+        }));
       if (!items.length) {
         cart.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
         return;

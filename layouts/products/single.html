@@ -3,7 +3,12 @@
 {{- $p := .Params.price -}}
 {{- $min := $p | default (.Params.priceMin | default 0) -}}
 {{- $max := $p | default (.Params.priceMax | default $min) -}}
-<article class="product" data-handle="{{ .File.ContentBaseName }}" data-title="{{ .Title }}">
+{{- $desc := .Params.description | default (.Params.subtitle | default "") -}}
+{{- if not $desc }}{{ $desc = .Summary | plainify | htmlUnescape | chomp }}{{ end -}}
+{{- $desc = $desc | replaceRE `\s+` " " | strings.TrimSpace | truncate 120 "" -}}
+{{- $sku := (index $v 0).id | default .File.ContentBaseName -}}
+<article class="product" data-handle="{{ .File.ContentBaseName }}" data-title="{{ .Title }}"
+         data-description="{{ $desc }}" data-sku="{{ $sku }}">
   <div class="wrap product-grid">
     <div class="p-gallery">
       {{- range .Params.images }}

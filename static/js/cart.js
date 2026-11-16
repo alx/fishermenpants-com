@@ -81,7 +81,9 @@
         price: Number(opt.dataset.price || opt.textContent.match(/[\d.]+/)?.[0] || 0),
         image: images[0] ? images[0].src : "",
         handle: art.dataset.handle,
-        name: art.dataset.title
+        name: art.dataset.title,
+        description: art.dataset.description || "",
+        sku: art.dataset.sku || art.dataset.handle || ""
       };
     }
     if (addBtn) {
