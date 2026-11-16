@@ -1,5 +1,4 @@
 ---
 title: "Jewelry"
+products: ["samui-leather-bracelets"]
 ---
-<!-- collection:jewelry -->
-<!-- collection-handles:["samui-leather-bracelets"] -->

@@ -96,13 +96,15 @@ COLL_META = {
     "all-products": "All Products",
 }
 os.makedirs(os.path.join(CONTENT, "collections"), exist_ok=True)
+prod_handles = {p["handle"] for p in parsed.get("products", [])}
 count_c = 0
 for h, meta in parsed.get("collections", {}).items():
     title = COLL_META.get(h, h.replace("-", " ").title())
-    lines = ["---", f'title: "{title}"', "---",
-             f"<!-- collection:{h} -->",
-             f"<!-- collection-handles:{json.dumps(meta.get('handles', []))} -->"]
+    # keep original order, but drop handles we did not crawl (no product page)
+    handles = [x for x in meta.get("handles", []) if x in prod_handles]
+    lines = ["---", f'title: "{title}"', f"products: {json.dumps(handles)}", "---"]
     open(os.path.join(CONTENT, "collections", f"{h}.md"), "w").write("\n".join(lines) + "\n")
+    print(f"  collection {h}: {len(handles)}/{len(meta.get('handles', []))} handles with pages")
     count_c += 1
 print(f"built: {count_c} collections")
 

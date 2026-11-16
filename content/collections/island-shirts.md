@@ -1,5 +1,4 @@
 ---
 title: "Island Shirts"
+products: ["fishermans-island-shirt", "kimono-thailand-organic-tie-dye-copy"]
 ---
-<!-- collection:island-shirts -->
-<!-- collection-handles:["fishermans-island-shirt", "kimono-thailand-organic-tie-dye-copy"] -->

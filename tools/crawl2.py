@@ -35,7 +35,13 @@ PRODUCTS = ["kimono-samui-slim-sleeves","dragon-wrap-pants","hemp-ethnic-pants",
             "island-night-long-sleeve","ems-fast-shipping-7-days","cotton-beach-towel",
             "thai-towel-for-female","thai-pha-ka-matowel","kimono-samui-slim-sleeves-copy",
             "traveling-pants-copy","traveling-pants-copy-1","printed-wrap-pants-copy",
-            "hemp-ethnic-pants-copy"]
+            "hemp-ethnic-pants-copy",
+            # added so every collection has real product pages
+            "3-4-two-tones-wrap-pants-copy","beach-bag-2","beach-bag-copy",
+            "kimono-thailand-organic-tie-dye-copy","marin-kaftan-copy",
+            "organic-tye-dye-fisherman-pants-copy","reversible-cotton-silk-scarf-with-embroidery-1",
+            "samui-leather-bracelets","stonewash-koh-tao","stonewash-samui",
+            "tribal-bay-copy","vintage-wrap-pants","vintage-wrap-pants-copy"]
 
 def log(m): print(time.strftime("[%H:%M:%S] ") + m, flush=True)
 
