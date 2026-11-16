@@ -1,0 +1,80 @@
+{{ define "main" }}
+{{- $b := .Site.Params.business -}}
+{{- $pp := .Site.Params.paypal -}}
+<div class="wrap pay-page">
+  <h1>{{ .Title }}</h1>
+  <p class="pay-lede">Choose the method that suits you. Every order is confirmed by email before it ships.</p>
+
+  <div class="pay-grid">
+
+    <section class="pay-card pay-card--main">
+      <div class="pay-card-head">
+        <span class="pay-badge pay-badge--pp">Pay<span>Pal</span></span>
+        <h2>PayPal</h2>
+      </div>
+      <p class="pay-desc">The quickest option — pay with your PayPal balance, bank account or any card PayPal accepts. No account is strictly required at checkout.</p>
+      <ol class="pay-steps">
+        <li>Add your items to the cart and open the <a href="{{ "cart/" | relURL }}">cart page</a>.</li>
+        <li>Press the gold <strong>PayPal Checkout</strong> button — a secure PayPal window opens.</li>
+        <li>Log in (or choose “Pay with card”) and confirm the total.</li>
+        <li>You’ll return here with a confirmation, and we’ll email your order details.</li>
+      </ol>
+      <p class="pay-note">Payments go to <strong>{{ $pp.business }}</strong>.</p>
+    </section>
+
+    <section class="pay-card">
+      <div class="pay-card-head">
+        <img src="{{ "img/crypto-metamask.png" | relURL }}" alt="MetaMask wallet QR code" class="pay-qr" width="198" height="197" loading="lazy">
+        <div>
+          <h2>MetaMask <span class="pay-sub">Ethereum</span></h2>
+          <p class="pay-desc">Send ETH, USDC or USDT on the Ethereum network via MetaMask.</p>
+        </div>
+      </div>
+      <ol class="pay-steps">
+        <li>Scan the QR code with your MetaMask app, or copy the address below.</li>
+        <li>Send the agreed amount in ETH, USDC or USDT.</li>
+        <li>Reply to our email with the transaction hash.</li>
+        <li>We confirm on-chain and ship your order.</li>
+      </ol>
+      <div class="pay-addr">
+        <code id="addr-eth">0x4E9D527492E7f3D8b3356b69828e6FDe01EE9084</code>
+        <button type="button" class="copy-btn" data-copy="addr-eth">Copy</button>
+      </div>
+      <p class="pay-note">Ethereum network only — funds sent on another chain can be lost.</p>
+    </section>
+
+    <section class="pay-card">
+      <div class="pay-card-head">
+        <img src="{{ "img/crypto-solana.png" | relURL }}" alt="Solana wallet QR code" class="pay-qr" width="186" height="186" loading="lazy">
+        <div>
+          <h2>Solana Wallet <span class="pay-sub">SOL</span></h2>
+          <p class="pay-desc">Send SOL or SPL tokens on Solana — fast and low fees.</p>
+        </div>
+      </div>
+      <ol class="pay-steps">
+        <li>Scan the QR code with your Solana wallet (Phantom, Solflare, Backpack…).</li>
+        <li>Send the agreed amount in SOL or USDC.</li>
+        <li>Reply to our email with the transaction signature.</li>
+        <li>We confirm on-chain and ship your order.</li>
+      </ol>
+      <div class="pay-addr">
+        <code id="addr-sol">Bb1dfJCVCQCb4ruVC6yYLSTwvPSX3rDcZT8KFEpBp19T</code>
+        <button type="button" class="copy-btn" data-copy="addr-sol">Copy</button>
+      </div>
+      <p class="pay-note">Solana network only — double-check the address before sending.</p>
+    </section>
+
+  </div>
+
+  <p class="pay-help">Not sure which method to use, or need a different arrangement? We’re happy to help.</p>
+  <a class="pay-cta" href="mailto:{{ $pp.business }}?subject=Question%20about%20payment">
+    <span class="pay-cta-icon" aria-hidden="true">&#9993;</span>
+    <span>
+      <strong>Contact us about payment</strong>
+      <em>{{ $pp.business }} — or call {{ $b.phoneDisplay }}</em>
+    </span>
+  </a>
+</div>
+
+<script defer src="{{ "js/pay-methods.js" | relURL }}"></script>
+{{ end }}

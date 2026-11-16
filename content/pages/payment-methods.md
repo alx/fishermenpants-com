@@ -1,4 +1,6 @@
 ---
 title: "Payment Methods"
+description: "Pay with PayPal or crypto — MetaMask (Ethereum) and Solana wallet. Step-by-step instructions."
+type: "pages"
+layout: "payment-methods"
 ---
- <section id="shopify-section-template--18068675133614__main" class="shopify-section section"><link href="//www.fishermenpants.com/cdn/shop/t/3/assets/section-main-page.css?v=848677459125201531741672836" rel="stylesheet" type="text/css" media="all"> <style data-shopify="">.section-template--18068675133614__main-padding { padding-top: 21px; padding-bottom: 21px; } @media screen and (min-width: 750px) { .section-template--18068675133614__main-padding { padding-top: 28px; padding-bottom: 28px; } }</style><div class="page-width page-width--narrow section-template--18068675133614__main-padding"> <h1 class="main-page-title page-title h0 scroll-trigger animate--fade-in"> Payment methods </h1> <div class="rte scroll-trigger animate--slide-in"> <ul> <li style="text-align: left;">Paypal</li> <li style="text-align: left;">&nbsp;stripe</li> <li style="text-align: left;"> <strong>NEW</strong> crypto&nbsp; payments</li> </ul> <p><img src="https://cdn.shopify.com/s/files/1/0684/1060/5742/files/Screenshot_2025-05-19_124412.png?v=1747633582" alt=""><img src="https://cdn.shopify.com/s/files/1/0684/1060/5742/files/Screenshot_2025-05-19_123233.png?v=1747633550" alt="">&nbsp;</p> <p>just scan and <a href="mailto:thaifishpants@gmail.com" target="_blank" title="Email" rel="noopener">contact</a> to verify</p> </div> </div> </section> 
