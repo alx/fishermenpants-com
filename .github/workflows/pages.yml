@@ -41,9 +41,14 @@ jobs:
           key: img-gen-${{ hashFiles('tools/optimize_images.py', 'static/img/*.png', 'static/img/*.jpg', 'static/img/*.jpeg') }}
 
       - name: Install Hugo
+        # Pinned: an unpinned install silently moved to 0.169 and broke the build
+        # (_build front matter was removed in 0.145). Keep this in sync with
+        # HUGO_VERSION expressed in the local dev environment.
         run: |
-          npm install -g hugo-extended
+          npm install -g hugo-extended@${HUGO_VERSION}
           hugo version
+        env:
+          HUGO_VERSION: 0.169.0
 
       - name: Build site
         run: HUGO_BASEURL="${{ vars.BASE_URL || 'https://www.fishermenpants.com/' }}" ./build.sh
