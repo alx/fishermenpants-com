@@ -1,28 +1,32 @@
-/* Fishermen Pants — PayPal buttons (PayPal JS SDK, client-side).
-   Configure params.paypal.clientId in hugo.toml to enable. */
+/* Fishermen Pants — PayPal checkout.
+   Uses the classic PayPal checkout form (POST to /cgi-bin/webscr), which only
+   needs the business email (params.paypal.business) — no client id / backend.
+   - Product page: cmd=_xclick (single selected variant x qty)
+   - Cart page:    cmd=_cart  (one line per cart item)
+   Opens PayPal in a new tab. */
 (function () {
-  const cfg = window.FP_CONFIG && window.FP_CONFIG.paypal;
-  const clientId = cfg && cfg.clientId;
-  const currency = (cfg && cfg.currency) || "USD";
-  const enabled = !!clientId && clientId !== "sb" && !String(clientId).includes("your-");
+  const cfg = (window.FP_CONFIG && window.FP_CONFIG.paypal) || {};
+  const business = cfg.business;
+  const currency = cfg.currency || "USD";
 
   const api = {
-    enabled,
+    enabled: !!business,
     productLine: null,
     cartItems: null,
     refreshProduct() {
       const art = document.querySelector(".product");
+      if (!art) return;
       const select = document.getElementById("variant-select") ||
                      document.getElementById("variant-select-single");
-      if (!art || !select) return;
-      const opt = select.options[select.selectedIndex];
+      const opt = select ? select.options[select.selectedIndex] : null;
+      let desc = opt ? opt.textContent.split("—")[0].trim() : "";
+      if (desc === "Default Title") desc = "";
       const qty = Math.max(1, parseInt((document.getElementById("qty-input") || {}).value, 10) || 1);
       api.productLine = {
         name: art.dataset.title,
-        description: opt ? opt.textContent : "",
+        description: desc,
         qty,
-        unitPrice: Number((opt && opt.dataset.price) || 0),
-        cartId: String(opt ? opt.value : "1")
+        unitPrice: Number((opt && opt.dataset.price) || 0)
       };
       render();
     },
@@ -33,86 +37,94 @@
     }
   };
   window.FPPaypal = api;
-  if (!enabled) return;
+  if (!api.enabled) return;
 
-  let sdkLoading = null;
-  function loadSdk() {
-    return sdkLoading || (sdkLoading = new Promise((res, rej) => {
-      const s = document.createElement("script");
-      s.src = `https://www.paypal.com/sdk/js?client-id=${encodeURIComponent(clientId)}&currency=${currency}`;
-      s.onload = res;
-      s.onerror = () => rej(new Error("paypal sdk failed to load"));
-      document.head.appendChild(s);
-    }));
+  const PP_URL = "https://www.paypal.com/cgi-bin/webscr";
+  const money = n => (Math.round(n * 100) / 100).toFixed(2);
+
+  function field(name, value) {
+    const i = document.createElement("input");
+    i.type = "hidden";
+    i.name = name;
+    i.value = value;
+    return i;
   }
 
-  async function render() {
-    const slots = [document.getElementById("paypal-buttons"),
-                   document.getElementById("paypal-buttons-cart")];
-    for (const slot of slots) {
-      if (!slot) continue;
-      slot.innerHTML = "";
-      if (slot.id === "paypal-buttons") {
-        // product page: pay for selected variant
-        const line = api.productLine;
-        if (!line || !line.unitPrice) { continue; }
-        await renderButtons(slot, (t, d) => orderForLines([line], t, d), currency);
+  function payButton(label) {
+    const b = document.createElement("button");
+    b.type = "submit";
+    b.className = "pp-pay-btn";
+    b.innerHTML = '<span class="pp-logo">Pay<span>Pal</span></span> ' + label;
+    return b;
+  }
+
+  // Build the classic checkout form and render a gold PayPal button.
+  function buildForm(slot, opts) {
+    const form = document.createElement("form");
+    form.action = PP_URL;
+    form.method = "post";
+    form.target = "_blank";
+    form.rel = "noopener";
+    form.appendChild(field("cmd", opts.cmd));
+    form.appendChild(field("business", business));
+    form.appendChild(field("currency_code", currency));
+    if (opts.cmd === "_cart") form.appendChild(field("upload", "1"));
+    if (opts.items) {
+      opts.items.forEach((it, idx) => {
+        const n = idx + 1;
+        const desc = it.description && it.description !== "Default Title" ? it.description : "";
+        const name = desc ? (it.name + " — " + desc) : it.name;
+        form.appendChild(field("item_name_" + n, name));
+        form.appendChild(field("quantity_" + n, String(it.qty)));
+        form.appendChild(field("amount_" + n, money(it.unitPrice * it.qty)));
+      });
+    } else {
+      form.appendChild(field("item_name", opts.name));
+      form.appendChild(field("amount", money(opts.unitPrice * opts.qty)));
+      form.appendChild(field("quantity", String(opts.qty)));
+    }
+    form.appendChild(payButton(opts.buttonLabel));
+    slot.innerHTML = "";
+    slot.appendChild(form);
+  }
+
+  function render() {
+    const prod = document.getElementById("paypal-buttons");
+    if (prod) {
+      prod.innerHTML = "";
+      const l = api.productLine;
+      if (l && l.unitPrice > 0) {
+        buildForm(prod, {
+          cmd: "_xclick",
+          name: l.description ? (l.name + " — " + l.description) : l.name,
+          unitPrice: l.unitPrice,
+          qty: l.qty,
+          buttonLabel: "Pay for item"
+        });
       } else {
-        // cart page: pay for the whole cart
-        const items = (api.cartItems || []).filter(i => i.qty > 0);
-        if (!items.length) {
-          slot.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
-          continue;
-        }
-        const lines = items.map(i => ({ name: i.name, description: i.title, qty: i.qty, unitPrice: i.price, cartId: i.vid }));
-        await renderButtons(slot, (t, d) => orderForLines(lines, t, d), currency);
+        prod.innerHTML = '<p class="pay-disabled">Select a product to pay with PayPal.</p>';
       }
     }
-  }
 
-  async function renderButtons(slot, createOrder, cur) {
-    try {
-      await loadSdk();
-      window.paypal.Buttons({
-        style: { layout: "row", color: "gold", shape: "rect", label: "paypal" },
-        createOrder: (t, d) => createOrder(t, d),
-        onApprove: async (d, actions) => {
-          const detail = await actions.order.capture();
-          window.fpToast(`Payment ${detail.id} captured — order placed!`);
-          if (slot.id === "paypal-buttons-cart" && window.FPCart) {
-            const empty = { items: [] };
-            localStorage.setItem("fp_cart_v1", JSON.stringify(empty));
-            document.dispatchEvent(new CustomEvent("fp:cart", { detail: empty }));
-          }
-        },
-        onError: () => window.fpToast("PayPal error — please try again")
-      }).render(slot);
-    } catch (e) {
-      slot.innerHTML = '<p class="pay-disabled">PayPal unavailable right now.</p>';
+    const cart = document.getElementById("paypal-buttons-cart");
+    if (cart) {
+      const items = (api.cartItems || [])
+        .filter(i => i.qty > 0 && i.price > 0)
+        .map(i => ({ name: i.name, description: i.title, qty: i.qty, unitPrice: i.price }));
+      if (!items.length) {
+        cart.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
+        return;
+      }
+      buildForm(cart, {
+        cmd: "_cart",
+        items,
+        buttonLabel: "Checkout"
+      });
     }
   }
 
-  function orderForLines(lines, t, d) {
-    return t.orders.create({
-      intent: "CAPTURE",
-      purchase_units: lines.map(l => ({
-        description: `${l.name} — ${l.description}`,
-        amount: {
-          currency_code: cur,
-          value: (l.unitPrice * l.qty).toFixed(2)
-        },
-        items: [{
-          name: l.name,
-          description: l.description,
-          quantity: String(l.qty),
-          unit_amount: { currency_code: cur, value: l.unitPrice.toFixed(2) }
-        }]
-      }))
-    });
-  }
-
-  // initial render on product page
-  const art = document.querySelector(".product");
-  const cartPage = document.getElementById("cart-items");
-  if (art || cartPage) render();
+  const isProduct = !!document.querySelector(".product");
+  const isCart = !!document.getElementById("cart-items");
+  if (isProduct) api.refreshProduct();
+  else if (isCart) api.refreshCart();
 })();

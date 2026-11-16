@@ -153,6 +153,10 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .btn-primary:hover { background: var(--sea-dark); }
 .paypal-slot { margin: 18px 0; min-height: 8px; }
 .paypal-slot .pay-disabled { color: var(--muted); font-size: .9rem; }
+.pp-pay-btn { display: inline-flex; align-items: center; gap: 8px; background: linear-gradient(180deg, #fff8e6, #ffec8b); border: 1px solid #d99000; border-radius: 8px; padding: 12px 26px; font-size: 1.05rem; font-weight: 600; color: #111; cursor: pointer; box-shadow: 0 2px 4px rgba(0,0,0,.12); transition: filter .15s; }
+.pp-pay-btn:hover { filter: brightness(.97); }
+.pp-logo { font-family: Georgia, 'Times New Roman', serif; font-style: italic; font-weight: 700; font-size: 1.15rem; color: #003087; }
+.pp-logo span { color: #0070e0; }
 .p-desc { margin-top: 20px; line-height: 1.7; }
 .p-desc p { margin: .6em 0; }
 .p-meta { list-style: none; padding: 14px 0 0; margin: 14px 0 0; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; gap: 14px; font-size: .9rem; }

@@ -3,7 +3,7 @@ title: "Zoo dress"
 priceMin: 99.0
 priceMax: 99.0
 compareAtMin: 0
-variants: [{"id": "46478751236270", "title": "zebra", "price": 99.0, "sku": "", "available": true}, {"id": "46478751269038", "title": "Swan", "price": 99.0, "sku": "", "available": true}]
+variants: [{"id": "46478751236270", "title": "Default Title", "price": 99.0, "sku": "", "available": true}]
 images: ["img/f874fc_Screenshot2025-05-14120647.png"]
 ptype: "Dress"
 vendor: "Gaya"

@@ -3,7 +3,7 @@ title: "Ethnic wrap pants"
 priceMin: 79.0
 priceMax: 79.0
 compareAtMin: 0
-variants: [{"id": "46482330910894", "title": "1", "price": 79.0, "sku": "", "available": true}, {"id": "46482330943662", "title": "2", "price": 79.0, "sku": "", "available": true}, {"id": "46482330976430", "title": "3", "price": 79.0, "sku": "", "available": true}, {"id": "46482331009198", "title": "4", "price": 79.0, "sku": "", "available": true}]
+variants: [{"id": "46482330910894", "title": "Default Title", "price": 79.0, "sku": "", "available": true}]
 images: ["img/f0d1b5_Screenshot_2025-03-30_203051.png", "img/40b7d5_Screenshot_2025-03-28_145813_538bb30d-7649-483c-8993-acce31bd2829.png"]
 ptype: "wrap pants"
 vendor: "Gaya"

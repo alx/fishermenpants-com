@@ -16,7 +16,7 @@
       <p class="p-price">
         {{ if gt (float $max) (float $min) }}${{ (float $min) | printf "%.2f" }} – ${{ (float $max) | printf "%.2f" }} USD{{ else }}${{ (float $min) | printf "%.2f" }} USD{{ end }}
       </p>
-      {{ if $v }}
+      {{ if and $v (gt (len $v) 1) }}
       <label>Options
         <select id="variant-select">
           {{- range $v }}

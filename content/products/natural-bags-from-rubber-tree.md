@@ -3,7 +3,7 @@ title: "Natural Bags From Rubber Tree"
 priceMin: 49.0
 priceMax: 49.0
 compareAtMin: 0
-variants: [{"id": "46467517382830", "title": "1", "price": 49.0, "sku": "", "available": true}, {"id": "46467517415598", "title": "2", "price": 49.0, "sku": "", "available": true}, {"id": "46467517448366", "title": "3", "price": 49.0, "sku": "", "available": true}]
+variants: [{"id": "46467517382830", "title": "Default Title", "price": 49.0, "sku": "", "available": true}]
 images: ["img/4b26ed_Screenshot2025-05-10134128.png", "img/4d626a_Screenshot_2025-05-11_140700.png"]
 ptype: "bags"
 vendor: "Gaya"

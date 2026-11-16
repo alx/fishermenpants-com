@@ -3,7 +3,7 @@ title: "Mudmee (Old Silk) Thai Pants"
 priceMin: 149.0
 priceMax: 149.0
 compareAtMin: 0
-variants: [{"id": "46469981241518", "title": "1", "price": 149.0, "sku": "", "available": true}, {"id": "46469981274286", "title": "2", "price": 149.0, "sku": "", "available": true}, {"id": "46469981307054", "title": "3", "price": 149.0, "sku": "", "available": true}, {"id": "46469981339822", "title": "4", "price": 149.0, "sku": "", "available": true}, {"id": "46469981372590", "title": "5", "price": 149.0, "sku": "", "available": true}, {"id": "46469981405358", "title": "6", "price": 149.0, "sku": "", "available": true}]
+variants: [{"id": "46469981241518", "title": "Default Title", "price": 149.0, "sku": "", "available": true}]
 images: ["img/97134b_Screenshot2025-05-12162359.png"]
 ptype: "wrap pants"
 vendor: "Gaya"

@@ -3,7 +3,7 @@ title: "Thai pha ka ma(towel)"
 priceMin: 24.0
 priceMax: 24.0
 compareAtMin: 0
-variants: [{"id": "46467308486830", "title": "1", "price": 24.0, "sku": "", "available": true}, {"id": "46467308519598", "title": "2", "price": 24.0, "sku": "", "available": true}, {"id": "46467308552366", "title": "3", "price": 24.0, "sku": "", "available": true}, {"id": "46467308585134", "title": "4", "price": 24.0, "sku": "", "available": true}, {"id": "46467308617902", "title": "5", "price": 24.0, "sku": "", "available": true}]
+variants: [{"id": "46467308486830", "title": "Default Title", "price": 24.0, "sku": "", "available": true}]
 images: ["img/57c0f9_Screenshot2025-05-11121845.png", "img/c02049_Sarong.png"]
 ptype: "Sarongs"
 vendor: "Gaya"

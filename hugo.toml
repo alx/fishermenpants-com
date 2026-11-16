@@ -9,9 +9,11 @@ hasCJKLanguage = false
   facebook = "https://www.facebook.com/fishermenpants/"
 
   [params.paypal]
-    # PayPal REST API client id (live: AX... / sandbox: sb). Replace to enable buttons.
+    # PayPal REST API client id (live: AX... / sandbox: sb). Replace to enable SDK buttons.
     clientId = "sb"
     currency = "USD"
+    # Business account that receives payments (used by the classic checkout button).
+    business = "thaifishpants@gmail.com"
 
   [params.formspree]
     # Create a free form at https://formspree.io and paste the endpoint here.

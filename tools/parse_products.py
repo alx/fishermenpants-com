@@ -49,6 +49,17 @@ def parse_product(fp):
         except Exception as e:
             log(f"  initData parse fail for {handle}: {e}")
 
+    # The source store configures many products with filler numbered
+    # "Patterns" variants (1..20, all the same price). Every product on this
+    # store is effectively single-price, so collapse same-price variant sets
+    # to Shopify's single-variant convention ("Default Title").
+    vs = out["variants"]
+    if len(vs) > 1 and len({v["price"] for v in vs}) == 1:
+        out["variants"] = [{"id": vs[0]["id"], "title": "Default Title",
+                            "price": vs[0]["price"], "sku": "", "available": True}]
+        out["price_min"] = vs[0]["price"]
+        out["price_max"] = vs[0]["price"]
+
     # --- gallery ---
     g = h.find("<media-gallery")
     if g >= 0:
