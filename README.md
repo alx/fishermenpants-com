@@ -21,6 +21,27 @@ newsletter via Formspree. No customer accounts/authentication.
 ./build.sh            # -> public/  (add HUGO_BASEURL=https://<user>.github.io/fishermenpants-com/ for Pages)
 ```
 
+## Deploy (GitHub Actions)
+
+Pushing to `master` runs `.github/workflows/pages.yml`: installs Hugo,
+rebuilds `public/` (with the Pages baseURL) and deploys via
+`actions/deploy-pages`. The repo's Pages source is set to **GitHub Actions**
+(build type `workflow`). Site: https://alx.github.io/fishermenpants-com/
+
+## Re-crawling the source site
+
+Shopify's edge rejects plain HTTP clients (403/429), so pages are fetched
+with a real browser (Playwright Firefox) in `tools/crawl_browser.mjs`:
+
+```bash
+python3 tools/crawl2.py jobs        # write _crawl/jobs.json
+node tools/crawl_browser.mjs        # phase A: browser crawl (paced, retry-on-429)
+python3 tools/crawl2.py bc          # phase B: CDN images -> static/img, phase C: legacy parse
+python3 tools/parse_products.py     # parse product/collection pages -> parsed.json
+python3 tools/build_content.py      # content/ + data/home.json
+./build.sh && python3 tools/verify.py
+```
+
 ## Configuration (hugo.toml → params)
 
 - `params.paypal.clientId` — PayPal REST client id. Set to a live/sandbox id
