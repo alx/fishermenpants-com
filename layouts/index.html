@@ -5,7 +5,7 @@
   {{- range $i, $slide := $d.hero }}
   <div class="hero-slide{{ if eq $i 0 }} is-active{{ end }}" role="group" aria-label="{{ add $i 1 }} of {{ len $d.hero }}">
     {{- partial "img.html" (dict "src" $slide.image "alt" $slide.heading
-          "sizes" "(max-width: 788px) 100vw, 788px" "eager" (eq $i 0)) }}
+          "sizes" "(max-width: 1120px) 100vw, 1120px" "eager" (eq $i 0)) }}
     <div class="hero-overlay"><span class="hero-heading">{{ $slide.heading }}</span></div>
   </div>
   {{- end }}
