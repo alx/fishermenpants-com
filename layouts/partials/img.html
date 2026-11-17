@@ -24,7 +24,19 @@
 {{- $name := strings.TrimSuffix (path.Ext $base) $base -}}
 {{- $genDir := path.Join $dir "_gen" -}}
 
-{{- $widths := slice "400" "800" "1200" -}}
+{{- /* Candidates: the standard widths plus the source's own width, which the
+       optimizer also emits (never upscales past the source). */ -}}
+{{- /* Real widths come from the manifest the optimizer writes; fall back to the
+       standard set if it is missing (e.g. before the first build). */ -}}
+{{- $widths := slice "400" "800" "1200" "1600" "2000" -}}
+{{- $mPath := path.Join "static" $genDir "manifest.json" -}}
+{{- if fileExists $mPath -}}
+  {{- $manifest := (os.ReadFile $mPath | transform.Unmarshal) -}}
+  {{- with index $manifest $name -}}
+    {{- $widths = slice -}}
+    {{- range .widths }}{{ $widths = $widths | append (printf "%v" .) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
 {{- $webp := slice -}}
 {{- $webpSrcset := slice -}}
 {{- $jpgSrcset := slice -}}

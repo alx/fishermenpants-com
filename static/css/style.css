@@ -71,7 +71,10 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 /* home */
 /* hero slides: source images are 16:9, so the stage keeps a 16:9 box and shows the
    whole image (contain) instead of cropping it at arbitrary viewport heights. */
-.hero-slideshow { position: relative; aspect-ratio: 16 / 9; width: 100%; max-width: 1120px; margin: 0 auto; overflow: hidden; background: #10151b; }
+/* The source slides are small (788x443 and 1152x648). Capping the stage at the
+   largest source width keeps the hero sharp instead of stretching it; on 2x
+   screens the 788w asset is still the best available (see optimize_images.py). */
+.hero-slideshow { position: relative; aspect-ratio: 16 / 9; width: 100%; max-width: 788px; margin: 0 auto; overflow: hidden; background: #10151b; }
 @supports not (aspect-ratio: 16 / 9) {
   .hero-slideshow { height: 0; padding-bottom: 56.25%; }
 }

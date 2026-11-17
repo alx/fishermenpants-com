@@ -7,6 +7,7 @@ image partial can emit a srcset.
 
 Usage: python3 tools/optimize_images.py [--force] [--limit N]
 """
+import json
 import os
 import sys
 import glob
@@ -17,7 +18,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SRC = os.path.join(ROOT, "static", "img")
 OUT = os.path.join(SRC, "_gen")
 
-WIDTHS = (400, 800, 1200)
+WIDTHS = (400, 800, 1200, 1600, 2000)  # 1600/2000 feed 2x DPR on wide viewports
 EXT = (".png", ".jpg", ".jpeg")
 WEBP_QUALITY = 78
 JPEG_QUALITY = 80
@@ -36,6 +37,7 @@ def main():
         files += glob.glob(os.path.join(SRC, "*" + ext))
     files = [f for f in files if not os.path.basename(f).startswith("og-")]
 
+    manifest = {}
     made = skipped = 0
     total_bytes = 0
     for path in sorted(files):
@@ -48,6 +50,11 @@ def main():
             continue
 
         src_w, src_h = im.size
+        manifest[name] = {
+            "w": src_w,
+            "h": src_h,
+            "widths": variants(WIDTHS, src_w),
+        }
         has_alpha = im.mode in ("RGBA", "LA") or (
             im.mode == "P" and "transparency" in im.info
         )
@@ -78,6 +85,9 @@ def main():
                     dest, "JPEG", quality=JPEG_QUALITY, optimize=True, progressive=True
                 )
                 made += 1
+
+    with open(os.path.join(OUT, "manifest.json"), "w") as fh:
+        json.dump(manifest, fh, separators=(",", ":"))
 
     print(f"images: {made} variants generated, {skipped} up to date, {total_bytes/1e6:.1f} MB written")
 
