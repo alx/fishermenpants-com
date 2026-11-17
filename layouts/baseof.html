@@ -69,6 +69,26 @@
     window.FP_CONFIG = {{ .Site.Params | jsonify | safeJS }};
     window.FP_BASE = {{ .Site.BaseURL | jsonify | safeJS }};
   </script>
+  {{- with .Site.Params.meta.pixelId }}
+  <meta property="fb:app_id" content="{{ . }}">
+  <script>
+    // Meta pixel — loaded only when params.meta.pixelId is set in hugo.toml.
+    !function (b, c, d, e) {
+      e = b[d] = b[d] || {};
+      var f = function (a) { return function () {
+        var b = Array.prototype.slice.call(arguments, 0);
+        ("init" === a ? e._fbInit : e)[a].apply(e, b);
+      }; };
+      e._fbInit = e._fbInit || [];
+      var g = ["track","initialize","show","identify","trackCustom","trackLink","pageView"], h;
+      for (h = 0; h < g.length; h++) e[g[h]] = f(g[h]);
+      e.noop = function () {};
+    }(window, document, 'fbq');
+    fbq('init', '{{ . }}');
+    fbq('track', 'PageView');
+  </script>
+  <script defer src="{{ "js/meta-events.js" | relURL }}"></script>
+  {{- end}}
 </head>
 <body>
   {{ partial "header.html" . }}

@@ -45,6 +45,12 @@
 
       <button id="add-to-cart" class="btn-primary">Add to Cart</button>
       <div class="paypal-slot" id="paypal-buttons"></div>
+      <ul class="p-trust">
+        <li>Free standard shipping, worldwide</li>
+        <li>Ships in 2–3 weeks to Europe &amp; USA</li>
+        <li><a href="{{ "pages/size-guide/" | relURL }}">Size guide</a></li>
+        <li><a href="{{ "pages/shipping-returns/" | relURL }}">14-day returns</a></li>
+      </ul>
       <a class="p-ask" href="https://wa.me/{{ replaceRE `[^0-9]` "" .Site.Params.business.phone }}?text={{ printf "Hi GAYA, I have a question about: %s" .Title | urlquery }}"
          target="_blank" rel="noopener">
         <span aria-hidden="true">&#128172;</span> Ask about this on WhatsApp
@@ -79,6 +85,8 @@
     {{- end -}}
   {{- end -}}
 {{- end -}}
+{{ partial "testimonials.html" . }}
+
 {{- if $pool }}
 <section class="wrap related">
   <h2>You may also like</h2>

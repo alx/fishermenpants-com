@@ -35,6 +35,10 @@ hasCJKLanguage = false
     # e.g. https://formspree.io/f/abcdwxyz — replace with your form's id
     endpoint = "https://formspree.io/f/xppdpbqk"
 
+  [params.meta]
+    # Meta (Facebook/Instagram) pixel id. Empty = pixel disabled.
+    pixelId = ""
+
 # Hugo version this site is built and tested with (CI pins the same version;
 # build.sh refuses to run on a mismatch). See .github/workflows/pages.yml.
 [module]

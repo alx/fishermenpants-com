@@ -107,7 +107,13 @@
     fd.set("ship_to", [c.address1, c.address2, c.city, c.state, c.zip, c.country].filter(Boolean).join(", "));
     fd.set("items", lines);
     fd.set("subtotal", "$" + Number(order.total).toFixed(2) + " USD");
-    fd.set("notes", c.notes || "");
+    // Carry the click-id (fbclid/gclid/…) from meta-events.js for ad attribution.
+    let notes = c.notes || "";
+    try {
+      const cid = window.fpClickId ? window.fpClickId() : "";
+      if (cid) notes = (notes ? notes + " | " : "") + cid;
+    } catch {}
+    fd.set("notes", notes.slice(0, 255));
     fd.set("placed_at", order.createdAt || new Date().toISOString());
     fd.set("payment", order.payment || "paypal");
 

@@ -1,0 +1,16 @@
+name = "fp-orders"
+main = "worker.js"
+compatibility_date = "2025-11-01"
+
+# 1) wrangler kv namespace create fp_orders
+# 2) paste the returned id below
+kv_namespaces = [
+  { binding = "ORDERS", id = "REPLACE_WITH_NAMESPACE_ID" }
+]
+
+[vars]
+BUSINESS_EMAIL = "thaifishpants@gmail.com"
+SITE = "https://www.fishermenpants.com"
+
+# Set with: wrangler secret put BREVO_API_KEY
+# Set with: wrangler secret put BREVO_FROM_EMAIL   (verified sender in the Brevo account)

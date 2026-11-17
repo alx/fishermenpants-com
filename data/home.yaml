@@ -1,8 +1,11 @@
 hero:
   - image: /img/777a87_Wrap_pants.png
-    heading: "Explore nature"
+    heading: "Handmade island wear — free worldwide shipping"
+    cta:
+      label: "Shop best-sellers"
+      href: /collections/best-sellers/
   - image: /img/e45d05_Samui_collection.png
-    heading: "Breath the air"
+    heading: "Breathe the air"
 brand: GAYA
 tagline: "Elegant and sustainable beachwear for the adventurous trendsetters."
 interstitials:

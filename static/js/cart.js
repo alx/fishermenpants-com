@@ -149,6 +149,27 @@
       }
       const sub = document.getElementById("cart-subtotal");
       if (sub) sub.textContent = money(window.FPCart.total(cart)) + " USD";
+
+      // Bundle nudge: show only while the cart holds exactly one piece.
+      const totalQty = cart.items.reduce((s, i) => s + i.qty, 0);
+      const banner = document.getElementById("bundle-banner");
+      if (banner) banner.hidden = !(cart.items.length > 0 && totalQty === 1);
+
+      // WhatsApp handoff: one tap sends the cart contents to the shop.
+      const wa = document.getElementById("wa-cart");
+      if (wa) {
+        wa.hidden = cart.items.length === 0;
+        if (!wa.hidden) {
+          const cfg = (window.FP_CONFIG && window.FP_CONFIG.business) || {};
+          const lines = cart.items.map(i =>
+            `${i.qty} x ${i.name}${i.title ? " (" + i.title + ")" : ""} — $${(i.price * i.qty).toFixed(2)}`);
+          const text = "Hi GAYA, I'd like to order:\n" + lines.join("\n") +
+            "\nTotal: $" + window.FPCart.total(cart).toFixed(2);
+          wa.href = "https://wa.me/" + String(cfg.phone || "").replace(/[^0-9]/g, "") +
+            "?text=" + encodeURIComponent(text);
+        }
+      }
+
       window.FPPaypal && window.FPPaypal.refreshCart();
     }
     document.addEventListener("fp:cart", renderCart);

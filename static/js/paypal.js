@@ -114,7 +114,11 @@
       if (c.country) form.appendChild(field("country", c.country));
       if (c.phone) form.appendChild(field("night_phone_b", c.phone));
       if (opts.order.ref) form.appendChild(field("invoice", opts.order.ref));
-      if (c.notes) form.appendChild(field("custom", String(c.notes).slice(0, 255)));
+      // custom = c1|name|email|addr1|addr2|city|state|zip|country (<=255 chars).
+      // The order Worker decodes this to send the customer confirmation email;
+      // order notes already travel separately in the Formspree order notify.
+      const cc = [c.name, c.email, c.address1, c.address2, c.city, c.state, c.zip, c.country];
+      form.appendChild(field("custom", "c1|" + encodeURIComponent(cc.map(v => String(v || "").slice(0, 60)).join("|"))));
       form.appendChild(field("no_shipping", "1")); // address already collected
       form.appendChild(field("no_note", "0"));
     }

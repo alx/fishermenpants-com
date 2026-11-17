@@ -1,0 +1,16 @@
+{{- /* Site-wide testimonials, sourced from data/home.yaml (single source with the home page).
+   Hidden automatically when there are no entries. */ -}}
+{{- $t := hugo.Data.home.testimonials }}
+{{- if $t }}
+<section class="wrap reviews-section">
+  <h2>What people say</h2>
+  <div class="review-row">
+    {{- range $t }}
+    <figure class="review">
+      <blockquote>{{ .text }}</blockquote>
+      <figcaption>— {{ .name }}{{ with .country }}, {{ . }}{{ end }}</figcaption>
+    </figure>
+    {{- end }}
+  </div>
+</section>
+{{- end }}
