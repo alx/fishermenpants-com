@@ -5,7 +5,7 @@ priceMin: 129.0
 price: 129.0
 priceMax: 129.0
 compareAtMin: 0
-variants: [{"id": "46478772011182", "title": "Default Title", "price": 129.0, "sku": null, "available": true}]
+variants: [{"id": "46478772011182", "title": "", "price": 129.0, "sku": null, "available": true}]
 images: [
   "/img/1c9a84_Screenshot2025-05-14124516.png",
   "/img/f46320_509161f790b941c788a93f7ccfa31e28.thumbnail.0000000000.jpg",

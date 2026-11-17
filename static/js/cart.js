@@ -77,7 +77,13 @@
       const opt = select.options[select.selectedIndex];
       return {
         vid: String(opt.value),
-        title: opt.textContent.split("—")[0].trim(),
+        // Variant label: only when the product really has named options. For a
+        // single-variant product the option text is just a price, which is not a label.
+        title: (() => {
+          const t = opt.textContent.split("—")[0].trim();
+          if (!t || t === "Default Title" || /^\$?[\d.,]+\s*USD$/i.test(t)) return "";
+          return t;
+        })(),
         price: Number(opt.dataset.price || opt.textContent.match(/[\d.]+/)?.[0] || 0),
         image: images[0] ? images[0].src : "",
         handle: art.dataset.handle,

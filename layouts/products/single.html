@@ -35,7 +35,7 @@
       <select id="variant-select-single" hidden>
         {{- $multi := and $v (gt (len $v) 1) -}}
         {{- range $v }}
-        <option value="{{ .id }}" data-price="{{ if $multi }}{{ .price }}{{ else }}{{ $min }}{{ end }}" {{ if not .available }}disabled{{ end }}>{{ .title }} — ${{ (float .price) | printf "%.2f" }} USD</option>
+        <option value="{{ .id }}" data-price="{{ if $multi }}{{ .price }}{{ else }}{{ $min }}{{ end }}" {{ if not .available }}disabled{{ end }}>{{ with .title }}{{ . }} — {{ end }}${{ (float .price) | printf "%.2f" }} USD</option>
         {{- end }}
       </select>
 

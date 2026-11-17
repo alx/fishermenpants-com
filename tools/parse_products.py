@@ -55,10 +55,17 @@ def parse_product(fp):
     # to Shopify's single-variant convention ("Default Title").
     vs = out["variants"]
     if len(vs) > 1 and len({v["price"] for v in vs}) == 1:
-        out["variants"] = [{"id": vs[0]["id"], "title": "Default Title",
+        # Title is empty on purpose: "Default Title" is a Shopify placeholder for
+        # "this product has no options" and must never reach the page.
+        out["variants"] = [{"id": vs[0]["id"], "title": "",
                             "price": vs[0]["price"], "sku": "", "available": True}]
         out["price_min"] = vs[0]["price"]
         out["price_max"] = vs[0]["price"]
+    # A genuine single-variant product keeps whatever Shopify gave it, which is
+    # usually the same placeholder - normalise those too.
+    for v in out["variants"]:
+        if (v.get("title") or "").strip() == "Default Title":
+            v["title"] = ""
 
     # --- gallery ---
     g = h.find("<media-gallery")

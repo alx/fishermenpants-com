@@ -156,6 +156,9 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .p-price { color: var(--sea-dark); font-size: 1.3rem; font-weight: 700; margin: 6px 0 16px; }
 .p-info label { display: block; margin: 12px 0; font-weight: 600; text-transform: uppercase; font-size: .8rem; letter-spacing: .05em; }
 .p-info select, .p-info input[type="number"] { display: block; width: 100%; max-width: 340px; margin-top: 6px; padding: 10px 12px; border: 1px solid var(--line); border-radius: 8px; font-size: 1rem; background: #fff; }
+/* A class selector outranks the UA rule for [hidden], so `display: block` above was
+   making hidden elements visible. The single-variant select must stay hidden. */
+.p-info select[hidden], .p-info [hidden] { display: none !important; }
 .qty-row { display: flex; align-items: center; gap: 10px; margin: 14px 0; }
 .qty-row label { display: flex; align-items: center; gap: 8px; text-transform: none; font-weight: 600; margin: 0; }
 .qty-row input { width: 74px; max-width: none; margin: 0; }
