@@ -44,11 +44,11 @@
       </div>
 
       <button id="add-to-cart" class="btn-primary">Add to Cart</button>
+      <div class="paypal-slot" id="paypal-buttons"></div>
       <a class="p-ask" href="https://wa.me/{{ replaceRE `[^0-9]` "" .Site.Params.business.phone }}?text={{ printf "Hi GAYA, I have a question about: %s" .Title | urlquery }}"
          target="_blank" rel="noopener">
         <span aria-hidden="true">&#128172;</span> Ask about this on WhatsApp
       </a>
-      <div class="paypal-slot" id="paypal-buttons"></div>
 
       <div class="p-desc">{{ .Content }}</div>
       <ul class="p-meta">
