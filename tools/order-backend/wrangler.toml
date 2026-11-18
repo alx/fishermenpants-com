@@ -5,7 +5,7 @@ compatibility_date = "2025-11-01"
 # 1) wrangler kv namespace create fp_orders
 # 2) paste the returned id below
 kv_namespaces = [
-  { binding = "ORDERS", id = "REPLACE_WITH_NAMESPACE_ID" }
+  { binding = "ORDERS", id = "db7d8f96f64844fab64965df40079d34" }
 ]
 
 [vars]
