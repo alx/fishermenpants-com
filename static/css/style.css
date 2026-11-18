@@ -132,8 +132,8 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .tile-img { display: block; aspect-ratio: 4/3; background: var(--sand); }
 .tile-img img { width: 100%; height: 100%; object-fit: cover; }
 .tile-label { display: block; text-align: center; font-family: var(--serif); font-size: 1.25rem; padding: 10px; }
-.reviews-section { margin: 40px 0; }
-.reviews-section h2 { font-family: var(--serif); font-weight: 500; font-size: 1.6rem; margin-bottom: 16px; }
+.reviews-section { margin: 10px auto 60px; }
+.reviews-section h2 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; margin: 40px 0 16px; }
 .reviews-section .review-row { max-width: 640px; margin: 0 auto; }
 .review-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; }
 .p-trust { list-style: none; display: flex; flex-direction: column; gap: 4px; margin: 14px 0; padding: 12px 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); color: var(--muted); font-size: .88rem; }
