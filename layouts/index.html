@@ -65,18 +65,6 @@
 {{- end }}
 
 <section class="section">
-  <h2>What people say</h2>
-  <div class="review-row">
-    {{- range $d.testimonials }}
-    <figure class="review">
-      <blockquote>{{ .text }}</blockquote>
-      <figcaption>— {{ .name }}</figcaption>
-    </figure>
-    {{- end }}
-  </div>
-</section>
-
-<section class="section">
   <h2>Islands vibes</h2>
   <div class="product-row">
     {{- $pg := . }}
