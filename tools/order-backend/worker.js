@@ -126,12 +126,12 @@ async function sendConfirmation(env, order) {
   </div>`;
   const body = {
     to: [{ email: c.email, name: c.name || "" }],
-    from: { email: env.BREVO_FROM_EMAIL, name: "GAYA — Fishermen Pants" },
+    sender: { email: env.BREVO_FROM_EMAIL, name: "GAYA — Fishermen Pants" },
     subject: `Your order ${order.ref} — Fishermen Pants (Koh Samui)`,
     htmlContent: html,
   };
   try {
-    const res = await fetch("https://api.brevo.com/v3/sendTransac", {
+    const res = await fetch("https://api.brevo.com/v3/smtp/email", {
       method: "POST",
       headers: {
         "api-key": env.BREVO_API_KEY,
