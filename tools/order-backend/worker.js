@@ -126,7 +126,7 @@ async function sendConfirmation(env, order) {
   </div>`;
   const body = {
     to: [{ email: c.email, name: c.name || "" }],
-    sender: { email: env.BREVO_FROM_EMAIL, name: "GAYA — Fishermen Pants" },
+    sender: { email: env.BREVO_FROM_EMAIL, name: "Thai FishermenPants" },
     subject: `Your order ${order.ref} — Fishermen Pants (Koh Samui)`,
     htmlContent: html,
   };
