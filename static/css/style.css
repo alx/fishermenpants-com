@@ -375,3 +375,35 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .related h2 { margin: 40px 0 16px; font-size: 1.5rem; }
 .related-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 18px; }
 @media (max-width: 560px) { .related-grid { grid-template-columns: 1fr 1fr; gap: 12px; } }
+
+/* ---- Visit the shop page ---- */
+.visit-page { padding-bottom: 60px; }
+.visit-head { margin: 34px 0 26px; text-align: center; }
+.visit-head h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 10px; }
+.visit-lede { color: var(--muted); max-width: 640px; margin: 0 auto 18px; }
+.visit-badges { display: flex; flex-wrap: wrap; gap: 10px; justify-content: center; }
+.visit-badge { background: var(--sand); border: 1px solid var(--line); border-radius: 999px; padding: 7px 16px; font-size: .88rem; }
+.visit-cta { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-top: 20px; }
+.visit-cta .btn, .visit-cta .btn--secondary { text-decoration: none; border-radius: 8px; padding: 13px 24px; font-size: 1rem; display: inline-block; }
+.visit-cta .btn--secondary { background: transparent; color: var(--sea); border: 1px solid var(--sea); }
+
+.visit-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 0 0 36px; }
+.visit-photo { margin: 0; position: relative; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: var(--sand); border: 1px solid var(--line); }
+.visit-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.visit-photo.is-placeholder img { object-fit: contain; opacity: .5; padding: 18px; }
+.visit-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(28,36,48,.72); color: #fff; font-size: .78rem; padding: 6px 10px; text-align: center; }
+
+.visit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 40px; }
+.visit-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 22px; }
+.visit-card h2 { font-family: var(--serif); font-weight: 500; font-size: 1.25rem; margin: 0 0 12px; }
+.visit-card address { font-style: normal; line-height: 1.6; }
+.visit-card p { margin: 0 0 10px; }
+
+.visit-map-title { margin: 12px 0 14px; font-family: var(--serif); font-weight: 500; font-size: 1.5rem; }
+.visit-reviews { margin: 46px 0 40px; }
+.visit-reviews h2 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; margin: 0 0 16px; }
+.review-src { color: var(--accent); font-weight: 600; margin-left: 4px; }
+.review-attr { margin-top: 12px; font-size: .82rem; }
+.visit-onsite { text-align: center; background: var(--sand); border-radius: 14px; padding: 34px 22px; }
+.visit-onsite h2 { font-family: var(--serif); font-weight: 500; font-size: 1.4rem; margin: 0 0 10px; }
+.visit-onsite .btn-primary { text-decoration: none; display: inline-block; margin-top: 8px; }

@@ -1,0 +1,94 @@
+{{ define "main" }}
+{{- $b := .Site.Params.business -}}
+{{- $d := hugo.Data.shop -}}
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<div class="wrap visit-page">
+
+  <header class="visit-head">
+    <h1>{{ .Title }}</h1>
+    <p class="visit-lede">{{ .Description }}</p>
+    <div class="visit-badges">
+      <span class="visit-badge"><strong>★ {{ $d.rating }}</strong> — {{ $d.reviewCount }} Google reviews</span>
+      <span class="visit-badge">Open daily 9:00 am – 7:30 pm</span>
+      <span class="visit-badge">Right by Lamai Beach</span>
+    </div>
+    <p class="visit-cta">
+      <a class="btn-primary" href="{{ $b.mapsUrl }}" target="_blank" rel="noopener">Get directions</a>
+      <a class="btn btn--secondary" href="tel:{{ $b.phone }}">Call {{ $b.phoneDisplay }}</a>
+    </p>
+  </header>
+
+  {{- /* Photo gallery. Owner: drop images into data/shop.yaml gallery:[{src,alt}] and they replace these placeholders. */ -}}
+  <section class="visit-gallery" aria-label="Photos of the shop">
+    {{- range $d.gallery }}
+    <figure class="visit-photo{{ if .placeholder }} is-placeholder{{ end }}">
+      <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy">
+      {{ with .placeholder }}<figcaption>Photo coming soon</figcaption>{{ end }}
+    </figure>
+    {{- end }}
+  </section>
+
+  <div class="visit-grid">
+    <section class="visit-card">
+      <h2>Where we are</h2>
+      <address>
+        <strong>{{ $b.name }}</strong><br>
+        {{ $b.street }}<br>
+        {{ $b.city }}<br>
+        {{ $b.country }}<br>
+        <span class="muted">Plus code: {{ $b.postal }}</span>
+      </address>
+      <p><a class="btn-primary contact-btn" href="{{ $b.mapsUrl }}" target="_blank" rel="noopener">Open in Google Maps</a></p>
+      <p class="muted">A few steps from the sand on Had Lamai Road — look for the shop with the garden.</p>
+    </section>
+
+    <section class="visit-card">
+      <h2>When we're open</h2>
+      <table class="hours">
+        {{ range slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday" }}
+        <tr><th scope="row">{{ . }}</th><td>9:00 am – 7:30 pm</td></tr>
+        {{ end }}
+      </table>
+      <p class="muted">Open every day, including public holidays.</p>
+    </section>
+
+    <section class="visit-card">
+      <h2>Come and try things on</h2>
+      <p>One size, generous cut — but nothing beats feeling the fabric in your hands. Bring your swimsuit, try the wrap pants over it, and take your time.</p>
+      <p>We'll show you the colours, explain how the ties work, and tell you exactly how to wash them so they last the whole trip and beyond.</p>
+      <p class="muted">No pressure to buy — tea and a chat are free.</p>
+    </section>
+  </div>
+
+  <h2 class="visit-map-title">Find us on the map</h2>
+  <div id="contact-map" class="contact-map" role="application"
+       aria-label="Map showing {{ $b.name }} in Lamai Beach, Koh Samui"
+       data-lat="{{ $b.lat }}" data-lng="{{ $b.lng }}"
+       data-name="{{ $b.name }}" data-maps="{{ $b.mapsUrl }}"></div>
+
+  {{- /* Reviews: real Google Maps reviews, supplied by the owner. Attribution per Google's terms. */ -}}
+  {{- with $d.reviews }}
+  <section class="visit-reviews">
+    <h2>What visitors say</h2>
+    <div class="review-row">
+      {{- range . }}
+      <figure class="review">
+        <blockquote>{{ .text }}</blockquote>
+        <figcaption>— {{ .name }}{{ with .when }}, {{ . }}{{ end }} <span class="review-src">{{ .stars }}/5</span></figcaption>
+      </figure>
+      {{- end }}
+    </div>
+    <p class="review-attr muted">Reviews reproduced from our <a href="{{ $b.mapsUrl }}" target="_blank" rel="noopener">Google Maps listing</a>.</p>
+  </section>
+  {{- end }}
+
+  <section class="visit-onsite">
+    <h2>Can't make it to the island?</h2>
+    <p>Everything in the shop is on the online store, and we ship worldwide — free standard shipping, packed by hand in Lamai.</p>
+    <p><a class="btn-primary" href="{{ "collections/all-products/" | relURL }}">Shop the collection</a></p>
+  </section>
+</div>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script defer src="{{ "js/contact-map.js" | relURL }}"></script>
+{{ end }}

@@ -1,0 +1,54 @@
+# Shop page data — reviews and gallery for /pages/visit/.
+
+# Google rating on the listing (owner: update if it moves).
+rating: "4.9"
+reviewCount: 21
+
+# Reviews supplied by the owner from the Google Maps listing.
+reviews:
+  - name: "Google review"
+    stars: 5
+    when: "2025"
+    text: >-
+      Super nice people, and a lovely little shop right by Lamai Beach. My
+      daughter and I both bought fisherman's pants and we love them —
+      beautiful fabric, really well made, and the designs are unique rather
+      than the usual tourist stuff. The welcome was warm and there was no
+      pressure at all. Well worth a stop.
+  - name: "Google review"
+    stars: 5
+    when: "2025"
+    text: >-
+      A lovely boutique with summery clothing and accessories. The fabrics are
+      perfect for summer (many items are made of linen, muslin, or cotton). My
+      boyfriend bought a pair of cotton trousers and I bought a two-piece
+      muslin outfit. The sales assistant was very friendly and showed us all
+      the different colors and styles, and also gave us tips on washing the
+      clothes and about the online shop. We felt very comfortable there!
+  - name: "Google review"
+    stars: 5
+    when: "2025"
+    text: >-
+      Unique clothing boutique with locally designed garments and accessories.
+      Belinda was extremely helpful and a delight to shop with. Thank you.
+  - name: "Google review"
+    stars: 5
+    when: "2025"
+    text: >-
+      Cozy place, nice items you can purchase for your family.
+
+# Gallery. Placeholders for now — replace src/alt and drop `placeholder: true`
+# once the real photos land in static/img/.
+gallery:
+  - src: "/img/placeholder.svg"
+    alt: "The shop front at Lamai Beach"
+    placeholder: true
+  - src: "/img/placeholder.svg"
+    alt: "Inside the shop — racks of fisherman pants"
+    placeholder: true
+  - src: "/img/placeholder.svg"
+    alt: "Fabrics and colours"
+    placeholder: true
+  - src: "/img/placeholder.svg"
+    alt: "The garden by the sea"
+    placeholder: true
