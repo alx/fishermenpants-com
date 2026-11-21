@@ -1,0 +1,24 @@
+{{- $shown := slice -}}
+{{- range .Site.RegularPages -}}
+  {{- if and (in (slice "products" "collections" "pages") .Section) (not (in (string (.Params.robots | default "")) "noindex")) -}}
+    {{- $shown = $shown | append . -}}
+  {{- end -}}
+{{- end -}}
+{{- printf "<?xml version=\"1.0\" encoding=\"utf-8\" standalone=\"yes\"?>" | safeHTML }}
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>{{ .Site.Title }}</title>
+    <link>{{ .Site.BaseURL }}</link>
+    <description>{{ .Site.Params.description }}</description>
+    {{- with .Site.Language.LanguageCode }}<language>{{ . }}</language>{{ end }}
+    {{- range first 50 $shown }}
+    <item>
+      <title>{{ .Title }}</title>
+      <link>{{ .Permalink }}</link>
+      <guid>{{ .Permalink }}</guid>
+      <pubDate>{{ .Date.Format "Mon, 02 Jan 2006 15:04:05 -0700" }}</pubDate>
+      <description>{{ .Summary | plainify | htmlEscape }}</description>
+    </item>
+    {{- end }}
+  </channel>
+</rss>

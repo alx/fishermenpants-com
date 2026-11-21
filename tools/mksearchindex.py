@@ -40,6 +40,9 @@ for sec, urlfmt in (("products", "/products/{n}/"), ("collections", "/collection
         n = f[:-3]
         text = open(os.path.join(d, f), errors="replace").read()
         fm, body = parse_frontmatter(text)
+        # Skip explicitly noindex'd pages (e.g. the internal $1 debug product).
+        if "noindex" in str(fm.get("robots", "")).lower():
+            continue
         img = (fm.get("images") or [None])[0] if isinstance(fm.get("images"), list) else None
         docs.append({
             "title": fm.get("title", n),

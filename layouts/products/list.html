@@ -1,6 +1,11 @@
 {{ define "main" }}
+{{- $all := .RegularPages.ByTitle -}}
+{{- $shown := slice -}}
+{{- range $all -}}
+  {{- if not (in (string (.Params.robots | default "")) "noindex") }}{{ $shown = $shown | append . }}{{ end -}}
+{{- end -}}
 <div class="wrap"><h1>All Products</h1></div>
 <div class="wrap product-row product-row-grid">
-  {{ range .RegularPages.ByTitle }}{{ partial "product-card.html" . }}{{ end }}
+  {{ range $shown }}{{ partial "product-card.html" . }}{{ end }}
 </div>
 {{ end }}
