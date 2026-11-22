@@ -3,6 +3,11 @@ title: "Size Guide"
 description: "Measurements for our fisherman pants, kimono, kaftans and one-size pieces."
 type: "pages"
 layout: "text-page"
+url: "/size-guide/"
+aliases:
+  - "/pages/size-guide/"
+  - "/pages/size-guide"
+  - "/size-guide"
 ---
 
 Most of what we sell is **one size**, cut generously — the fisherman pants in particular are made to wrap and tie, so a single size fits a wide range of bodies. The measurements below come from the garments themselves, measured flat.

@@ -87,7 +87,7 @@ collections:
     label_singular: Page
     folder: content/pages
     create: true
-    preview_path: "/pages/{{slug}}/"
+    preview_path: "/{{slug}}/"
     fields:
       - { label: Title, name: title, widget: string, required: true }
       - { label: Body, name: body, widget: markdown }

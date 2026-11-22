@@ -122,7 +122,7 @@ async function sendConfirmation(env, order) {
        We'll email you when it ships.</p>
     <p style="color:#6b7280;font-size:13px">Questions? WhatsApp <a href="https://wa.me/66625508121">+66 62 550 8121</a>
        or email <a href="mailto:thaifishpants@gmail.com">thaifishpants@gmail.com</a>
-       — or see our <a href="${env.SITE}/pages/shipping-returns/">shipping &amp; returns policy</a>.</p>
+       — or see our <a href="${env.SITE}/shipping-returns/">shipping &amp; returns policy</a>.</p>
   </div>`;
   const body = {
     to: [{ email: c.email, name: c.name || "" }],

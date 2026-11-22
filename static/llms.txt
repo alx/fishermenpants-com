@@ -47,13 +47,13 @@ small batches, so patterns vary slightly piece to piece.
 
 ## Shop information and policies
 
-- [Visit the shop](https://www.fishermenpants.com/pages/visit/): location, hours, photos, Google reviews.
-- [About GAYA](https://www.fishermenpants.com/pages/about/): the label, materials, how the pieces are made.
-- [Contact](https://www.fishermenpants.com/pages/contact/): address, phone, map, social links.
-- [Shipping & returns](https://www.fishermenpants.com/pages/shipping-returns/): delivery times, tracking, customs, returns, refunds.
-- [Size guide](https://www.fishermenpants.com/pages/size-guide/): how the one-size garments fit and how to measure.
-- [Payment methods](https://www.fishermenpants.com/pages/payment-methods/): PayPal and crypto, step by step.
-- [Privacy policy](https://www.fishermenpants.com/pages/privacy-policy/): what data is collected and why.
+- [Visit the shop](https://www.fishermenpants.com/visit/): location, hours, photos, Google reviews.
+- [About GAYA](https://www.fishermenpants.com/about/): the label, materials, how the pieces are made.
+- [Contact](https://www.fishermenpants.com/contact/): address, phone, map, social links.
+- [Shipping & returns](https://www.fishermenpants.com/shipping-returns/): delivery times, tracking, customs, returns, refunds.
+- [Size guide](https://www.fishermenpants.com/size-guide/): how the one-size garments fit and how to measure.
+- [Payment methods](https://www.fishermenpants.com/payment-methods/): PayPal and crypto, step by step.
+- [Privacy policy](https://www.fishermenpants.com/privacy-policy/): what data is collected and why.
 
 ## Buying
 

@@ -1,6 +1,11 @@
 ---
 title: "Privacy Policy"
 description: "How GAYA collects, uses and protects your personal information."
+url: "/privacy-policy/"
+aliases:
+  - "/pages/privacy-policy/"
+  - "/pages/privacy-policy"
+  - "/privacy-policy"
 ---
 <p><strong>Last updated:</strong> October 29, 2026</p>
 
@@ -108,6 +113,6 @@ description: "How GAYA collects, uses and protects your personal information."
 
 <h2>Contact</h2>
 
-<p>If you have questions about our privacy practices or this Privacy Policy, or wish to exercise any of your rights, please email us at <a href="mailto:thaifishpants@gmail.com">thaifishpants@gmail.com</a>, call <a href="tel:+66625508121">+66 62 550 8121</a>, or visit our <a href="/pages/contact/">contact page</a> for our address and opening hours.</p>
+<p>If you have questions about our privacy practices or this Privacy Policy, or wish to exercise any of your rights, please email us at <a href="mailto:thaifishpants@gmail.com">thaifishpants@gmail.com</a>, call <a href="tel:+66625508121">+66 62 550 8121</a>, or visit our <a href="/contact/">contact page</a> for our address and opening hours.</p>
 
 <p>For the purpose of applicable data protection law, GAYA, 156, beach 7 Had Lamai Rd, Tambon Maret, Koh Samui, Surat Thani 84310, Thailand, is the data controller of your personal information.</p>

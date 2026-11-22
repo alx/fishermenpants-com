@@ -23,7 +23,7 @@ HTML_DIR = os.path.join(ROOT, "_crawl", "html")
 IMG_DIR = os.path.join(ROOT, "static", "img")
 COLLECTIONS = ["all", "new-arrivals", "shop-for-her", "fisherman-pants",
                "island-shirts", "sarongs", "scarves", "bags", "jewelry", "accessories-1"]
-STATIC_PAGES = {"/pages/payment-methods": "payment-methods",
+STATIC_PAGES = {"/payment-methods": "payment-methods",
                 "/policies/privacy-policy": "privacy-policy"}
 FORCE = "--force" in sys.argv
 

@@ -4,7 +4,7 @@ Date: 2026-11-12 · Status: **decision made, numbers measured**
 
 ## Question
 
-Which try-on approach is feasible for the /pages/mirror/ experiment, and what is the
+Which try-on approach is feasible for the /mirror/ experiment, and what is the
 quality/latency compromise between local GPU, in-browser WASM on low-end CPU, and
 server-side inference?
 

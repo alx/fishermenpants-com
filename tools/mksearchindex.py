@@ -30,7 +30,7 @@ def text_of(body):
 
 docs = []
 for sec, urlfmt in (("products", "/products/{n}/"), ("collections", "/collections/{n}/"),
-                    ("pages", "/pages/{n}/")):
+                    ("pages", "/{n}/")):
     d = os.path.join(ROOT, "content", sec)
     if not os.path.isdir(d):
         continue

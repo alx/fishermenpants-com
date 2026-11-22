@@ -5,4 +5,9 @@ type: "pages"
 layout: "contact"
 sitemap:
   priority: 0.8
+url: "/contact/"
+aliases:
+  - "/pages/contact/"
+  - "/pages/contact"
+  - "/contact"
 ---

@@ -48,8 +48,8 @@
       <ul class="p-trust">
         <li>Standard shipping, worldwide</li>
         <li>Ships in 2–3 weeks to Europe &amp; USA</li>
-        <li><a href="{{ "pages/size-guide/" | relURL }}">Size guide</a></li>
-        <li><a href="{{ "pages/shipping-returns/" | relURL }}">14-day returns</a></li>
+        <li><a href="{{ "size-guide/" | relURL }}">Size guide</a></li>
+        <li><a href="{{ "shipping-returns/" | relURL }}">14-day returns</a></li>
       </ul>
       <a class="p-ask" href="https://wa.me/{{ replaceRE `[^0-9]` "" .Site.Params.business.phone }}?text={{ printf "Hi GAYA, I have a question about: %s" .Title | urlquery }}"
          target="_blank" rel="noopener">

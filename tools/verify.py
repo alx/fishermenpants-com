@@ -159,7 +159,7 @@ print("private pages: not in sitemap, noindex verified")
 
 # 9. structured data must be valid JSON with absolute URLs
 _ld_checked = 0
-for _f in ("products/beach-bag-2", "collections/bags", "pages/contact", ""):
+for _f in ("products/beach-bag-2", "collections/bags", "contact", ""):
     _p = os.path.join(ROOT, "public", _f, "index.html")
     if not os.path.exists(_p):
         continue

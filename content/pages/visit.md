@@ -6,4 +6,9 @@ layout: "visit"
 # Social card: 1200x630 JPEG of the shopfront (tools/make_og_images.py).
 # JPEG rather than WebP: some chat/social crawlers do not render WebP previews.
 ogImage: "/img/og/page--visit.jpg"
+url: "/visit/"
+aliases:
+  - "/pages/visit/"
+  - "/pages/visit"
+  - "/visit"
 ---

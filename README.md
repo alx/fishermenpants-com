@@ -72,7 +72,7 @@ Events never include personal data.
 
 - **PayPal** classic checkout, `business = thaifishpants@gmail.com`. Cart lines send
   the **unit price** (PayPal multiplies it by quantity) plus a description via `on0/os0`.
-- **MetaMask / Solana**: wallet addresses and QR codes on `/pages/payment-methods/`.
+- **MetaMask / Solana**: wallet addresses and QR codes on `/payment-methods/`.
 - Orders are collected on `/cart/` (name, email, address) and emailed to the seller
   through Formspree; a reference like `FP-261116-ABCD` is generated per order.
 

@@ -49,7 +49,7 @@ def all_jobs():
     jobs = [("/", "home")]
     jobs += [(f"/collections/{c}", f"collection-{c}") for c in COLLECTIONS]
     jobs += [(f"/products/{p}", f"product-{p}") for p in PRODUCTS]
-    jobs += [(f"/pages/{p}", f"page-{p}") for p in PAGES]
+    jobs += [(f"/{p}", f"page-{p}") for p in PAGES]
     jobs += [("/policies/privacy-policy", "page-privacy-policy")]
     return jobs
 
