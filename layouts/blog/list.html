@@ -1,7 +1,10 @@
 {{ define "main" }}
 <div class="wrap blog-list">
-  <h1>{{ .Title }}</h1>
-  {{- with .Content }}<div class="blog-intro">{{ . }}</div>{{ end }}
+  <header class="blog-head">
+    <h1>{{ .Title }}</h1>
+    {{- with .Content }}<div class="blog-intro">{{ . }}</div>{{ end }}
+  </header>
+
   <div class="blog-grid">
     {{- range .RegularPages.ByDate.Reverse }}
     <article class="blog-card">
@@ -12,16 +15,27 @@
                 "sizes" "(max-width: 700px) 100vw, 33vw") }}
         </span>
         {{- end }}
-        <h2>{{ .Title }}</h2>
-        <p class="blog-meta">
-          <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
-          {{- with .Params.author }} · {{ . }}{{ end }}
-        </p>
-        <p class="blog-excerpt">{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify | truncate 160 }}{{ end }}</p>
-        <span class="blog-more">Read more →</span>
+        <div class="blog-card-body">
+          <p class="blog-card-date"><time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time></p>
+          <h2>{{ .Title }}</h2>
+          <p class="blog-excerpt">{{ with .Description }}{{ . }}{{ else }}{{ .Summary | plainify }}{{ end }}</p>
+          <span class="blog-more">Read the story →</span>
+        </div>
       </a>
     </article>
     {{- end }}
+  </div>
+
+  {{- /* Older archive + the one thing a reader of this page should be able to do. */}}
+  <div class="blog-outro">
+    <p class="blog-archive">
+      More posts on our <a href="https://shmargad.wixsite.com/kohsamuishop/blog" target="_blank" rel="noopener">original blog archive</a>.
+    </p>
+    <div class="blog-cta">
+      <h2>The pants the stories are about</h2>
+      <p>Hand-tied, one size, cut for the heat — made in small batches here in Lamai.</p>
+      <p><a class="btn-primary" href="{{ "collections/fisherman-pants/" | relURL }}">Shop fisherman pants</a></p>
+    </div>
   </div>
 </div>
 {{ end }}
