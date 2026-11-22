@@ -1,11 +1,14 @@
 {{ define "main" }}
 {{- $pieces := slice
       (dict "handle" "fisherman-pants" "label" "Fisherman pants"
-            "img" "/img/ea2e41_1000028081.png" "href" "collections/fisherman-pants/")
+            "img" "/img/ea2e41_1000028081.png" "href" "collections/fisherman-pants/"
+            "region" (slice 0.42 1.0))
       (dict "handle" "kimono" "label" "Thai kimono"
-            "img" "/img/176e87_F34E4A87CC1B6D9FBEC41DB3769F1D490552424C.png" "href" "collections/shop-for-her/")
+            "img" "/img/176e87_F34E4A87CC1B6D9FBEC41DB3769F1D490552424C.png" "href" "collections/shop-for-her/"
+            "region" (slice 0.14 0.80))
       (dict "handle" "wrap-pants" "label" "Wrap pants"
-            "img" "/img/d908e2_1000028161.png" "href" "collections/fisherman-pants/")
+            "img" "/img/d908e2_1000028161.png" "href" "collections/fisherman-pants/"
+            "region" (slice 0.42 1.0))
 -}}
 <div class="wrap mirror-page" id="mirror-app" data-base="{{ "" | relURL }}">
 
@@ -46,12 +49,6 @@
           <li><strong>Plain background</strong> and even daylight give the cleanest outline.</li>
           <li><strong>Stand relaxed</strong>, arms slightly away from your sides.</li>
         </ul>
-
-        <h3>Speed or quality?</h3>
-        <div class="mirror-quality" role="radiogroup" aria-label="Processing preference">
-          <label><input type="radio" name="quality" value="fast" checked> <span>Fast<em>quick preview, less detail</em></span></label>
-          <label><input type="radio" name="quality" value="best"> <span>Best<em>slower, sharper fabric and edges</em></span></label>
-        </div>
 
         <p class="mirror-note" id="mirror-device-note" hidden></p>
       </div>
@@ -121,5 +118,6 @@
 <script>
   window.FP_PIECES = {{ $pieces | jsonify | safeJS }};
 </script>
+<script defer src="{{ "js/mirror-ml.js" | relURL }}"></script>
 <script defer src="{{ "js/mirror.js" | relURL }}"></script>
 {{ end }}

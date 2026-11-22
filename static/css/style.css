@@ -602,9 +602,6 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .mirror-tips { margin: 0; padding-left: 18px; color: var(--muted); font-size: .92rem; line-height: 1.65; }
 .mirror-tips strong { color: var(--brown-dark); }
 
-.mirror-quality { display: flex; flex-direction: column; gap: 8px; }
-.mirror-quality label { display: flex; align-items: flex-start; gap: 8px; font-size: .92rem; cursor: pointer; }
-.mirror-quality em { display: block; color: var(--brown-soft); font-style: normal; font-size: .82rem; }
 
 .mirror-note { color: var(--brown-soft); font-size: .87rem; margin: 12px 0 0; }
 
