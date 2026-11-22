@@ -8,7 +8,7 @@
 {{- $links := slice
       (dict "url" (index site.Params "instagram") "icon" "fa-instagram"   "label" "Instagram"   "handle" "@gaya_boutique_koh_samui")
       (dict "url" (index site.Params "facebook")  "icon" "fa-facebook-f"  "label" "Facebook"    "handle" "fishermenpants")
-      (dict "url" $trip                            "icon" "fa-tripadvisor" "label" "Tripadvisor" "handle" "GAYA reviews")
+      (dict "url" $trip                            "icon" "fa-tripadvisor" "label" "Tripadvisor" "handle" "ratings & reviews")
 -}}
 {{- if eq (default "" .style) "footer" }}
 <div class="social-links social-links--footer">
@@ -17,6 +17,7 @@
   {{- with $url }}
   <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ $label }} — {{ $handle }}">
     <i class="fa-brands {{ $icon }}" aria-hidden="true"></i>
+    <span class="social-handle">{{ $handle }}</span>
   </a>
   {{- end }}
   {{- end }}

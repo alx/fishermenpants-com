@@ -438,7 +438,9 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
   font-display: block;
   src: url("../fonts/fa/fontawesome4-webfont.woff2") format("woff2");
 }
-.fa-tripadvisor {
+.fa-tripadvisor,
+.social-link i.fa-tripadvisor,
+.social-icon i.fa-tripadvisor {
   font-family: "FontAwesome4Tripadvisor";
   font-style: normal;
   font-weight: 400;
@@ -446,4 +448,6 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-.fa-tripadvisor::before { content: "\f262"; }
+.fa-tripadvisor::before,
+.social-link i.fa-tripadvisor::before,
+.social-icon i.fa-tripadvisor::before { content: "\f262"; }
