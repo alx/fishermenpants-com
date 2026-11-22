@@ -30,9 +30,15 @@ if os.path.exists(_hp):
         import yaml
         home = yaml.safe_load(open(_hp))
     except ImportError:
-        home = json.load(open(_hp))  # JSON is valid YAML
+        # data/home.yaml is real YAML, not JSON, so json.load() would crash with
+        # a confusing JSONDecodeError. Say what's actually wrong instead.
+        # (CI installs PyYAML; this only bites an unusual local setup.)
+        print("WARN: PyYAML missing - skipping data/home.yaml image refs")
+        home = {}
 else:
     home = json.load(open(os.path.join(ROOT, "data", "home.json")))
+if home is None:
+    home = {}
 def check_img(v, ctx):
     if v and str(v).startswith("/img/"):
         p = os.path.join(ROOT, "static", str(v).lstrip("/"))

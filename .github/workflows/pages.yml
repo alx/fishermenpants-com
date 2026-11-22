@@ -31,8 +31,8 @@ jobs:
         with:
           python-version: 3.12
 
-      - name: Install Pillow (image variants)
-        run: pip install --quiet Pillow
+      - name: Install Pillow (image variants) + PyYAML (verify.py reads home.yaml)
+        run: pip install --quiet Pillow PyYAML
 
       - name: Cache generated image variants
         uses: actions/cache@v4
