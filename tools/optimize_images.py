@@ -34,14 +34,21 @@ def main():
     os.makedirs(OUT, exist_ok=True)
     files = []
     for ext in EXT:
-        files += glob.glob(os.path.join(SRC, "*" + ext))
-    files = [f for f in files if not os.path.basename(f).startswith("og-")]
+        # recursive so subdirectories (e.g. static/img/shop/) also get variants
+        files += glob.glob(os.path.join(SRC, "**", "*" + ext), recursive=True)
+    files = [f for f in files
+             if not os.path.basename(f).startswith("og-")
+             and "_gen" not in os.path.relpath(f, SRC).split(os.sep)]
 
-    manifest = {}
+    manifests = {}
     made = skipped = 0
     total_bytes = 0
     for path in sorted(files):
-        name = os.path.splitext(os.path.basename(path))[0]
+        rel = os.path.relpath(path, SRC)
+        subdir = os.path.dirname(rel)          # "" for top-level, "shop" for shop/
+        name = os.path.splitext(os.path.basename(rel))[0]
+        # variants live next to their source, matching layouts/partials/img.html
+        out_dir = os.path.join(SRC, subdir, "_gen") if subdir else OUT
         try:
             im = Image.open(path)
         except Exception as e:  # unreadable file: skip, don't fail the build
@@ -50,7 +57,8 @@ def main():
             continue
 
         src_w, src_h = im.size
-        manifest[name] = {
+        sub_manifest = manifests.setdefault(subdir, {})
+        sub_manifest[name] = {
             "w": src_w,
             "h": src_h,
             "widths": variants(WIDTHS, src_w),
@@ -61,8 +69,9 @@ def main():
         # WebP keeps alpha; convert non-alpha PNGs to RGB for a smaller file
         webp_im = im if has_alpha else im.convert("RGB")
 
+        os.makedirs(out_dir, exist_ok=True)
         for w in variants(WIDTHS, src_w):
-            dest = os.path.join(OUT, f"{name}-{w}.webp")
+            dest = os.path.join(out_dir, f"{name}-{w}.webp")
             if os.path.exists(dest) and not FORCE:
                 if os.path.getmtime(dest) >= os.path.getmtime(path):
                     skipped += 1
@@ -76,7 +85,7 @@ def main():
         # JPEG fallback for browsers without WebP (only when the source is not transparent)
         if not has_alpha:
             for w in variants(WIDTHS, src_w):
-                dest = os.path.join(OUT, f"{name}-{w}.jpg")
+                dest = os.path.join(out_dir, f"{name}-{w}.jpg")
                 if os.path.exists(dest) and not FORCE:
                     if os.path.getmtime(dest) >= os.path.getmtime(path):
                         continue
@@ -86,8 +95,11 @@ def main():
                 )
                 made += 1
 
-    with open(os.path.join(OUT, "manifest.json"), "w") as fh:
-        json.dump(manifest, fh, separators=(",", ":"))
+    for subdir, mf in manifests.items():
+        d = os.path.join(SRC, subdir, "_gen") if subdir else OUT
+        os.makedirs(d, exist_ok=True)
+        with open(os.path.join(d, "manifest.json"), "w") as fh:
+            json.dump(mf, fh, separators=(",", ":"))
 
     print(f"images: {made} variants generated, {skipped} up to date, {total_bytes/1e6:.1f} MB written")
 
