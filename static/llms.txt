@@ -1,0 +1,81 @@
+# GAYA — boutique by the sea (Fishermen Pants)
+
+> Handmade Thai fisherman pants, kimonos, caftans and island wear, made and sold
+> at our own shop in Lamai Beach, Koh Samui, Thailand. Founded 2003. We ship
+> worldwide with free standard shipping. Online store: https://www.fishermenpants.com
+
+This file helps AI agents answer questions about the business and find the right
+pages. The shop is a small independent Thai label: naturally dyed cotton and hemp,
+hand-dyed indigo, hill-tribe embroidery, one-size wrap garments. Stock is made in
+small batches, so patterns vary slightly piece to piece.
+
+## Business facts
+
+- Trading name: GAYA (boutique by the sea). Website title: Fishermen Pants.
+- Established: 2003, Lamai Beach, Koh Samui.
+- Address: 156, beach 7 Had Lamai Rd, Tambon Maret, Koh Samui, Surat Thani 84310, Thailand (plus code F29X+PM).
+- Opening hours: every day, 9:00 am – 7:30 pm (including public holidays).
+- Phone / WhatsApp: +66 62 550 8121.
+- Email: thaifishpants@gmail.com.
+- Currency: USD. Payment: PayPal, plus crypto (MetaMask/Ethereum and Solana).
+- Catalogue size: ~52 products, typically $39–$199 USD.
+- Shipping: from Thailand. Standard shipping is free worldwide; EMS express is
+  available and tracked. Typical delivery: Thailand 2–4 business days, Asia 10–18,
+  Europe/UK 14–24, USA/Canada/Australia 14–28. EMS is faster.
+- Returns: 14 days from delivery, unworn and unwashed; buyer pays return postage
+  unless the item was faulty or wrong.
+- Customs: orders ship as personal purchases from Thailand; import duty/VAT, if
+  any, is the buyer's responsibility and parcels are declared accurately.
+- Sizes: mostly one size, generously cut. A size guide explains how to choose.
+- Social: Instagram @gaya_boutique_koh_samui, Facebook fishermenpants, Tripadvisor listing.
+
+## Main pages
+
+- [Home](https://www.fishermenpants.com/): featured pieces, collections, newsletter.
+- [All products](https://www.fishermenpants.com/collections/all-products/): the full catalogue.
+- [Fisherman pants](https://www.fishermenpants.com/collections/fisherman-pants/): the signature wrap pants.
+- [New arrivals](https://www.fishermenpants.com/collections/new-arrivals/)
+- [Best sellers](https://www.fishermenpants.com/collections/best-sellers/)
+- [Shop for her](https://www.fishermenpants.com/collections/shop-for-her/)
+- [Island shirts](https://www.fishermenpants.com/collections/island-shirts/)
+- [Kimonos and caftans](https://www.fishermenpants.com/collections/shop-for-her/)
+- [Scarves](https://www.fishermenpants.com/collections/scarves/)
+- [Sarongs](https://www.fishermenpants.com/collections/sarongs/)
+- [Bags](https://www.fishermenpants.com/collections/bags/)
+- [Jewelry](https://www.fishermenpants.com/collections/jewelry/)
+- [Accessories](https://www.fishermenpants.com/collections/accessories/)
+
+## Shop information and policies
+
+- [Visit the shop](https://www.fishermenpants.com/pages/visit/): location, hours, photos, Google reviews.
+- [About GAYA](https://www.fishermenpants.com/pages/about/): the label, materials, how the pieces are made.
+- [Contact](https://www.fishermenpants.com/pages/contact/): address, phone, map, social links.
+- [Shipping & returns](https://www.fishermenpants.com/pages/shipping-returns/): delivery times, tracking, customs, returns, refunds.
+- [Size guide](https://www.fishermenpants.com/pages/size-guide/): how the one-size garments fit and how to measure.
+- [Payment methods](https://www.fishermenpants.com/pages/payment-methods/): PayPal and crypto, step by step.
+- [Privacy policy](https://www.fishermenpants.com/pages/privacy-policy/): what data is collected and why.
+
+## Buying
+
+- Products can be added to a cart or paid for directly with PayPal from the product page.
+- Checkout collects name, email and shipping address, then hands off to PayPal; the
+  order reference looks like `FP-241121-ABCD` and is quoted in all correspondence.
+- One-tap ordering by WhatsApp is available from the cart page.
+- A 10% first-order discount is offered for newsletter signup.
+
+## Notes for agents
+
+- Prices are in USD and shown on every product page.
+- Product photography is of the actual stock; hand-dyed patterns vary slightly
+  between pieces, which is expected and not a defect.
+- Product pages include a "You may also like" section and customer reviews.
+- There is no public API. Do not attempt to scrape at high rates; the catalogue is
+  small and the pages above are sufficient for answering questions.
+- An internal $1 test product exists for verifying checkout. It is not for sale and
+  is excluded from search, sitemap and social previews.
+
+## Optional
+
+- [Facebook](https://www.facebook.com/fishermenpants/)
+- [Instagram](https://www.instagram.com/gaya_boutique_koh_samui/)
+- [Tripadvisor reviews](https://www.tripadvisor.com/Attraction_Review-g1188000-d6580307-Reviews-Gaya-Lamai_Beach_Maret_Ko_Samui_Surat_Thani_Province.html)

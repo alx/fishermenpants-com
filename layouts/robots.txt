@@ -1,0 +1,5 @@
+User-agent: *
+Allow: /
+Disallow: /products/debug-order-1/
+
+Sitemap: {{ site.Params.baseURL | default "https://www.fishermenpants.com" }}/sitemap.xml

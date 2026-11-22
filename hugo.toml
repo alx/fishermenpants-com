@@ -5,6 +5,8 @@ enableRobotsTXT = true
 hasCJKLanguage = false
 
 [params]
+  # Canonical production origin, used by robots.txt (build.sh passes --baseURL /).
+  prodBaseURL = "https://www.fishermenpants.com"
   description = "Boutique by the sea in Lamai Beach, Koh Samui — beachwear, wrap pants, kimonos, caftans"
   facebook = "https://www.facebook.com/fishermenpants/"
   instagram = "https://www.instagram.com/gaya_boutique_koh_samui/"
