@@ -420,10 +420,13 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .social-links--footer { display: flex; flex-direction: column; gap: 8px; }
 .social-link { display: inline-flex; align-items: center; gap: 9px; color: #d7dde3; text-decoration: none; font-size: .95rem; transition: color .18s; }
 .social-link:hover { color: #fff; }
-.social-link i { font-size: 1.05rem; width: 1.35em; text-align: center; color: #9fb0bf; transition: color .18s; }
+.social-link i { font-family: "Font Awesome 6 Brands"; font-style: normal; font-weight: 400; font-size: 1.05rem; width: 1.35em; text-align: center; color: #9fb0bf; transition: color .18s; }
 .social-link:hover i { color: var(--sea); }
-.social-handle { color: #7d8b98; font-size: .82rem; }
+.social-handle { color: #b8c4cf; font-size: .9rem; }
+.social-svg { display: inline-flex; align-items: center; justify-content: center; width: 1.35em; font-size: 1.05rem; color: #9fb0bf; }
+.social-link:hover .social-svg { color: var(--sea); }
+.social-icon .social-svg { font-size: .95rem; color: inherit; }
 .social-icons { display: inline-flex; gap: 12px; align-items: center; vertical-align: middle; }
 .social-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: var(--sand); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background .18s, color .18s, border-color .18s; }
 .social-icon:hover { background: var(--sea); border-color: var(--sea); color: #fff; }
-.social-icon i { font-size: .95rem; }
+.social-icon i { font-family: "Font Awesome 6 Brands"; font-style: normal; font-weight: 400; font-size: .95rem; }
