@@ -1,0 +1,125 @@
+{{ define "main" }}
+{{- $pieces := slice
+      (dict "handle" "fisherman-pants" "label" "Fisherman pants"
+            "img" "/img/ea2e41_1000028081.png" "href" "collections/fisherman-pants/")
+      (dict "handle" "kimono" "label" "Thai kimono"
+            "img" "/img/176e87_F34E4A87CC1B6D9FBEC41DB3769F1D490552424C.png" "href" "collections/shop-for-her/")
+      (dict "handle" "wrap-pants" "label" "Wrap pants"
+            "img" "/img/d908e2_1000028161.png" "href" "collections/fisherman-pants/")
+-}}
+<div class="wrap mirror-page" id="mirror-app" data-base="{{ "" | relURL }}">
+
+  {{- /* ---------- step indicator ---------- */}}
+  <ol class="mirror-steps" id="mirror-steps" aria-label="Progress">
+    <li data-step="setup" class="is-active">Setup</li>
+    <li data-step="capture">Capture</li>
+    <li data-step="process">Process</li>
+    <li data-step="result">Result</li>
+  </ol>
+
+  {{- /* ---------- step 1: setup & settings ---------- */}}
+  <section class="mirror-step is-active" data-step="setup" aria-labelledby="m-setup-title">
+    <h1 id="m-setup-title">The Mirror</h1>
+    <p class="mirror-lede">See how a piece sits on <em>you</em> — not on a model. Stand in front of your camera in good light, pick a piece, and we'll show you the fit.</p>
+
+    <div class="mirror-setup-grid">
+      <div class="mirror-card">
+        <h2>1. Pick a piece</h2>
+        <p class="muted">Only a few pieces are available while we test this.</p>
+        <div class="mirror-pieces" role="radiogroup" aria-label="Choose a piece">
+          {{- range $i, $p := $pieces }}
+          <label class="mirror-piece">
+            <input type="radio" name="piece" value="{{ $p.handle }}" {{ if eq $i 0 }}checked{{ end }}>
+            <span class="mirror-piece-body">
+              <img src="{{ $p.img | relURL }}" alt="{{ $p.label }}" loading="lazy">
+              <span>{{ $p.label }}</span>
+            </span>
+          </label>
+          {{- end }}
+        </div>
+      </div>
+
+      <div class="mirror-card">
+        <h2>2. Get the best result</h2>
+        <ul class="mirror-tips">
+          <li><strong>Face the camera</strong>, full body in frame — step back a metre or two.</li>
+          <li><strong>Plain background</strong> and even daylight give the cleanest outline.</li>
+          <li><strong>Stand relaxed</strong>, arms slightly away from your sides.</li>
+        </ul>
+
+        <h3>Speed or quality?</h3>
+        <div class="mirror-quality" role="radiogroup" aria-label="Processing preference">
+          <label><input type="radio" name="quality" value="fast" checked> <span>Fast<em>quick preview, less detail</em></span></label>
+          <label><input type="radio" name="quality" value="best"> <span>Best<em>slower, sharper fabric and edges</em></span></label>
+        </div>
+
+        <p class="mirror-note" id="mirror-device-note" hidden></p>
+      </div>
+    </div>
+
+    <div class="mirror-actions">
+      <button class="btn-primary" id="mirror-start" type="button">Turn on camera</button>
+      <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
+    </div>
+  </section>
+
+  {{- /* ---------- step 2: capture ---------- */}}
+  <section class="mirror-step" data-step="capture" aria-labelledby="m-capture-title" hidden>
+    <h2 id="m-capture-title">Stand where we can see you</h2>
+    <div class="mirror-stage">
+      <video id="mirror-video" playsinline muted autoplay aria-label="Your camera"></video>
+      <canvas id="mirror-canvas" hidden></canvas>
+      <div class="mirror-countdown" id="mirror-countdown" hidden></div>
+      <div class="mirror-flash" id="mirror-flash" hidden></div>
+    </div>
+    <p class="mirror-note" id="mirror-capture-note" role="status"></p>
+    <div class="mirror-actions">
+      <button class="btn-primary" id="mirror-shoot" type="button">Capture</button>
+      <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
+    </div>
+  </section>
+
+  {{- /* ---------- step 3: process ---------- */}}
+  <section class="mirror-step" data-step="process" aria-labelledby="m-process-title" hidden>
+    <h2 id="m-process-title">Working on it…</h2>
+    <div class="mirror-stage mirror-stage--process">
+      <canvas id="mirror-process-canvas"></canvas>
+      <div class="mirror-progress" role="progressbar" aria-labelledby="m-process-title">
+        <div class="mirror-progress-bar" id="mirror-progress-bar"></div>
+      </div>
+      <p class="mirror-note" id="mirror-process-note" role="status">Preparing…</p>
+    </div>
+    <div class="mirror-actions">
+      <button class="btn-plain" id="mirror-cancel" type="button">Cancel</button>
+      <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
+    </div>
+  </section>
+
+  {{- /* ---------- step 4: result ---------- */}}
+  <section class="mirror-step" data-step="result" aria-labelledby="m-result-title" hidden>
+    <h2 id="m-result-title">Here's how it looks</h2>
+    <div class="mirror-result" id="mirror-result">
+      <figure>
+        <img id="mirror-result-img" alt="You wearing the selected piece">
+        <figcaption id="mirror-result-caption"></figcaption>
+      </figure>
+      <aside class="mirror-result-side">
+        <p class="mirror-badge" id="mirror-result-badge">Preview</p>
+        <p id="mirror-result-text"></p>
+        <a class="btn-primary" id="mirror-result-shop" href="{{ "collections/all-products/" | relURL }}">See the piece</a>
+        <button class="btn-plain" id="mirror-again" type="button">Try another</button>
+        <button class="btn-plain" id="mirror-save" type="button">Save the image</button>
+      </aside>
+    </div>
+    <div class="mirror-actions">
+      <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  window.FP_PIECES = {{ $pieces | jsonify | safeJS }};
+</script>
+<script defer src="{{ "js/mirror.js" | relURL }}"></script>
+{{ end }}

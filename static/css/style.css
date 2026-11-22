@@ -562,3 +562,76 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .blog-cta h2 { font-family: var(--serif); font-weight: 500; font-size: 1.5rem; margin: 0 0 8px; color: var(--brown-dark); }
 .blog-cta p { color: var(--muted); margin: 0 0 18px; }
 .blog-cta .btn-primary { text-decoration: none; display: inline-block; }
+
+/* ---- The Mirror (experimental try-on flow) ---- */
+.mirror-page { max-width: 980px; padding-top: 26px; padding-bottom: 70px; }
+
+.mirror-steps { display: flex; gap: 8px; list-style: none; padding: 0; margin: 0 0 26px; counter-reset: mstep; }
+.mirror-steps li {
+  counter-increment: mstep;
+  flex: 1;
+  font-size: .78rem;
+  letter-spacing: .07em;
+  text-transform: uppercase;
+  color: var(--brown-soft);
+  padding: 9px 6px;
+  text-align: center;
+  border-bottom: 2px solid var(--line);
+}
+.mirror-steps li::before { content: counter(mstep) ". "; opacity: .6; }
+.mirror-steps li.is-active { color: var(--sea-dark); border-bottom-color: var(--sea); font-weight: 600; }
+.mirror-steps li.is-done { color: var(--sea); border-bottom-color: var(--sea-soft); }
+
+.mirror-step h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(1.9rem, 4vw, 2.6rem); margin: 0 0 10px; }
+.mirror-step h2 { font-family: var(--serif); font-weight: 500; font-size: 1.28rem; margin: 0 0 8px; color: var(--brown-dark); }
+.mirror-step h3 { font-size: .95rem; margin: 18px 0 8px; color: var(--brown); }
+.mirror-lede { color: var(--muted); max-width: 620px; line-height: 1.6; margin: 0 0 26px; }
+
+.mirror-setup-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+@media (max-width: 760px) { .mirror-setup-grid { grid-template-columns: 1fr; } }
+.mirror-card { background: var(--card); border: 1px solid var(--line); border-radius: 14px; padding: 20px; }
+
+.mirror-pieces { display: grid; grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap: 12px; margin-top: 12px; }
+.mirror-piece input { position: absolute; opacity: 0; pointer-events: none; }
+.mirror-piece-body { display: block; border: 2px solid var(--line); border-radius: 12px; padding: 8px; text-align: center; cursor: pointer; transition: border-color .18s, background .18s; }
+.mirror-piece-body img { width: 100%; aspect-ratio: 1; object-fit: cover; border-radius: 8px; display: block; background: var(--sand); }
+.mirror-piece-body span { display: block; font-size: .8rem; margin-top: 7px; color: var(--brown); }
+.mirror-piece input:checked + .mirror-piece-body { border-color: var(--sea); background: #f7fcfd; }
+.mirror-piece input:focus-visible + .mirror-piece-body { outline: 2px solid var(--sea); outline-offset: 2px; }
+
+.mirror-tips { margin: 0; padding-left: 18px; color: var(--muted); font-size: .92rem; line-height: 1.65; }
+.mirror-tips strong { color: var(--brown-dark); }
+
+.mirror-quality { display: flex; flex-direction: column; gap: 8px; }
+.mirror-quality label { display: flex; align-items: flex-start; gap: 8px; font-size: .92rem; cursor: pointer; }
+.mirror-quality em { display: block; color: var(--brown-soft); font-style: normal; font-size: .82rem; }
+
+.mirror-note { color: var(--brown-soft); font-size: .87rem; margin: 12px 0 0; }
+
+.mirror-actions { display: flex; align-items: center; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
+.mirror-actions .btn-primary { text-decoration: none; display: inline-block; }
+.btn-plain { background: transparent; border: 1px solid var(--line); color: var(--brown-dark); border-radius: 8px; padding: 12px 20px; font-size: .95rem; cursor: pointer; }
+.btn-plain:hover { background: var(--sand); }
+.mirror-escape { color: var(--brown-soft); font-size: .88rem; text-decoration: none; }
+.mirror-escape:hover { color: var(--sea); }
+
+.mirror-stage { position: relative; background: var(--brown-dark); border-radius: 14px; overflow: hidden; aspect-ratio: 4 / 3; max-width: 720px; }
+.mirror-stage video, .mirror-stage canvas { width: 100%; height: 100%; object-fit: cover; display: block; }
+.mirror-stage video { transform: scaleX(-1); } /* mirror image, as a real mirror would show */
+.mirror-countdown { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 6rem; color: #fff; font-family: var(--serif); text-shadow: 0 4px 24px rgba(0,0,0,.6); }
+.mirror-flash { position: absolute; inset: 0; background: #fff; }
+
+.mirror-stage--process { display: flex; flex-direction: column; }
+.mirror-stage--process canvas { flex: 1; object-fit: contain; }
+.mirror-progress { height: 5px; background: rgba(255,255,255,.22); }
+.mirror-progress-bar { height: 100%; width: 0; background: var(--sea); transition: width .18s linear; }
+.mirror-stage--process .mirror-note { color: #e9dfd2; text-align: center; padding: 10px; margin: 0; }
+
+.mirror-result { display: grid; grid-template-columns: 1.4fr 1fr; gap: 20px; align-items: start; }
+@media (max-width: 760px) { .mirror-result { grid-template-columns: 1fr; } }
+.mirror-result figure { margin: 0; }
+.mirror-result img { width: 100%; border-radius: 14px; display: block; background: var(--sand); }
+.mirror-result figcaption { color: var(--brown-soft); font-size: .85rem; margin-top: 8px; }
+.mirror-result-side { display: flex; flex-direction: column; gap: 10px; }
+.mirror-badge { display: inline-block; background: var(--sand); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: .76rem; letter-spacing: .05em; text-transform: uppercase; color: var(--brown); margin: 0; }
+.mirror-result-side .btn-primary { text-decoration: none; text-align: center; }
