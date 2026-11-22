@@ -1,25 +1,22 @@
 {{- /*
-  Social links: Font Awesome brand icons where Free 6.5.2 has one, inline SVG
-  for Tripadvisor (its icon is Font Awesome Pro-only — no free glyph exists).
+  Social icons: Font Awesome 6 Free brand glyphs. Tripadvisor is not in FA6
+  Free, so style.css defines .fa-tripadvisor from the bundled FA 4.7 webfont.
   Context: dict
     style (optional) "footer" -> vertical list; default -> inline icon row
 */ -}}
-{{- $tripSvg := `<svg viewBox="0 0 24 24" width="1em" height="1em" fill="currentColor" aria-hidden="true" focusable="false"><path d="M12 6.5c-2.4 0-4.6.5-6.5 1.4L3 5.4l1-1 2.6 2.5c1.7-.9 3.6-1.4 5.4-1.4s3.7.5 5.4 1.4L20.2 4.4l1 1-2.5 2.5c-1.9-.9-4.1-1.4-6.7-1.4zm0 2.3c-1.6 0-3.1.4-4.4 1.1-1.8 1-3 2.9-3 5.1 0 3.3 2.6 5.9 5.9 5.9 1.2 0 2.4-.4 3.3-1 .9.6 2 1 3.3 1 3.3 0 5.9-2.6 5.9-5.9 0-2.2-1.2-4.1-3-5.1-1.4-.7-2.9-1.1-4.5-1.1h-3.5zm-3.4 3a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8zm10.3 0a2.4 2.4 0 1 1 0 4.8 2.4 2.4 0 0 1 0-4.8zm-10.3 1.5a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zm10.3 0a.9.9 0 1 0 0 1.8.9.9 0 0 0 0-1.8zM12 12.6c1.6 0 3.1.7 4.1 1.7-.8 1.1-2.2 1.8-4.1 1.8s-3.2-.7-4.1-1.8c1-1 2.5-1.7 4.1-1.7z"/></svg>` -}}
 {{- $trip := index site.Params "tripadvisor" -}}
 {{- $links := slice
-      (dict "url" (index site.Params "instagram") "icon" "fa-instagram"   "svg" "" "label" "Instagram"   "handle" "@gaya_boutique_koh_samui")
-      (dict "url" (index site.Params "facebook")  "icon" "fa-facebook-f"  "svg" "" "label" "Facebook"    "handle" "fishermenpants")
-      (dict "url" $trip                            "icon" ""              "svg" $tripSvg "label" "Tripadvisor" "handle" "GAYA reviews")
+      (dict "url" (index site.Params "instagram") "icon" "fa-instagram"   "label" "Instagram"   "handle" "@gaya_boutique_koh_samui")
+      (dict "url" (index site.Params "facebook")  "icon" "fa-facebook-f"  "label" "Facebook"    "handle" "fishermenpants")
+      (dict "url" $trip                            "icon" "fa-tripadvisor" "label" "Tripadvisor" "handle" "GAYA reviews")
 -}}
 {{- if eq (default "" .style) "footer" }}
 <div class="social-links social-links--footer">
   {{- range $links }}
-  {{- $url := .url }}{{ $icon := .icon }}{{ $svg := .svg }}{{ $label := .label }}{{ $handle := .handle }}
+  {{- $url := .url }}{{ $icon := .icon }}{{ $label := .label }}{{ $handle := .handle }}
   {{- with $url }}
   <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ $label }} — {{ $handle }}">
-    {{- if $svg }}<span class="social-svg">{{ $svg | safeHTML }}</span>
-    {{- else }}<i class="fa-brands {{ $icon }}" aria-hidden="true"></i>{{ end }}
-    <span class="social-handle">{{ $label }}{{ with $handle }} · {{ . }}{{ end }}</span>
+    <i class="fa-brands {{ $icon }}" aria-hidden="true"></i>
   </a>
   {{- end }}
   {{- end }}
@@ -27,11 +24,10 @@
 {{- else }}
 <div class="social-icons">
   {{- range $links }}
-  {{- $url := .url }}{{ $icon := .icon }}{{ $svg := .svg }}{{ $label := .label }}
+  {{- $url := .url }}{{ $icon := .icon }}{{ $label := .label }}
   {{- with $url }}
   <a class="social-icon" href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ $label }}" title="{{ $label }}">
-    {{- if $svg }}<span class="social-svg">{{ $svg | safeHTML }}</span>
-    {{- else }}<i class="fa-brands {{ $icon }}" aria-hidden="true"></i>{{ end }}
+    <i class="fa-brands {{ $icon }}" aria-hidden="true"></i>
   </a>
   {{- end }}
   {{- end }}
