@@ -112,9 +112,25 @@ for o in sorted(_orphans):
 ap = os.path.join(_col_dir, "all-products.md")
 if os.path.exists(ap):
     cm = _re.search(r'^products:\s*\[(.*?)\]', open(ap, errors="replace").read(), _re.M | _re.S)
-    n = len(set(_re.findall(r'"([^"]+)"', cm.group(1)))) if cm else 0
-    if n != len(_prods):
-        fail(f"all-products lists {n} products, content has {len(_prods)}")
+    listed = set(_re.findall(r'"([^"]+)"', cm.group(1))) if cm else set()
+    # Some product files are deliberately not shoppable cards:
+    #   ptype: test            -> debug SKUs (e.g. debug-order-1, 1 USD)
+    #   service: true          -> shipping add-ons (e.g. ems-fast-shipping),
+    #                             listed at checkout, not in the grid
+    _excl = set()
+    for pf in glob.glob(os.path.join(_prod_dir, "*.md")):
+        t = open(pf, errors="replace").read()
+        if _re.search(r'^ptype:\s*["\']?test', t, _re.M) or _re.search(r'^service:\s*true', t, _re.M):
+            _excl.add(os.path.basename(pf)[:-3])
+    _expected = _prods - _excl
+    _missing = _expected - listed
+    _extra = listed - _prods
+    for m in sorted(_missing):
+        fail(f"product '{m}' is shoppable but missing from all-products")
+    for m in sorted(_extra):
+        fail(f"all-products lists '{m}' but no content/products/{m}.md exists")
+    print(f"all-products: {len(listed)} listed, {len(_expected)} shoppable, "
+          f"{len(_excl)} excluded (test/service)")
 print(f"catalogue: {len(_prods)} products, all in a collection, all handles resolve")
 
 # 10. every product handle referenced in data/home.yaml must exist

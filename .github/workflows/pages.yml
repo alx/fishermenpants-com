@@ -55,6 +55,18 @@ jobs:
         env:
           BASE_URL: ${{ vars.BASE_URL }}
 
+      # Gate the deploy on the built site actually being correct. These run
+      # AFTER the build (they inspect public/) and BEFORE the artifact upload,
+      # so a failure stops the deploy instead of shipping a broken site.
+      # Deliberately no `|| true`: a red check must block.
+      # This is the gap that let a page ship at /pages/mirror/ while templates
+      # linked to /mirror/ — see tools/check_links.py.
+      - name: Verify build
+        run: python3 tools/verify.py
+
+      - name: Check internal links
+        run: python3 tools/check_links.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
