@@ -44,24 +44,44 @@
     {{- end -}}
   {{- end -}}
   {{- if not $ogImg }}{{ $ogImg = .Site.Params.ogImage }}{{ end -}}
-  {{- $ogURL := cond (hasPrefix $ogImg "http") $ogImg (absURL ($ogImg | strings.TrimPrefix "/")) -}}
+  {{- /* Absolute URL is required by social crawlers. absURL() follows --baseURL,
+       which build.sh sets to "/" for GitHub Pages asset paths, so anchor on the
+       canonical production origin instead. */ -}}
+  {{- $origin := site.Params.prodBaseURL | default "https://www.fishermenpants.com" -}}
+  {{- $ogURL := cond (hasPrefix $ogImg "http") $ogImg (printf "%s/%s" $origin ($ogImg | strings.TrimPrefix "/")) -}}
+  {{- /* Absolute canonical/og:url (see $origin note above). */ -}}
+  {{- $canonical := printf "%s%s" $origin .RelPermalink -}}
   {{- $ogTitle := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) -}}
   {{- $ogDesc := .Description | default .Site.Params.description | strings.TrimSpace | replaceRE `\s+` " " -}}
   {{- $ogType := "website" -}}
   {{- if .IsPage -}}
     {{- if eq .Section "products" }}{{ $ogType = "product" }}{{ else }}{{ $ogType = "article" }}{{ end -}}
   {{- end -}}
-  <link rel="canonical" href="{{ .Permalink }}">
+  <link rel="canonical" href="{{ $canonical }}">
   <meta property="og:site_name" content="{{ .Site.Title }}">
   <meta property="og:type" content="{{ $ogType }}">
   <meta property="og:title" content="{{ $ogTitle }}">
   <meta property="og:description" content="{{ $ogDesc }}">
-  <meta property="og:url" content="{{ .Permalink }}">
+  <meta property="og:url" content="{{ $canonical }}">
   <meta property="og:image" content="{{ $ogURL }}">
   <meta property="og:image:secure_url" content="{{ $ogURL }}">
-  <meta property="og:image:type" content="image/jpeg">
+  {{- /* Type and dimensions must describe the actual file, not assume a card. */ -}}
+  {{- $ogMime := "image/jpeg" -}}
+  {{- if or (strings.HasSuffix $ogImg ".webp") (strings.HasSuffix $ogImg ".WEBP") }}{{ $ogMime = "image/webp" }}{{ end -}}
+  {{- if or (strings.HasSuffix $ogImg ".png") (strings.HasSuffix $ogImg ".PNG") }}{{ $ogMime = "image/png" }}{{ end -}}
+  <meta property="og:image:type" content="{{ $ogMime }}">
+  {{- /* Read real pixel dimensions from disk when the file is local. */ -}}
+  {{- $ogr := "" -}}
+  {{- if not (hasPrefix $ogImg "http") -}}
+    {{- $local := path.Join "static" ($ogImg | strings.TrimPrefix "/") -}}
+    {{- if fileExists $local -}}
+      {{- $img := imageConfig $local -}}
+      {{- $ogr = printf "\n  <meta property=\"og:image:width\" content=\"%d\">\n  <meta property=\"og:image:height\" content=\"%d\">" $img.Width $img.Height -}}
+    {{- end -}}
+  {{- end -}}
+  {{- with $ogr }}{{ . | safeHTML }}{{ else }}
   <meta property="og:image:width" content="1200">
-  <meta property="og:image:height" content="630">
+  <meta property="og:image:height" content="630">{{ end }}
   <meta property="og:image:alt" content="{{ $ogTitle }}">
   {{- if eq $ogType "product" }}
   {{- with .Params.price | default .Params.priceMin }}
