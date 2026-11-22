@@ -43,9 +43,8 @@ h2 { font-size: 1.9rem; margin: 0 0 1rem; }
 .site-header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
 .header-inner { display: flex; align-items: center; gap: 22px; padding-top: 12px; padding-bottom: 12px; }
 .brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
-.brand-logo { width: 34px; height: 34px; border-radius: 50%; display: block; flex: 0 0 auto; }
-.brand-name { font-family: var(--serif); font-size: 1.9rem; letter-spacing: .18em; font-weight: 600; line-height: 1; }
-@media (max-width: 560px) { .brand-logo { width: 28px; height: 28px; } .brand-name { font-size: 1.45rem; letter-spacing: .12em; } }
+.brand-logo { width: 44px; height: 44px; border-radius: 50%; display: block; flex: 0 0 auto; }
+@media (max-width: 560px) { .brand-logo { width: 38px; height: 38px; } }
 .main-nav { display: flex; gap: 18px; align-items: center; flex: 1; flex-wrap: wrap; }
 .main-nav a, .main-nav .drop-title { cursor: pointer; font-size: .95rem; text-transform: uppercase; letter-spacing: .06em; padding: 6px 2px; border-bottom: 2px solid transparent; }
 .main-nav a:hover { border-bottom-color: var(--sea); }
@@ -66,7 +65,11 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 
 @media (max-width: 860px) {
   .main-nav { display: none; }
-  .nav-toggle { display: inline-block; }
+  .nav-toggle { display: inline-block; order: 2; }
+  /* keep the logo left, the hamburger + cart hard right */
+  .header-inner { gap: 12px; flex-wrap: nowrap; }
+  .brand { margin-right: auto; }
+  .cart-link { order: 3; margin-left: 0; }
   body.nav-open .main-nav { display: flex; flex-direction: column; position: absolute; left: 0; right: 0; top: 100%; background: #fff; border-bottom: 1px solid var(--line); padding: 10px 20px; }
   body.nav-open .search-bar { display: flex; }
 }
