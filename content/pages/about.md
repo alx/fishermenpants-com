@@ -27,4 +27,4 @@ If you are on the island, come by. We are open every day from **9:00 am to 7:30 
 
 **GAYA — boutique by the sea**<br>
 156, beach 7 Had Lamai Rd, Tambon Maret, Koh Samui, Surat Thani 84310, Thailand<br>
-[+66 62 550 8121](tel:+66625508121) · [contact page](/pages/contact/) · [Facebook](https://www.facebook.com/fishermenpants/)
+[+66 62 550 8121](tel:+66625508121) · [contact page](/pages/contact/) · [Facebook](https://www.facebook.com/fishermenpants/) · [Instagram](https://www.instagram.com/gaya_boutique_koh_samui/)
