@@ -7,7 +7,7 @@ layout: "text-page"
 
 ## A shop by the sea
 
-GAYA sits on Had Lamai Road, a few steps from the water on the east coast of Koh Samui. It started as a small stall and grew into the shop it is today — still run by the same hands, still filled with things we would wear ourselves.
+GAYA sits on Had Lamai Road, a few steps from the water on the east coast of Koh Samui. The shop has been open since **2003** — it started as a small stall and grew into the shop it is today, still run by the same hands and still filled with things we would wear ourselves.
 
 We sell what the island gives us: light cotton and hemp, hand-dyed indigo, embroidery from hill-tribe makers, and the fisherman pants that started it all.
 

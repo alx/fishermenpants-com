@@ -1,0 +1,36 @@
+{{- /*
+  Social links with Font Awesome brand icons.
+  Context: dict
+    style (optional) "footer" -> vertical list; default -> inline icon row
+  Icons come from static/css/fa-brands.min.css (self-hosted Font Awesome Free 6.5.2 brands).
+*/ -}}
+{{- $links := slice
+      (dict "url" (index site.Params "instagram")   "icon" "fa-instagram"   "label" "Instagram"   "handle" "@gaya_boutique_koh_samui")
+      (dict "url" (index site.Params "facebook")    "icon" "fa-facebook-f"  "label" "Facebook"    "handle" "fishermenpants")
+      (dict "url" (index site.Params "tripadvisor") "icon" "fa-tripadvisor" "label" "Tripadvisor" "handle" "GAYA reviews")
+-}}
+{{- if eq (default "" .style) "footer" }}
+<div class="social-links social-links--footer">
+  {{- range $links }}
+  {{- $url := .url }}{{ $icon := .icon }}{{ $label := .label }}{{ $handle := .handle }}
+  {{- with $url }}
+  <a class="social-link" href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ $label }} — {{ $handle }}">
+    <i class="fa-brands {{ $icon }}" aria-hidden="true"></i>
+    <span class="social-label">{{ $label }}</span>
+    <span class="social-handle">{{ $handle }}</span>
+  </a>
+  {{- end }}
+  {{- end }}
+</div>
+{{- else }}
+<div class="social-icons">
+  {{- range $links }}
+  {{- $url := .url }}{{ $icon := .icon }}{{ $label := .label }}
+  {{- with $url }}
+  <a class="social-icon" href="{{ . }}" target="_blank" rel="noopener" aria-label="{{ $label }}" title="{{ $label }}">
+    <i class="fa-brands {{ $icon }}" aria-hidden="true"></i>
+  </a>
+  {{- end }}
+  {{- end }}
+</div>
+{{- end }}

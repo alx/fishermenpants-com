@@ -42,7 +42,10 @@ h2 { font-size: 1.9rem; margin: 0 0 1rem; }
 /* header */
 .site-header { position: sticky; top: 0; z-index: 40; background: rgba(255,255,255,.95); backdrop-filter: blur(6px); border-bottom: 1px solid var(--line); }
 .header-inner { display: flex; align-items: center; gap: 22px; padding-top: 12px; padding-bottom: 12px; }
-.brand { font-family: var(--serif); font-size: 1.9rem; letter-spacing: .18em; font-weight: 600; }
+.brand { display: inline-flex; align-items: center; gap: 10px; text-decoration: none; color: inherit; }
+.brand-logo { width: 34px; height: 34px; border-radius: 50%; display: block; flex: 0 0 auto; }
+.brand-name { font-family: var(--serif); font-size: 1.9rem; letter-spacing: .18em; font-weight: 600; line-height: 1; }
+@media (max-width: 560px) { .brand-logo { width: 28px; height: 28px; } .brand-name { font-size: 1.45rem; letter-spacing: .12em; } }
 .main-nav { display: flex; gap: 18px; align-items: center; flex: 1; flex-wrap: wrap; }
 .main-nav a, .main-nav .drop-title { cursor: pointer; font-size: .95rem; text-transform: uppercase; letter-spacing: .06em; padding: 6px 2px; border-bottom: 2px solid transparent; }
 .main-nav a:hover { border-bottom-color: var(--sea); }
@@ -389,10 +392,10 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 
 .visit-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 0 0 36px; }
 .visit-photo { margin: 0; position: relative; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: var(--sand); border: 1px solid var(--line); }
+.visit-photo picture { position: absolute; inset: 0; display: block; }
 .visit-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.visit-photo.is-placeholder img { object-fit: contain; opacity: .5; padding: 18px; }
+.visit-photo.is-placeholder img { object-fit: contain; opacity: .5; padding: 18px; position: absolute; inset: 0; }
 .visit-photo.is-wide { grid-column: 1 / -1; aspect-ratio: 16 / 9; }
-.visit-photo picture { display: block; width: 100%; height: 100%; }
 .visit-photo figcaption { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(28,36,48,.72); color: #fff; font-size: .78rem; padding: 6px 10px; text-align: center; }
 
 .visit-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 18px; margin-bottom: 40px; }
@@ -409,3 +412,15 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .visit-onsite { text-align: center; background: var(--sand); border-radius: 14px; padding: 34px 22px; }
 .visit-onsite h2 { font-family: var(--serif); font-weight: 500; font-size: 1.4rem; margin: 0 0 10px; }
 .visit-onsite .btn-primary { text-decoration: none; display: inline-block; margin-top: 8px; }
+
+/* ---- social links (Font Awesome brand icons) ---- */
+.social-links--footer { display: flex; flex-direction: column; gap: 8px; }
+.social-link { display: inline-flex; align-items: center; gap: 9px; color: #d7dde3; text-decoration: none; font-size: .95rem; transition: color .18s; }
+.social-link:hover { color: #fff; }
+.social-link i { font-size: 1.05rem; width: 1.35em; text-align: center; color: #9fb0bf; transition: color .18s; }
+.social-link:hover i { color: var(--sea); }
+.social-handle { color: #7d8b98; font-size: .82rem; }
+.social-icons { display: inline-flex; gap: 12px; align-items: center; vertical-align: middle; }
+.social-icon { display: inline-flex; align-items: center; justify-content: center; width: 34px; height: 34px; border-radius: 999px; background: var(--sand); border: 1px solid var(--line); color: var(--ink); text-decoration: none; transition: background .18s, color .18s, border-color .18s; }
+.social-icon:hover { background: var(--sea); border-color: var(--sea); color: #fff; }
+.social-icon i { font-size: .95rem; }

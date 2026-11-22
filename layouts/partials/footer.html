@@ -26,10 +26,8 @@
       <p class="pay-badges"><span>PayPal</span><span>MetaMask</span><span>Solana</span><span>USDT / USDC</span></p>
     </div>
     <div>
-      <h3>Social Media</h3>
-      <p><a href="{{ .Site.Params.facebook }}" target="_blank" rel="noopener">Facebook — fishermenpants</a></p>
-      <p><a href="{{ .Site.Params.instagram }}" target="_blank" rel="noopener">Instagram — @gaya_boutique_koh_samui</a></p>
-      <p><a href="{{ .Site.Params.tripadvisor }}" target="_blank" rel="noopener">Tripadvisor — GAYA reviews</a></p>
+      <h3>Follow us</h3>
+      {{ partial "social-links.html" (dict "style" "footer") }}
     </div>
     <div>
       <h3>Country/region</h3>

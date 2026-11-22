@@ -1,8 +1,14 @@
 <header class="site-header">
   <div class="wrap header-inner">
-    <a class="brand" href="{{ site.Home.RelPermalink }}">{{ .Site.Params.brand | default "GAYA" }}</a>
+    <a class="brand" href="{{ site.Home.RelPermalink }}">
+      <img class="brand-logo" src="{{ "img/favicon-48.png" | relURL }}"
+           srcset="{{ "img/favicon-48.png" | relURL }} 1x, {{ "img/favicon-180.png" | relURL }} 2x"
+           width="34" height="34" alt="" aria-hidden="true" decoding="async">
+      <span class="brand-name">{{ site.Params.brand | default "GAYA" }}</span>
+    </a>
     <button class="nav-toggle" aria-label="Menu" onclick="document.body.classList.toggle('nav-open')">&#9776;</button>
     <nav class="main-nav">
+      <a href="{{ "pages/visit/" | relURL }}">Visit the shop</a>
       <a href="{{ "collections/new-arrivals/" | relURL }}">New Arrivals</a>
       <div class="has-drop">
         <span class="drop-title">Shop</span>
@@ -15,11 +21,10 @@
           <a href="{{ "collections/bags/" | relURL }}">Bags</a>
           <a href="{{ "collections/jewelry/" | relURL }}">Jewelry</a>
           <a href="{{ "collections/accessories/" | relURL }}">Accessories</a>
-      <a href="{{ "collections/all-products/" | relURL }}">All Products</a>
-      <a href="{{ "pages/visit/" | relURL }}">Visit the shop</a>
+          <a href="{{ "collections/all-products/" | relURL }}">All Products</a>
+        </div>
+      </div>
       <a href="{{ "pages/contact/" | relURL }}">Contact</a>
-      </div>
-      </div>
     </nav>
     <a class="cart-link" href="{{ "cart/" | relURL }}" aria-label="Cart">
       &#128722;<span id="cart-count" class="cart-count" hidden>0</span>
