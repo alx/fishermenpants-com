@@ -243,18 +243,18 @@ def build_plain(src_paths: list[Path], title: str, subtitle: str = "") -> Image.
 # Non-product pages: title, subtitle, candidate photos (first that exists wins).
 PAGES = {
     # single-image card: the shopfront is the recognisable hero for this page
-    "visit": ("Visit the shop", "Lamai Beach, Koh Samui — open daily 9:00–19:30",
-              ["shop/gaya-shopfront-night.jpg"]),
+    "visit": ("Visit the shop", "Lamai Beach, Koh Samui — open daily 10:00–19:00",
+              ["shop/gaya-shopfront.jpg"]),
     "about": ("GAYA — boutique by the sea", "Handmade Thai clothing, made with care",
-              ["shop/gaya-shop-interior.jpg", "shop/gaya-shopfront-night.jpg"]),
+              ["shop/gaya-shop-interior.jpg", "shop/gaya-shopfront.jpg"]),
     "contact": ("Contact & find us", "Had Lamai Road, Koh Samui — open every day",
-                ["shop/gaya-shopfront-night.jpg"]),
+                ["shop/gaya-shopfront.jpg"]),
     "shipping-returns": ("Shipping & returns", "Free worldwide shipping from Koh Samui",
                          ["shop/gaya-shop-interior.jpg"]),
     "size-guide": ("Size guide", "One size, generous cut — how to measure",
                    ["shop/gaya-shop-interior.jpg"]),
     "payment-methods": ("Payment methods", "PayPal and crypto — simple and secure",
-                        ["shop/gaya-shopfront-night.jpg"]),
+                        ["shop/gaya-shopfront.jpg"]),
 }
 
 

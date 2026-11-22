@@ -29,7 +29,12 @@ hasCJKLanguage = false
     city = "Koh Samui, Surat Thani 84310"
     country = "Thailand"
     postal = "F29X+PM"
-    hours = "Monday – Sunday, 9:00 am – 7:30 pm"
+    hours = "Every day, 10:00 am – 7:00 pm"
+    # Machine values for display tables + JSON-LD (keep in sync with `hours`).
+    opens = "10:00"
+    closes = "19:00"
+    hoursDisplay = "10:00 am – 7:00 pm"
+    hoursShort = "10:00–19:00"
     mapsUrl = "https://maps.app.goo.gl/7ccyCNLymWZHUXz38"
     lat = 9.4693212
     lng = 100.0491771

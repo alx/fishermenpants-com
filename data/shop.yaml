@@ -41,8 +41,8 @@ reviews:
 # by tools/optimize_images.py into static/img/shop/_gen/.
 # Order: exterior first (recognise the place), then inside, then the stock.
 gallery:
-  - src: "/img/shop/gaya-shopfront-night.jpg"
-    alt: "GAYA boutique by the sea at night — the lit shopfront on Had Lamai Road, Koh Samui"
+  - src: "/img/shop/gaya-shopfront.jpg"
+    alt: "GAYA boutique by the sea — the shopfront and garden on Had Lamai Road, Koh Samui"
     wide: true
   - src: "/img/shop/gaya-shop-interior.jpg"
     alt: "Inside the shop — fisherman pants and kimonos on bamboo racks against woven walls"

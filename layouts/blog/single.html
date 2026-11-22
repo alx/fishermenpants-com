@@ -1,0 +1,16 @@
+{{ define "main" }}
+<article class="wrap blog-post">
+  <nav class="blog-crumbs"><a href="{{ "blog/" | relURL }}">← All posts</a></nav>
+  <h1>{{ .Title }}</h1>
+  <p class="blog-meta">
+    <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
+    {{- with .Params.author }} · {{ . }}{{ end }}
+  </p>
+  <div class="blog-body">
+    {{ .Content }}
+  </div>
+  <footer class="blog-foot">
+    <p><a class="btn" href="{{ "collections/all-products/" | relURL }}">Shop the collection</a></p>
+  </footer>
+</article>
+{{ end }}

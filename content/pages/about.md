@@ -23,7 +23,7 @@ Our stock is not mass-produced. The tie-dye is done by hand, batch by batch, so 
 
 ## Come and see us
 
-If you are on the island, come by. We are open every day from **9:00 am to 7:30 pm**, and we are always happy to talk about the pieces, the fabric, or where to eat nearby.
+If you are on the island, come by. We are open every day from **10:00 am to 7:00 pm**, and we are always happy to talk about the pieces, the fabric, or where to eat nearby.
 
 **GAYA — boutique by the sea**<br>
 156, beach 7 Had Lamai Rd, Tambon Maret, Koh Samui, Surat Thani 84310, Thailand<br>

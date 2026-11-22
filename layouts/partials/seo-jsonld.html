@@ -60,8 +60,8 @@
     "openingHoursSpecification" (slice (dict
       "@type" "OpeningHoursSpecification"
       "dayOfWeek" (slice "Monday" "Tuesday" "Wednesday" "Thursday" "Friday" "Saturday" "Sunday")
-      "opens" "09:00"
-      "closes" "19:30"
+      "opens" $biz.opens
+      "closes" $biz.closes
     ))
   ) -}}
 {{- end -}}
