@@ -9,11 +9,31 @@
   <meta name="robots" content="{{ . }}">
   {{- end }}
 
-  {{- /* Open Graph / Twitter card image: page image -> page's first product image -> site default. */ -}}
+  {{- $noindex := in (string (.Params.robots | default "")) "noindex" -}}
+  {{- if not $noindex }}
+  {{- /* Open Graph image resolution, in priority order:
+       1. explicit `ogImage` in front matter (hand-picked)
+       2. generated 1200x630 social card: static/img/og/<kind>--<name>.jpg
+       3. site default
+       Cards are produced by tools/make_og_images.py; they matter because
+       raw product photos are square/portrait and platforms crop to 1.91:1. */ -}}
   {{- $ogImg := "" -}}
-  {{- with .Params.image }}{{ $ogImg = . }}{{ end -}}
-  {{- if and (not $ogImg) .Params.images }}{{ $ogImg = (index .Params.images 0) }}{{ end -}}
-  {{- /* Collection pages: use the first product image in the collection. */ -}}
+  {{- with .Params.ogImage }}{{ $ogImg = . }}{{ end -}}
+  {{- if not $ogImg -}}
+    {{- $slug := "" -}}
+    {{- with .File }}{{ $slug = .ContentBaseName }}{{ end -}}
+    {{- $kind := "" -}}
+    {{- if eq .Section "products" }}{{ $kind = "product" }}{{ end -}}
+    {{- if eq .Section "collections" }}{{ $kind = "collection" }}{{ end -}}
+    {{- if eq .Section "pages" }}{{ $kind = "page" }}{{ end -}}
+    {{- if and $kind $slug -}}
+      {{- $card := printf "static/img/og/%s--%s.jpg" $kind $slug -}}
+      {{- if fileExists $card }}{{ $ogImg = printf "/img/og/%s--%s.jpg" $kind $slug }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+  {{- /* Legacy fallback: the page's own image, when no card exists yet. */ -}}
+  {{- if not $ogImg }}{{ with .Params.image }}{{ $ogImg = . }}{{ end }}{{ end -}}
+  {{- if not $ogImg }}{{ with .Params.images }}{{ $ogImg = index . 0 }}{{ end }}{{ end -}}
   {{- if and (not $ogImg) .Params.products -}}
     {{- range $h := .Params.products -}}
       {{- if not $ogImg -}}
@@ -26,20 +46,29 @@
   {{- if not $ogImg }}{{ $ogImg = .Site.Params.ogImage }}{{ end -}}
   {{- $ogURL := cond (hasPrefix $ogImg "http") $ogImg (absURL ($ogImg | strings.TrimPrefix "/")) -}}
   {{- $ogTitle := cond .IsHome .Site.Title (printf "%s — %s" .Title .Site.Title) -}}
-  {{- $ogDesc := .Description | default .Site.Params.description -}}
+  {{- $ogDesc := .Description | default .Site.Params.description | strings.TrimSpace | replaceRE `\s+` " " -}}
+  {{- $ogType := "website" -}}
+  {{- if .IsPage -}}
+    {{- if eq .Section "products" }}{{ $ogType = "product" }}{{ else }}{{ $ogType = "article" }}{{ end -}}
+  {{- end -}}
   <link rel="canonical" href="{{ .Permalink }}">
   <meta property="og:site_name" content="{{ .Site.Title }}">
-  <meta property="og:type" content="{{ if .IsPage }}{{ if eq .Section "products" }}product{{ else }}article{{ end }}{{ else }}website{{ end }}">
+  <meta property="og:type" content="{{ $ogType }}">
   <meta property="og:title" content="{{ $ogTitle }}">
   <meta property="og:description" content="{{ $ogDesc }}">
   <meta property="og:url" content="{{ .Permalink }}">
   <meta property="og:image" content="{{ $ogURL }}">
-  {{- $isDefault := eq $ogImg .Site.Params.ogImage }}
-  {{- if $isDefault }}
+  <meta property="og:image:secure_url" content="{{ $ogURL }}">
+  <meta property="og:image:type" content="image/jpeg">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
-  {{- end }}
   <meta property="og:image:alt" content="{{ $ogTitle }}">
+  {{- if eq $ogType "product" }}
+  {{- with .Params.price | default .Params.priceMin }}
+  <meta property="product:price:amount" content="{{ . }}">
+  <meta property="product:price:currency" content="USD">
+  {{- end }}
+  {{- end }}
   {{- $locale := .Site.Language.LanguageCode | default "en" -}}
   {{- if in $locale "-" -}}
     {{- $parts := split $locale "-" -}}
@@ -52,6 +81,7 @@
   <meta name="twitter:title" content="{{ $ogTitle }}">
   <meta name="twitter:description" content="{{ $ogDesc }}">
   <meta name="twitter:image" content="{{ $ogURL }}">
+  {{- end }}{{/* /noindex OG guard */}}
   <!-- 100% privacy-first analytics -->
   <script async data-hostname="fishermenpants.com" src="https://scripts.simpleanalyticscdn.com/latest.js"></script>
   <script async data-hostname="fishermenpants.com" src="https://scripts.simpleanalyticscdn.com/auto-events.js"></script>
