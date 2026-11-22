@@ -27,6 +27,7 @@ import argparse
 import glob
 import os
 import re
+from math import ceil
 import sys
 from pathlib import Path
 
@@ -197,7 +198,27 @@ def build_plain(src_paths: list[Path], title: str, subtitle: str = "") -> Image.
     base = backdrop(Image.open(src_paths[0]).convert("RGB")) if src_paths else Image.new("RGB", (W, H), (12, 18, 24))
     card = base.convert("RGBA")
 
-    if len(src_paths) >= 2:
+    if len(src_paths) == 1:
+        # Single hero photo: fill the frame (cover-crop), then darken the very
+        # bottom so the caption over the image stays legible.
+        im = Image.open(src_paths[0]).convert("RGB")
+        s = max(W / im.width, H / im.height)
+        im = im.resize((ceil(im.width * s), ceil(im.height * s)), Image.LANCZOS)
+        left = (im.width - W) // 2
+        top = (im.height - H) // 2
+        card.alpha_composite(im.crop((left, top, left + W, top + H)).convert("RGBA"), (0, 0))
+        scrim = Image.new("RGBA", (W, 190), (0, 0, 0, 0))
+        sd = ImageDraw.Draw(scrim)
+        for i in range(190):
+            a = int(215 * (i / 190) ** 0.75)
+            sd.line([(0, i), (W, i)], fill=(8, 12, 16, a))
+        card.alpha_composite(scrim, (0, H - 190))
+        # brand mark needs its own contrast patch on a photo
+        badge = Image.new("RGBA", (190, 78), (0, 0, 0, 0))
+        ImageDraw.Draw(badge).rounded_rectangle((0, 0, 189, 77), radius=12, fill=(10, 14, 18, 120))
+        card.alpha_composite(badge, (30, 22))
+
+    elif len(src_paths) >= 2:
         # two-up strip of fitted images, centred
         box_w, box_h = 380, H - 200
         for i, p in enumerate(src_paths[:2]):
@@ -221,8 +242,9 @@ def build_plain(src_paths: list[Path], title: str, subtitle: str = "") -> Image.
 
 # Non-product pages: title, subtitle, candidate photos (first that exists wins).
 PAGES = {
+    # single-image card: the shopfront is the recognisable hero for this page
     "visit": ("Visit the shop", "Lamai Beach, Koh Samui — open daily 9:00–19:30",
-              ["shop/gaya-shopfront-night.jpg", "shop/gaya-shop-interior.jpg"]),
+              ["shop/gaya-shopfront-night.jpg"]),
     "about": ("GAYA — boutique by the sea", "Handmade Thai clothing, made with care",
               ["shop/gaya-shop-interior.jpg", "shop/gaya-shopfront-night.jpg"]),
     "contact": ("Contact & find us", "Had Lamai Road, Koh Samui — open every day",
