@@ -255,6 +255,42 @@
     else go("setup");
   });
 
+  // Copy-link share. Copies the CANONICAL page URL, never the preview image —
+  // the image is a local data URL and must not be put on the clipboard or
+  // pasted anywhere as if it were a hosted asset.
+  const copyBtn = document.getElementById("mirror-copy");
+  if (copyBtn) {
+    copyBtn.addEventListener("click", async () => {
+      const status = document.getElementById("mirror-share-status");
+      const label = copyBtn.querySelector(".mirror-copy-label");
+      const canonical = document.querySelector('link[rel="canonical"]');
+      const url = (canonical && canonical.href) || location.href;
+      try {
+        await navigator.clipboard.writeText(url);
+        label.textContent = "Copied";
+        status.textContent = "Link copied. Your photo was not included.";
+      } catch (err) {
+        // Clipboard API needs a secure context and permission; fall back to a
+        // prompt-free selection so the user can copy manually.
+        const tmp = document.createElement("input");
+        tmp.value = url;
+        document.body.appendChild(tmp);
+        tmp.select();
+        let done = false;
+        try { done = document.execCommand("copy"); } catch (e) { done = false; }
+        tmp.remove();
+        label.textContent = done ? "Copied" : "Copy failed";
+        status.textContent = done
+          ? "Link copied. Your photo was not included."
+          : "Couldn't copy automatically — the link is in your address bar.";
+      }
+      setTimeout(() => {
+        label.textContent = "Copy link";
+        status.textContent = "";
+      }, 4000);
+    });
+  }
+
   // Escape stops the camera too — leaving the page must not keep it live.
   document.querySelectorAll(".mirror-escape").forEach(a => {
     a.addEventListener("click", stopCamera);

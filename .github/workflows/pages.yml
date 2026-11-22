@@ -67,6 +67,9 @@ jobs:
       - name: Check internal links
         run: python3 tools/check_links.py
 
+      - name: Mirror consent + share tests
+        run: python3 tools/test_mirror_share.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5

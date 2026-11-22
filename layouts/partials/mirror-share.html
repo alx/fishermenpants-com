@@ -1,0 +1,50 @@
+{{- /*
+  Share buttons for the Mirror result step.
+
+  IMPORTANT: these share the PAGE, not the user's preview image. The preview is
+  generated on the user's device and never uploaded, so no social network can
+  receive it — there is no image URL to pass. The copy next to these buttons
+  makes that explicit, and nothing here should ever imply the photo is posted.
+
+  Intent URLs only: no third-party share SDKs, no tracking scripts, so no extra
+  consent banner is triggered. Icons reuse the bundled FA brand font.
+*/ -}}
+{{- $url := printf "%s#mirror" (absURL "mirror/") -}}
+{{- $text := "Try on fisherman pants and Thai kimonos with the Mirror — GAYA, Koh Samui" -}}
+{{- $eu := urlquery $url -}}
+{{- $et := urlquery $text -}}
+{{- $targets := slice
+      (dict "name" "WhatsApp"
+            "icon" "fa-whatsapp"
+            "href" (printf "https://wa.me/?text=%s" (urlquery (printf "%s %s" $text $url))))
+      (dict "name" "Facebook"
+            "icon" "fa-facebook-f"
+            "href" (printf "https://www.facebook.com/sharer/sharer.php?u=%s" $eu))
+      (dict "name" "Pinterest"
+            "icon" "fa-pinterest-p"
+            "href" (printf "https://pinterest.com/pin/create/button/?url=%s&description=%s" $eu $et))
+      (dict "name" "X"
+            "icon" "fa-x-twitter"
+            "href" (printf "https://x.com/intent/tweet?url=%s&text=%s" $eu $et))
+-}}
+<div class="mirror-share" id="mirror-share">
+  <p class="mirror-share-title">Share the Mirror</p>
+  <p class="mirror-share-note">
+    This shares a link to the page — not your photo. Your preview never leaves
+    your device, so nobody receives it, including us.
+  </p>
+  <div class="mirror-share-row">
+    {{- range $targets }}
+    <a class="mirror-share-btn" href="{{ .href }}" target="_blank" rel="noopener nofollow"
+       aria-label="Share the Mirror on {{ .name }}" title="Share on {{ .name }}">
+      <i class="fa-brands {{ .icon }}" aria-hidden="true"></i>
+      <span>{{ .name }}</span>
+    </a>
+    {{- end }}
+    <button class="mirror-share-btn" id="mirror-copy" type="button"
+            aria-label="Copy a link to the Mirror">
+      <span class="mirror-copy-label">Copy link</span>
+    </button>
+  </div>
+  <p class="mirror-share-status" id="mirror-share-status" role="status" aria-live="polite"></p>
+</div>

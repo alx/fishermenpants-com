@@ -7,7 +7,7 @@ aliases:
   - "/pages/privacy-policy"
   - "/privacy-policy"
 ---
-<p><strong>Last updated:</strong> October 29, 2026</p>
+<p><strong>Last updated:</strong> November 22, 2026</p>
 
 <p>GAYA ("we", "us") operates this store and website, including all related information, content, features, products and services, in order to provide you, the customer, with a curated shopping experience (the "Services"). This Privacy Policy describes how we collect, use, and disclose your personal information when you visit, use, or make a purchase through the Services, or otherwise communicate with us. If there is a conflict between our Terms of Service and this Privacy Policy, this Privacy Policy controls with respect to the handling of your personal information.</p>
 
@@ -106,6 +106,30 @@ aliases:
 <h2>International Transfers</h2>
 
 <p>We may transfer, store and process your personal information outside the country in which you live. If we transfer personal information out of the European Economic Area or the United Kingdom, we rely on recognised transfer mechanisms such as the European Commission's Standard Contractual Clauses, or an equivalent mechanism issued by the relevant competent authority, unless the transfer is to a country determined to provide an adequate level of protection.</p>
+
+<h2 id="the-mirror-and-your-photo">The Mirror and your photo</h2>
+
+<p>Our <a href="/mirror/">Mirror</a> page lets you see how a piece of clothing looks on you, using your device's camera. It is a beta experiment, currently shown only on a few terminals in the shop and to people we invite to try it.</p>
+
+<p><strong>Your photo never reaches us.</strong> When you press Capture, the image is processed entirely inside your own browser. It is not uploaded, transmitted, stored on a server, or sent to any third party by us. We cannot see it, save it, or share it. Only you see the result, on your own screen.</p>
+
+<p>Nothing is kept:</p>
+
+<ul>
+<li>No image is written to our servers, and we have no mechanism to retrieve one.</li>
+<li>No image is saved in your browser's storage. Closing or reloading the page discards it.</li>
+<li>The clothing preview is a rough approximation, not a photograph. It is not used for identification of any person, and it produces no facial measurement, biometric template, or profile.</li>
+</ul>
+
+<p><strong>The parts that run locally.</strong> The face-and-body detection used to separate you from the background is a small model that we host ourselves on this website. It is downloaded to your browser and runs there. It does not phone home, and it is not a Google service at runtime even though the underlying library comes from Google's open-source MediaPipe project.</p>
+
+<p><strong>Site analytics still apply.</strong> While you use the Mirror, our ordinary analytics may record that a page was viewed, in the same way as any other page on this site. Analytics never receives your camera image or anything derived from it.</p>
+
+<p><strong>If you share your preview.</strong> You can save a preview to your own device, and you can share it. If you do, you are the one sending it, and the privacy policy and terms of whichever social network or messaging app you use will apply to what you post. We never receive a copy.</p>
+
+<p><strong>To opt out entirely.</strong> Simply don't turn on the camera, or close the page. Declining camera access has no effect on anything else on this site — you can browse and order as normal. If you have already granted camera permission and want to revoke it, do so in your browser's site settings.</p>
+
+<p>If you are testing the Mirror on one of our terminals, ask a member of staff to close the page when you are finished. The page releases the camera as soon as you leave that step, and nothing is retained afterwards.</p>
 
 <h2>Changes to This Privacy Policy</h2>
 

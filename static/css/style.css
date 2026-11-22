@@ -632,3 +632,40 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .mirror-result-side { display: flex; flex-direction: column; gap: 10px; }
 .mirror-badge { display: inline-block; background: var(--sand); border: 1px solid var(--line); border-radius: 999px; padding: 5px 12px; font-size: .76rem; letter-spacing: .05em; text-transform: uppercase; color: var(--brown); margin: 0; }
 .mirror-result-side .btn-primary { text-decoration: none; text-align: center; }
+
+/* ---- Mirror: consent line + beta note ---- */
+.mirror-consent {
+  background: #f4fafb;
+  border: 1px solid var(--sea-soft);
+  border-left: 3px solid var(--sea);
+  border-radius: 8px;
+  padding: 12px 16px;
+  font-size: .9rem;
+  line-height: 1.6;
+  color: var(--brown);
+  max-width: 680px;
+  margin: 0 0 26px;
+}
+.mirror-consent strong { color: var(--brown-dark); }
+.mirror-consent a { color: var(--sea); }
+.mirror-beta { color: var(--brown-soft); font-size: .82rem; margin: 14px 0 0; font-style: italic; }
+
+/* ---- Mirror: share row ---- */
+.mirror-share { margin-top: 26px; border-top: 1px solid var(--line); padding-top: 20px; }
+.mirror-share-title { font-family: var(--serif); font-size: 1.06rem; margin: 0 0 4px; color: var(--brown-dark); }
+.mirror-share-note { color: var(--brown-soft); font-size: .86rem; margin: 0 0 12px; max-width: 560px; line-height: 1.55; }
+.mirror-share-row { display: flex; flex-wrap: wrap; gap: 8px; }
+.mirror-share-btn {
+  display: inline-flex; align-items: center; gap: 7px;
+  background: #fff; border: 1px solid var(--line); border-radius: 8px;
+  padding: 9px 14px; font-size: .88rem; color: var(--brown-dark);
+  text-decoration: none; cursor: pointer; line-height: 1;
+  transition: border-color .18s, background .18s, color .18s;
+}
+.mirror-share-btn:hover { border-color: var(--sea); color: var(--sea); background: #f7fcfd; }
+.mirror-share-btn i {
+  font-family: "Font Awesome 6 Brands"; font-style: normal; font-weight: 400;
+  font-size: 1rem;
+}
+.mirror-share-status { color: var(--sea-dark); font-size: .84rem; margin: 10px 0 0; min-height: 1.2em; }
+@media (prefers-reduced-motion: reduce) { .mirror-share-btn { transition: none; } }

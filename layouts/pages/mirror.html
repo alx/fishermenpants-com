@@ -25,6 +25,14 @@
     <h1 id="m-setup-title">The Mirror</h1>
     <p class="mirror-lede">See how a piece sits on <em>you</em> — not on a model. Stand in front of your camera in good light, pick a piece, and we'll show you the fit.</p>
 
+    <p class="mirror-consent" id="mirror-consent">
+      <strong>Your photo stays on your own device.</strong>
+      The preview is made in your browser and never sent to us — we can't see it,
+      save it, or share it. Close the page and it's gone. If you choose to share
+      your preview, you're the one sending it.
+      <a href="{{ "privacy-policy/" | relURL }}#the-mirror-and-your-photo">How this works</a>
+    </p>
+
     <div class="mirror-setup-grid">
       <div class="mirror-card">
         <h2>1. Pick a piece</h2>
@@ -58,6 +66,7 @@
       <button class="btn-primary" id="mirror-start" type="button">Turn on camera</button>
       <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
     </div>
+    <p class="mirror-beta">Beta test — this is an early experiment shown on a few shop terminals. It may be slow or wrong; tell us what you think.</p>
   </section>
 
   {{- /* ---------- step 2: capture ---------- */}}
@@ -108,6 +117,8 @@
         <button class="btn-plain" id="mirror-save" type="button">Save the image</button>
       </aside>
     </div>
+
+    {{ partial "mirror-share.html" . }}
     <div class="mirror-actions">
       <a class="mirror-escape" href="{{ site.Home.RelPermalink }}">← Back to the shop</a>
     </div>
