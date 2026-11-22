@@ -2,11 +2,12 @@
 title: 'Anyway'
 date: 2020-03-15T09:00:00+07:00
 author: "Erez Shmargad"
-description: 'Pants Island shirt Beach wear Accessories BLOG'
+description: 'If you do good, people will accuse you of selfish ulterior motives. Do good anyway.'
 source: "https://shmargad.wixsite.com/kohsamuishop/post/anyway"
+images:
+  - /img/blog/anyway/01.jpg
 draft: false
 ---
-
 
 If you do good, people will accuse you of selfish ulterior motives. Do good anyway.
 
@@ -29,3 +30,7 @@ People really need help but may attack you if you do help them. Help people anyw
 Give the world the best you have and you’ll get kicked in the teeth.
 
 Give the world the best you have anyway .
+
+![Anyway — photo 1](/img/blog/anyway/01.jpg)
+
+![Anyway — photo 2](/img/blog/anyway/02.jpg)

@@ -1,0 +1,5 @@
+{{- /*
+  Markdown image render hook: every ![alt](src) in content becomes a lazy,
+  sized <img>. Keeps imported blog photos from blocking first paint.
+*/ -}}
+<img src="{{ .Destination | safeURL }}" alt="{{ .Text }}" loading="lazy" decoding="async">

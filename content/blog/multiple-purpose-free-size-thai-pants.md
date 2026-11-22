@@ -2,11 +2,12 @@
 title: 'Multiple purpose free size Thai pants'
 date: 2020-03-15T09:00:00+07:00
 author: "Erez Shmargad"
-description: 'Pants Island shirt Beach wear Accessories BLOG'
+description: 'He’s definitely not bucking any sudden trend. He’s just doing what he’s done for many years. And doing it well. Meet him in person and you’ll find that he’'
 source: "https://shmargad.wixsite.com/kohsamuishop/post/multiple-purpose-free-size-thai-pants"
+images:
+  - /img/blog/multiple-purpose-free-size-thai-pants/01.jpg
 draft: false
 ---
-
 
 He’s definitely not bucking any sudden trend. He’s just doing what he’s done for many years. And doing it well. Meet him in person and you’ll find that he’s quite self-effacing. “I’ve worn fisherman’s pants all my life,” he says. “It’s really a way of living. Nobody believes that fisherman’s pants can be good quality. Even Thais doubt this. But they don’t have to be shoddy. If you start with decent materials then it’ll help you to end up with a good product. I’m not re-inventing the wheel, or anything like it.” If you’ve ever bought a pair of fisherman’s pants before, you probably won’t expect much of them: flimsy materials and unsteady dyes which prompt a question at the back of your mind - how long are these going to last? Your purchases are probably a cheerful nod to your holiday and no more than that. What Erez makes is of a different order. Only if you’re short-sighted and have no tactile feel in your hands could you think that these are the standard, flimsy pants of a thousand dusty stalls in tourist spots.
 
@@ -17,3 +18,9 @@ Erez, along with his life-partner Belinda Basa, live in a traditional house in L
 Opening times are 10:00 am until 7:00 pm daily, except Sundays, when the store’s open from 2:00 pm until 10:00pm. Outside those times, just give Erez a call.
 
 Many customers also order via his website – he ships fisherman’s pants all round the world via registered post. You can even chat to him online via a special link here. Scroll through the site or browse through the store and you’ll find yourself falling in love with the simplest yet most engaging of clothing – fisherman’s pants.
+
+![Multiple purpose free size Thai pants — photo 1](/img/blog/multiple-purpose-free-size-thai-pants/01.jpg)
+
+![Multiple purpose free size Thai pants — photo 2](/img/blog/multiple-purpose-free-size-thai-pants/02.jpg)
+
+![Multiple purpose free size Thai pants — photo 3](/img/blog/multiple-purpose-free-size-thai-pants/03.jpg)

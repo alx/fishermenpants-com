@@ -2,11 +2,12 @@
 title: 'Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai.'
 date: 2020-03-15T09:00:00+07:00
 author: "Erez Shmargad"
-description: 'Pants Island shirt Beach wear Accessories BLOG'
+description: 'Luckily, Koh Samui has its own specialist shop to provide for all your fisherman’s pants needs. The aptly named Fishermen Pants Shop in Lamai is owned and '
 source: "https://shmargad.wixsite.com/kohsamuishop/post/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai"
+images:
+  - /img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/01.jpg
 draft: false
 ---
-
 
 Luckily, Koh Samui has its own specialist shop to provide for all your fisherman’s pants needs. The aptly named Fishermen Pants Shop in Lamai is owned and run by the extremely hospitable Erez Shmargad and his partner Belinda Basa. Erez moved here from India 15 years ago, to further develop the business closer to his source of inspiration. They live above the shop, which is a traditional Thai house very close to the sea, and Erez ensures that his house is an open-house. Take your time to peruse the fantastic top quality clothing, and if you are lucky, Erez may invite you join him for coffee and possibly to share some food. It’s Erez’s Israeli hospitality, and his way of saying thank you for visiting his shop.
 
@@ -27,3 +28,13 @@ Fishermen Pants sell top-quality clothing and accessories. You will find their p
 For true island hospitality, amazing collections of gorgeous relaxing clothing in natural fabrics, visit Fishermen Pants Shop. Wear them and just wait for those compliments. Happy fishing!
 
 For further information, telephone 0 895 865 263 or 0 623 516 192. www.fishermenpants.com
+
+![Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai. — photo 1](/img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/01.jpg)
+
+![Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai. — photo 2](/img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/02.jpg)
+
+![Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai. — photo 3](/img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/03.jpg)
+
+![Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai. — photo 4](/img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/04.jpg)
+
+![Fishing For Compliments – Get yourself down to Fishermen Pants Shop in Lamai. — photo 5](/img/blog/fishing-for-compliments-get-yourself-down-to-fishermen-pants-shop-in-lamai/05.jpg)

@@ -6,6 +6,12 @@
     {{- range .RegularPages.ByDate.Reverse }}
     <article class="blog-card">
       <a class="blog-card-link" href="{{ .RelPermalink }}">
+        {{- with .Params.images }}
+        <span class="blog-card-media">
+          {{- partial "img.html" (dict "src" (index . 0) "alt" $.Title
+                "sizes" "(max-width: 700px) 100vw, 33vw") }}
+        </span>
+        {{- end }}
         <h2>{{ .Title }}</h2>
         <p class="blog-meta">
           <time datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 January 2006" }}</time>
