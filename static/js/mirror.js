@@ -47,6 +47,21 @@
     }
   }
 
+  function waitForFrame(video, timeoutMs) {
+    if (video.videoWidth > 0 && video.videoHeight > 0) return Promise.resolve(true);
+    return new Promise(resolve => {
+      const started = Date.now();
+      const check = () => {
+        if (video.videoWidth > 0 && video.videoHeight > 0) return resolve(true);
+        if (Date.now() - started > timeoutMs) return resolve(false);
+        requestAnimationFrame(check);
+      };
+      // 'loadedmetadata' fires as soon as dimensions are known
+      video.addEventListener("loadedmetadata", () => resolve(video.videoWidth > 0), { once: true });
+      check();
+    });
+  }
+
   async function startCamera() {
     const note = document.getElementById("mirror-capture-note");
     if (!cameraSupported()) {
@@ -61,6 +76,18 @@
       const video = document.getElementById("mirror-video");
       video.srcObject = stream;
       await video.play().catch(() => {});
+
+      // A stream can start before the first frame arrives (videoWidth === 0).
+      // Advancing then would leave the user on a dead step, so wait for real
+      // dimensions — but never longer than a few seconds.
+      const ready = await waitForFrame(video, 6000);
+      if (!ready) {
+        note.textContent =
+          "The camera opened but isn't sending a picture. Check that no other " +
+          "app is using it, then try again.";
+        stopCamera();
+        return false;
+      }
       note.textContent = "";
       return true;
     } catch (err) {
@@ -235,6 +262,12 @@
   });
 
   document.getElementById("mirror-shoot").addEventListener("click", () => {
+    const video = document.getElementById("mirror-video");
+    if (!video.videoWidth) {
+      document.getElementById("mirror-capture-note").textContent =
+        "The camera isn't ready yet — give it a second, then press Capture.";
+      return;
+    }
     runCountdown(() => {
       captured = captureFrame();
       if (!captured) {
