@@ -35,6 +35,6 @@ Use a soft tape measure, and measure over light clothing:
 
 ## If you are unsure
 
-Message us on WhatsApp or call **[+66 89 586 5263](tel:+66895865263)** with your usual size and height — we handle these garments every day and can tell you what will work. We would rather answer a question than process a return.
+Message us on WhatsApp or call **[+66 62 550 8121](tel:+66625508121)** with your usual size and height — we handle these garments every day and can tell you what will work. We would rather answer a question than process a return.
 
 Measurement notes for a specific item are also listed on its product page.

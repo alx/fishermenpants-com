@@ -120,7 +120,7 @@ async function sendConfirmation(env, order) {
     <p>Your parcel leaves our shop in Lamai Beach, Koh Samui within a few days.
        Delivery typically takes 2–4 business days in Thailand, 2–4 weeks to Europe/USA.
        We'll email you when it ships.</p>
-    <p style="color:#6b7280;font-size:13px">Questions? WhatsApp <a href="https://wa.me/66895865263">+66 89 586 5263</a>
+    <p style="color:#6b7280;font-size:13px">Questions? WhatsApp <a href="https://wa.me/66625508121">+66 62 550 8121</a>
        or email <a href="mailto:thaifishpants@gmail.com">thaifishpants@gmail.com</a>
        — or see our <a href="${env.SITE}/pages/shipping-returns/">shipping &amp; returns policy</a>.</p>
   </div>`;

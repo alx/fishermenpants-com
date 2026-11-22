@@ -19,8 +19,8 @@ hasCJKLanguage = false
 
   [params.business]
     name = "GAYA - boutique by the sea"
-    phone = "+66895865263"
-    phoneDisplay = "+66 89 586 5263"
+    phone = "+66625508121"
+    phoneDisplay = "+66 62 550 8121"
     street = "156, beach 7 Had Lamai Rd, Tambon Maret"
     city = "Koh Samui, Surat Thani 84310"
     country = "Thailand"
