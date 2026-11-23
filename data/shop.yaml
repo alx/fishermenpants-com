@@ -52,3 +52,6 @@ gallery:
     alt: "Fisherman pants in every colour, displayed folded on bamboo poles"
   - src: "/img/shop/gaya-bags-shelf.jpg"
     alt: "Shelves of bags, woven baskets and folded cotton scarves"
+  - src: "/img/shop/gaya-gift-corner.jpg"
+    alt: "The gift corner — leather and printed leaf bags on the top shelf, hand-painted elephant cushions, silk scarves by the basket, and framed vintage postcards below"
+    wide: true
