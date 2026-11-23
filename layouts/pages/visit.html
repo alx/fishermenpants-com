@@ -2,6 +2,7 @@
 {{- $b := .Site.Params.business -}}
 {{- $d := hugo.Data.shop -}}
 <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+<link rel="stylesheet" href="{{ "photoswipe/photoswipe.css" | relURL }}">
 <div class="wrap visit-page">
 
   <header class="visit-head">
@@ -28,8 +29,51 @@
       <img src="{{ .src | relURL }}" alt="{{ .alt }}" loading="lazy">
       <figcaption>Photo coming soon</figcaption>
       {{- else }}
-      {{- partial "img.html" (dict "src" .src "alt" .alt
-            "sizes" (cond (.wide | default false) "100vw" "(max-width: 700px) 100vw, 50vw")) }}
+      {{- /* Clickable: opens a PhotoSwipe lightbox. PhotoSwipe REQUIRES
+             data-pswp-width/height or it silently refuses to open, so the
+             dimensions are read from the optimizer manifest (which records the
+             source's true w/h) rather than hardcoded. The href is the largest
+             generated variant; the <picture> below stays the responsive thumb. */ -}}
+      {{- $clean := strings.TrimPrefix "/" .src -}}
+      {{- $base := path.Base $clean -}}
+      {{- $name := strings.TrimSuffix (path.Ext $base) $base -}}
+      {{- $genDir := path.Join (path.Dir $clean) "_gen" -}}
+      {{- $mw := 0 }}{{ $mh := 0 }}{{ $widths := slice }}{{ $full := .src -}}
+      {{- $mPath := path.Join "static" $genDir "manifest.json" -}}
+      {{- if fileExists $mPath -}}
+        {{- $manifest := (os.ReadFile $mPath | transform.Unmarshal) -}}
+        {{- with index $manifest $name -}}
+          {{- $mw = .w }}{{ $mh = .h }}{{ $widths = .widths -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /* largest generated webp that actually exists */ -}}
+      {{- if gt (len $widths) 0 -}}
+        {{- range $widths -}}
+          {{- /* manifest widths decode as float64, so %v not %d */ -}}
+          {{- $cand := path.Join $genDir (printf "%s-%v.webp" $name .) -}}
+          {{- if fileExists (path.Join "static" $cand) }}{{ $full = $cand }}{{ end -}}
+        {{- end -}}
+      {{- end -}}
+      {{- /* scale the source dimensions to the chosen variant */ -}}
+      {{- $fw := $mw }}{{ $fh := $mh -}}
+      {{- if and $mw $full -}}
+        {{- /* variant basename is "<name>-<width>" and <name> may contain hyphens,
+               so take the trailing numeric segment only */ -}}
+        {{- $variantName := strings.TrimSuffix (path.Ext (path.Base $full)) (path.Base $full) -}}
+        {{- $seg := index (last 1 (split $variantName "-")) 0 -}}
+        {{- $vw := 0 -}}
+        {{- if findRE "^[0-9]+$" $seg -}}{{ $vw = int $seg }}{{- end -}}
+        {{- if gt $vw 0 -}}
+          {{- $fw = $vw }}{{ $fh = int (math.Round (div (mul (float $mh) $vw) (float $mw))) -}}
+        {{- end -}}
+      {{- end -}}
+      <a class="visit-photo-link" href="{{ $full | relURL }}"
+         data-pswp-width="{{ $fw }}" data-pswp-height="{{ $fh }}"
+         data-pswp-caption="{{ .alt }}"
+         aria-label="View larger: {{ .alt }}" target="_blank" rel="noopener">
+        {{- partial "img.html" (dict "src" .src "alt" .alt
+              "sizes" (cond (.wide | default false) "100vw" "(max-width: 700px) 100vw, 50vw")) }}
+      </a>
       {{- end }}
     </figure>
     {{- end }}
@@ -100,4 +144,5 @@
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
 <script defer src="{{ "js/contact-map.js" | relURL }}"></script>
+<script defer type="module" src="{{ "js/visit-gallery.js" | relURL }}"></script>
 {{ end }}

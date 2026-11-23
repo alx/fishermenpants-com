@@ -401,6 +401,14 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 
 .visit-gallery { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 14px; margin: 0 0 36px; }
 .visit-photo { margin: 0; position: relative; aspect-ratio: 4 / 3; border-radius: 12px; overflow: hidden; background: var(--sand); border: 1px solid var(--line); }
+.visit-photo-link { position: absolute; inset: 0; display: block; cursor: zoom-in; }
+.visit-photo-link:focus-visible { outline: 3px solid var(--sea); outline-offset: -3px; border-radius: 12px; }
+.visit-photo-link:hover img { transform: scale(1.02); }
+.visit-photo img { transition: transform .25s ease; }
+@media (prefers-reduced-motion: reduce) {
+  .visit-photo img { transition: none; }
+  .visit-photo-link:hover img { transform: none; }
+}
 .visit-photo picture { position: absolute; inset: 0; display: block; }
 .visit-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
 .visit-photo.is-placeholder img { object-fit: contain; opacity: .5; padding: 18px; position: absolute; inset: 0; }
@@ -682,4 +690,13 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
   border: 1px solid var(--sea-soft);
   border-radius: 6px;
   padding: 7px 11px;
+}
+
+/* ---- PhotoSwipe caption (visit gallery) ---- */
+.pswp__custom-caption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 10px 16px 14px;
+  color: #fff; font-size: .9rem; line-height: 1.5; text-align: center;
+  background: linear-gradient(to top, rgba(0,0,0,.65), rgba(0,0,0,0));
+  z-index: 10;
 }

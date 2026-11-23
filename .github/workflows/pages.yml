@@ -73,6 +73,9 @@ jobs:
       - name: Shipping economics tests
         run: python3 tools/test_shipping.py
 
+      - name: Visit gallery tests
+        run: python3 tools/test_visit_gallery.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
