@@ -258,11 +258,18 @@
       window.FPPaypal && window.FPPaypal.refreshCart();
     }
     // ---- coupon: apply / remove / Enter --------------------------------
+    // NOTE: this block sits inside renderCart(), so it runs on every render.
+    // Without the guard below it re-attached another click listener to the same
+    // buttons each time. A single click then ran several handlers back to back,
+    // each dispatching its own re-render — wasteful, and the kind of ordering
+    // hazard that makes "Remove" behave inconsistently depending on how many
+    // renders happened first. Bound once now.
     (function initCoupon() {
       const inputEl = document.getElementById("coupon-input");
       const applyEl = document.getElementById("coupon-apply");
       const removeEl = document.getElementById("coupon-remove");
-      if (!inputEl || !window.FPcoupon) return;
+      if (!inputEl || !window.FPcoupon || window.__fpCouponWired) return;
+      window.__fpCouponWired = true;
 
       function apply() {
         const raw = inputEl.value;
@@ -287,6 +294,8 @@
       removeEl && removeEl.addEventListener("click", () => {
         window.FPcoupon.store("");
         if (inputEl) { inputEl.value = ""; }
+        const st = document.getElementById("coupon-status");
+        if (st) { st.textContent = ""; st.className = "cart-coupon-status"; }
         document.dispatchEvent(new CustomEvent("fp:cart"));
       });
     })();

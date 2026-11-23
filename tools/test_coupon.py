@@ -155,6 +155,27 @@ else:
         if 0 <= ix < i_coupon:
             fail(f"{nm} loads before coupon.js — FPcoupon would be undefined")
 
+# --------------------------------------------------------------------------
+# 6. coupon handlers must bind exactly once, outside the render loop
+# --------------------------------------------------------------------------
+print("checking coupon handlers bind only once...")
+if "__fpCouponWired" not in cart_js:
+    fail("cart.js: initCoupon has no re-entry guard — it lives inside renderCart(), "
+         "so it re-attaches a click listener on every render")
+
+# the guard must actually be consulted before addEventListener
+guard_at = cart_js.find("__fpCouponWired")
+listen_at = cart_js.find('addEventListener("click", apply)')
+if guard_at == -1 or listen_at == -1:
+    fail("cart.js: could not locate the coupon guard / apply listener")
+elif guard_at > listen_at:
+    fail("cart.js: the __fpCouponWired guard is set AFTER the click listener is "
+         "attached — stacked handlers are still possible")
+
+# remove handler must clear storage AND leave the UI consistent
+if 'store("")' not in cart_js:
+    fail("cart.js: the remove handler never clears the stored coupon")
+
 print()
 print("COUPON OK" if ok else "COUPON FAILED")
 sys.exit(0 if ok else 1)
