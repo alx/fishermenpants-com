@@ -176,6 +176,35 @@ elif guard_at > listen_at:
 if 'store("")' not in cart_js:
     fail("cart.js: the remove handler never clears the stored coupon")
 
+# --------------------------------------------------------------------------
+# 7. the `hidden` attribute must actually hide things
+# --------------------------------------------------------------------------
+# The HTML `hidden` attribute is only display:none at UA-stylesheet weight, so a
+# class that sets display (.total-row{display:flex}, .wa-cart-link{display:...})
+# silently defeats it: el.hidden === true but the element still renders. That is
+# exactly why the discount row refused to disappear. The global rule is the fix.
+print("checking [hidden] actually hides elements...")
+built_css = read("public", "css", "style.css") or ""
+site_css = read("static", "css", "style.css") or ""
+# Must be a STANDALONE [hidden] selector (optionally in a comma list that starts
+# with it). A scoped rule like ".p-info [hidden]" does NOT protect other pages —
+# that mistake is what let the cart bug live.
+if not re.search(r'(?:^|[{},])\s*\[hidden\]\s*(?:,[^{]*)?\{\s*display:\s*none\s*!important', built_css, re.M):
+    fail("css/style.css has no global '[hidden] { display:none !important }' rule — "
+         "any element whose class sets display will stay visible while hidden=true")
+else:
+    print("global [hidden] rule present in the built CSS")
+
+# and the specific elements this broke must carry hidden or a display-setting class
+if not re.search(r'\[hidden\][^{]*\{[^}]*!important', site_css):
+    fail("source style.css lacks the !important [hidden] rule")
+
+# the discount row is a .total-row (display:flex) -> would be the visible bug
+cart_html = read("public", "cart", "index.html") or ""
+m = re.search(r'<div class="total-row" id="cart-discount-row"[^>]*>', cart_html)
+if m and "hidden" not in m.group(0):
+    fail("cart-discount-row no longer starts hidden")
+
 print()
 print("COUPON OK" if ok else "COUPON FAILED")
 sys.exit(0 if ok else 1)
