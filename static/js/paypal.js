@@ -85,6 +85,15 @@
         form.appendChild(field("quantity_" + n, String(it.qty)));
         form.appendChild(field("amount_" + n, money(it.unitPrice)));
       });
+      // Shipping as its own line so PayPal charges it. The classic _cart
+      // handoff has no dedicated shipping field; a quantity-1 line item is the
+      // supported way to pass it without changing the goods amounts.
+      if (opts.shipping && opts.shipping.amount > 0) {
+        const n = opts.items.length + 1;
+        form.appendChild(field("item_name_" + n, "Standard shipping"));
+        form.appendChild(field("quantity_" + n, "1"));
+        form.appendChild(field("amount_" + n, money(opts.shipping.amount)));
+      }
     } else {
       const clean = v => String(v == null ? "" : v).replace(/Default Title/g, "").replace(/\s+/g, " ").trim();
       form.appendChild(field("item_name", clean(opts.name) || "Item"));
@@ -95,6 +104,10 @@
       if (opts.sku) form.appendChild(field("item_number", clean(opts.sku)));
       form.appendChild(field("amount", money(opts.unitPrice)));
       form.appendChild(field("quantity", String(opts.qty)));
+      // _xclick supports a handling charge, which is exactly "shipping".
+      if (opts.shipping && opts.shipping.amount > 0) {
+        form.appendChild(field("handling_cart", money(opts.shipping.amount)));
+      }
     }
     if (opts.order) {
       const c = opts.order.customer || {};
@@ -145,6 +158,7 @@
           sku: l.sku,
           unitPrice: l.unitPrice,
           qty: l.qty,
+          shipping: window.FPShipping ? window.FPShipping.forSubtotal(l.unitPrice * l.qty) : { amount: 0 },
           buttonLabel: "Pay for item"
         });
       } else {
@@ -163,6 +177,10 @@
           qty: i.qty,
           unitPrice: i.price
         }));
+      const _subtotal = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
+      const _shipping = window.FPShipping
+        ? window.FPShipping.forSubtotal(_subtotal)
+        : { amount: 0, free: true };
       if (!items.length) {
         cart.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
         return;
@@ -171,6 +189,7 @@
       buildForm(cart, {
         cmd: "_cart",
         items,
+        shipping: _shipping,
         order,
         returnUrl: order ? new URL("order/thank-you/", window.FP_BASE || location.origin + "/").href : "",
         cancelUrl: new URL("cart/", window.FP_BASE || location.origin + "/").href,

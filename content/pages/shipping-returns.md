@@ -16,16 +16,18 @@ Every order is packed by hand at our shop in **Lamai Beach, Koh Samui, Thailand*
 
 ## Delivery times
 
-| Destination | Standard (free) | EMS express |
+| Destination | Standard | EMS express |
 |---|---|---|
 | Thailand | 2–4 business days | 1–2 business days |
 | Asia | 10–18 business days | 5–7 business days |
 | Europe & UK | 14–24 business days | 7–10 business days |
 | USA, Canada & Australia | 14–28 business days | 7–12 business days |
 
-Standard shipping is **free** on every order. These are typical times — customs checks and local postal delays can add a few days, especially in December and around Thai public holidays.
+**Free standard shipping on orders over $149 USD.** Below that, standard shipping is a flat **$18 USD** per parcel — that is roughly what a single parcel costs us to send from Koh Samui, and it is shown as a separate line in your cart before you pay.
 
-**EMS tip:** express shipping is expensive for a single item. It is much better value with two or more pieces.
+These are typical times — customs checks and local postal delays can add a few days, especially in December and around Thai public holidays.
+
+**EMS tip:** express shipping is expensive for a single item. It is much better value with two or more pieces. Ask us for an EMS quote before you order and we will tell you the exact cost.
 
 ## Tracking
 

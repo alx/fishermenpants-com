@@ -106,7 +106,10 @@
     fd.set("phone", c.phone || "");
     fd.set("ship_to", [c.address1, c.address2, c.city, c.state, c.zip, c.country].filter(Boolean).join(", "));
     fd.set("items", lines);
-    fd.set("subtotal", "$" + Number(order.total).toFixed(2) + " USD");
+    const _ship = order.shipping || { amount: 0, free: true };
+    fd.set("subtotal", "$" + Number(order.subtotal != null ? order.subtotal : order.total).toFixed(2) + " USD");
+    fd.set("shipping", _ship.free ? "Free (order over $" + (window.FPShipping ? window.FPShipping.FREE_OVER : 149) + ")" : "$" + Number(_ship.amount).toFixed(2) + " USD");
+    fd.set("total", "$" + Number(order.total).toFixed(2) + " USD");
     // Carry the click-id (fbclid/gclid/…) from meta-events.js for ad attribution.
     let notes = c.notes || "";
     try {
@@ -151,7 +154,18 @@
       items: cart.items.map(i => ({
         name: i.name, description: i.description || "", sku: i.sku || i.handle, qty: i.qty, price: i.price
       })),
-      total: cart.items.reduce((s, i) => s + i.qty * i.price, 0)
+      // subtotal is the goods; shipping is added under the $149 threshold.
+      // total is what the customer actually pays — it must include shipping,
+      // otherwise PayPal only ever takes the goods and the shop eats the postage.
+      subtotal: cart.items.reduce((s, i) => s + i.qty * i.price, 0),
+      shipping: (function () {
+        var sub = cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
+        return window.FPShipping ? window.FPShipping.forSubtotal(sub) : { amount: 0, free: true };
+      })(),
+      total: (function () {
+        var sub = cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
+        return window.FPShipping ? window.FPShipping.grandTotal(sub) : sub;
+      })()
     };
     try { localStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch {}
     notify(order);

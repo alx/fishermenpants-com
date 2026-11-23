@@ -669,3 +669,17 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 }
 .mirror-share-status { color: var(--sea-dark); font-size: .84rem; margin: 10px 0 0; min-height: 1.2em; }
 @media (prefers-reduced-motion: reduce) { .mirror-share-btn { transition: none; } }
+
+/* ---- Cart: shipping line, grand total, free-shipping nudge ---- */
+.total-row--grand { border-top: 1px solid var(--line); margin-top: 8px; padding-top: 10px; font-size: 1.06rem; }
+.total-row--grand strong { color: var(--brown-dark); }
+#cart-shipping.is-free { color: var(--sea); }
+.cart-ship-nudge {
+  margin: 6px 0 2px;
+  font-size: .86rem;
+  color: var(--sea-dark);
+  background: #f4fafb;
+  border: 1px solid var(--sea-soft);
+  border-radius: 6px;
+  padding: 7px 11px;
+}

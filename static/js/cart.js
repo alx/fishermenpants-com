@@ -147,8 +147,37 @@
         });
         cartItems.appendChild(row);
       }
+      const subtotal = window.FPCart.total(cart);
       const sub = document.getElementById("cart-subtotal");
-      if (sub) sub.textContent = money(window.FPCart.total(cart)) + " USD";
+      if (sub) sub.textContent = money(subtotal) + " USD";
+
+      // Shipping line + grand total. Without this the shop silently absorbed
+      // ~$18 on every order: PayPal was being handed the product total only.
+      if (window.FPShipping) {
+        const ship = window.FPShipping.forSubtotal(subtotal);
+        const shipEl = document.getElementById("cart-shipping");
+        if (shipEl) {
+          shipEl.textContent = ship.free ? "Free" : "$" + window.FPShipping.money(ship.amount) + " USD";
+          shipEl.classList.toggle("is-free", ship.free);
+        }
+        const totEl = document.getElementById("cart-total");
+        if (totEl) totEl.textContent = window.FPShipping.money(window.FPShipping.grandTotal(subtotal)) + " USD";
+
+        const nudge = document.getElementById("cart-ship-nudge");
+        if (nudge) {
+          const away = window.FPShipping.toFreeShipping(subtotal);
+          if (away > 0) {
+            nudge.hidden = false;
+            nudge.textContent = "Add $" + window.FPShipping.money(away) +
+              " more for free shipping.";
+          } else if (subtotal > 0) {
+            nudge.hidden = false;
+            nudge.textContent = "You've got free standard shipping.";
+          } else {
+            nudge.hidden = true;
+          }
+        }
+      }
 
       // Bundle nudge: show only while the cart holds exactly one piece.
       const totalQty = cart.items.reduce((s, i) => s + i.qty, 0);
@@ -163,8 +192,13 @@
           const cfg = (window.FP_CONFIG && window.FP_CONFIG.business) || {};
           const lines = cart.items.map(i =>
             `${i.qty} x ${i.name}${i.title ? " (" + i.title + ")" : ""} — $${(i.price * i.qty).toFixed(2)}`);
+          const _sub = window.FPCart.total(cart);
+          const _ship = window.FPShipping ? window.FPShipping.forSubtotal(_sub) : null;
+          const _grand = window.FPShipping ? window.FPShipping.grandTotal(_sub) : _sub;
           const text = "Hi GAYA, I'd like to order:\n" + lines.join("\n") +
-            "\nTotal: $" + window.FPCart.total(cart).toFixed(2);
+            "\nSubtotal: $" + _sub.toFixed(2) +
+            (_ship ? "\nShipping: " + (_ship.free ? "free" : "$" + _ship.amount.toFixed(2)) : "") +
+            "\nTotal: $" + _grand.toFixed(2);
           wa.href = "https://wa.me/" + String(cfg.phone || "").replace(/[^0-9]/g, "") +
             "?text=" + encodeURIComponent(text);
         }

@@ -70,6 +70,9 @@ jobs:
       - name: Mirror consent + share tests
         run: python3 tools/test_mirror_share.py
 
+      - name: Shipping economics tests
+        run: python3 tools/test_shipping.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5
