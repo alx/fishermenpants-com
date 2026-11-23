@@ -108,6 +108,10 @@
     fd.set("items", lines);
     const _ship = order.shipping || { amount: 0, free: true };
     fd.set("subtotal", "$" + Number(order.subtotal != null ? order.subtotal : order.total).toFixed(2) + " USD");
+    const _disc = order.discount || { code: "", amount: 0, percent: 0 };
+    if (_disc.amount > 0) {
+      fd.set("discount", _disc.code + " -" + _disc.percent + "% = -$" + Number(_disc.amount).toFixed(2) + " USD");
+    }
     fd.set("shipping", _ship.free ? "Free (order over $" + (window.FPShipping ? window.FPShipping.FREE_OVER : 149) + ")" : "$" + Number(_ship.amount).toFixed(2) + " USD");
     fd.set("total", "$" + Number(order.total).toFixed(2) + " USD");
     // Carry the click-id (fbclid/gclid/…) from meta-events.js for ad attribution.
@@ -154,17 +158,41 @@
       items: cart.items.map(i => ({
         name: i.name, description: i.description || "", sku: i.sku || i.handle, qty: i.qty, price: i.price
       })),
-      // subtotal is the goods; shipping is added under the $149 threshold.
-      // total is what the customer actually pays — it must include shipping,
-      // otherwise PayPal only ever takes the goods and the shop eats the postage.
-      subtotal: cart.items.reduce((s, i) => s + i.qty * i.price, 0),
+      // subtotal is the goods, discount reduces the goods, shipping is added
+      // under the $149 threshold measured AFTER the discount (owner-confirmed).
+      // total is what the customer actually pays — it must include shipping and
+      // subtract the discount, otherwise PayPal takes the wrong amount.
+      subtotal: cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0),
+      discount: (function () {
+        var sub = cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
+        var code = window.FPcoupon ? window.FPcoupon.stored() : "";
+        if (!code || !window.FPcoupon) return { code: "", amount: 0, percent: 0 };
+        var r = window.FPcoupon.evaluate(code, sub);
+        return r.ok
+          ? { code: r.code, amount: r.amount, percent: r.percent }
+          : { code: "", amount: 0, percent: 0 };
+      })(),
       shipping: (function () {
         var sub = cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
-        return window.FPShipping ? window.FPShipping.forSubtotal(sub) : { amount: 0, free: true };
+        var d = 0;
+        var code = window.FPcoupon ? window.FPcoupon.stored() : "";
+        if (code && window.FPcoupon) {
+          var r = window.FPcoupon.evaluate(code, sub);
+          if (r.ok) d = r.amount;
+        }
+        var net = Math.max(0, sub - d);
+        return window.FPShipping ? window.FPShipping.forSubtotal(net) : { amount: 0, free: true };
       })(),
       total: (function () {
         var sub = cart.items.reduce(function (s, i) { return s + i.qty * i.price; }, 0);
-        return window.FPShipping ? window.FPShipping.grandTotal(sub) : sub;
+        var d = 0;
+        var code = window.FPcoupon ? window.FPcoupon.stored() : "";
+        if (code && window.FPcoupon) {
+          var r = window.FPcoupon.evaluate(code, sub);
+          if (r.ok) d = r.amount;
+        }
+        var net = Math.max(0, sub - d);
+        return (window.FPShipping ? window.FPShipping.grandTotal(net) : net);
       })()
     };
     try { localStorage.setItem(ORDER_KEY, JSON.stringify(order)); } catch {}

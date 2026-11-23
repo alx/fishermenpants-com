@@ -76,6 +76,9 @@ jobs:
       - name: Visit gallery tests
         run: python3 tools/test_visit_gallery.py
 
+      - name: Coupon tests
+        run: python3 tools/test_coupon.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5

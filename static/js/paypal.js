@@ -85,14 +85,23 @@
         form.appendChild(field("quantity_" + n, String(it.qty)));
         form.appendChild(field("amount_" + n, money(it.unitPrice)));
       });
-      // Shipping as its own line so PayPal charges it. The classic _cart
-      // handoff has no dedicated shipping field; a quantity-1 line item is the
-      // supported way to pass it without changing the goods amounts.
+      // The classic _cart handoff has no shipping and no discount field, so
+      // both go in as quantity-1 line items: shipping positive, discount
+      // NEGATIVE. The sum of amount_N x quantity_N is what PayPal charges, so a
+      // negative discount line is the supported way to reduce the total.
+      let lineNo = opts.items.length;
+      if (opts.discount && opts.discount.amount > 0) {
+        lineNo += 1;
+        form.appendChild(field("item_name_" + lineNo,
+          "Discount (" + (opts.discount.code || "code") + " -" + (opts.discount.percent || 0) + "%)"));
+        form.appendChild(field("quantity_" + lineNo, "1"));
+        form.appendChild(field("amount_" + lineNo, "-" + money(opts.discount.amount)));
+      }
       if (opts.shipping && opts.shipping.amount > 0) {
-        const n = opts.items.length + 1;
-        form.appendChild(field("item_name_" + n, "Standard shipping"));
-        form.appendChild(field("quantity_" + n, "1"));
-        form.appendChild(field("amount_" + n, money(opts.shipping.amount)));
+        lineNo += 1;
+        form.appendChild(field("item_name_" + lineNo, "Standard shipping"));
+        form.appendChild(field("quantity_" + lineNo, "1"));
+        form.appendChild(field("amount_" + lineNo, money(opts.shipping.amount)));
       }
     } else {
       const clean = v => String(v == null ? "" : v).replace(/Default Title/g, "").replace(/\s+/g, " ").trim();
@@ -178,8 +187,18 @@
           unitPrice: i.price
         }));
       const _subtotal = items.reduce((s, i) => s + i.qty * i.unitPrice, 0);
+      // Coupon: owner-confirmed that the free-shipping threshold is measured
+      // AFTER the discount, on what the customer actually pays for the goods.
+      const _code = window.FPcoupon ? window.FPcoupon.stored() : "";
+      const _disc = _code && window.FPcoupon
+        ? window.FPcoupon.evaluate(_code, _subtotal)
+        : null;
+      const _discount = _disc && _disc.ok ? _disc : null;
+      const _netGoods = _discount
+        ? window.FPcoupon.netSubtotal(_subtotal, _discount.amount)
+        : _subtotal;
       const _shipping = window.FPShipping
-        ? window.FPShipping.forSubtotal(_subtotal)
+        ? window.FPShipping.forSubtotal(_netGoods)
         : { amount: 0, free: true };
       if (!items.length) {
         cart.innerHTML = '<p class="pay-disabled">Your cart is empty.</p>';
@@ -190,6 +209,7 @@
         cmd: "_cart",
         items,
         shipping: _shipping,
+        discount: _discount,
         order,
         returnUrl: order ? new URL("order/thank-you/", window.FP_BASE || location.origin + "/").href : "",
         cancelUrl: new URL("cart/", window.FP_BASE || location.origin + "/").href,

@@ -28,6 +28,19 @@
       <p class="co-error" id="co-error" hidden></p>
       <div class="cart-totals">
         <div class="total-row"><span>Subtotal</span><strong id="cart-subtotal">$0.00 USD</strong></div>
+
+        <div class="cart-coupon" id="cart-coupon">
+          <label class="cart-coupon-label" for="coupon-input">Discount code</label>
+          <div class="cart-coupon-row">
+            <input id="coupon-input" type="text" inputmode="text" autocomplete="off"
+                   spellcheck="false" placeholder="From $99" aria-describedby="coupon-status">
+            <button type="button" id="coupon-apply" class="btn-plain cart-coupon-btn">Apply</button>
+            <button type="button" id="coupon-remove" class="cart-coupon-remove" hidden>Remove</button>
+          </div>
+          <p class="cart-coupon-status" id="coupon-status" role="status" aria-live="polite"></p>
+        </div>
+
+        <div class="total-row" id="cart-discount-row" hidden><span id="cart-discount-label">Discount</span><strong id="cart-discount">—</strong></div>
         <div class="total-row"><span>Standard shipping</span><strong id="cart-shipping">$0.00 USD</strong></div>
         <p class="cart-ship-nudge" id="cart-ship-nudge" hidden></p>
         <div class="total-row total-row--grand"><span>Total</span><strong id="cart-total">$0.00 USD</strong></div>

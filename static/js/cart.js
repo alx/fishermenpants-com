@@ -151,26 +151,77 @@
       const sub = document.getElementById("cart-subtotal");
       if (sub) sub.textContent = money(subtotal) + " USD";
 
+      // ---- discount -------------------------------------------------------
+      // Owner-confirmed: the free-shipping threshold is measured AFTER the
+      // discount, i.e. on what the customer actually pays for the goods.
+      const coupon = window.FPcoupon;
+      const code = coupon ? coupon.stored() : "";
+      const disc = coupon && code ? coupon.evaluate(code, subtotal) : null;
+      const netGoods = disc && disc.ok ? coupon.netSubtotal(subtotal, disc.amount) : subtotal;
+
+      const discRow = document.getElementById("cart-discount-row");
+      const discEl = document.getElementById("cart-discount");
+      const discLabel = document.getElementById("cart-discount-label");
+      const statusEl = document.getElementById("coupon-status");
+      const inputEl = document.getElementById("coupon-input");
+      const removeEl = document.getElementById("coupon-remove");
+      const applyEl = document.getElementById("coupon-apply");
+
+      function setStatus(msg, kind) {
+        if (!statusEl) return;
+        statusEl.textContent = msg || "";
+        statusEl.className = "cart-coupon-status" + (kind ? " is-" + kind : "");
+      }
+
+      if (disc && disc.ok) {
+        if (discRow) discRow.hidden = false;
+        if (discEl) discEl.textContent = "−$" + coupon.money(disc.amount) + " USD";
+        if (discLabel) discLabel.textContent = "Discount (" + disc.code + " −" + disc.percent + "%)";
+        if (removeEl) removeEl.hidden = false;
+        if (applyEl) applyEl.hidden = true;
+        if (inputEl) { inputEl.hidden = true; }
+        setStatus("", "");
+      } else {
+        if (discRow) discRow.hidden = true;
+        if (removeEl) removeEl.hidden = true;
+        if (applyEl) applyEl.hidden = false;
+        if (inputEl) { inputEl.hidden = false; }
+        if (disc && disc.reason === "minimum") {
+          // Code is real but the cart is too small: say exactly how much more.
+          setStatus("Spend $" + coupon.money(disc.shortfall) + " more to use " +
+                    disc.code + " (−" + disc.percent + "%).", "warn");
+        } else if (disc && disc.reason === "unknown") {
+          setStatus("That code isn't valid.", "error");
+          if (coupon) coupon.store("");   // drop a stale/typo code so it can't linger
+          if (inputEl) inputEl.hidden = false;
+        } else {
+          setStatus("", "");
+        }
+        if (inputEl && coupon && code && disc && disc.reason === "minimum") {
+          inputEl.value = code;
+        }
+      }
+
       // Shipping line + grand total. Without this the shop silently absorbed
       // ~$18 on every order: PayPal was being handed the product total only.
       if (window.FPShipping) {
-        const ship = window.FPShipping.forSubtotal(subtotal);
+        const ship = window.FPShipping.forSubtotal(netGoods);
         const shipEl = document.getElementById("cart-shipping");
         if (shipEl) {
           shipEl.textContent = ship.free ? "Free" : "$" + window.FPShipping.money(ship.amount) + " USD";
           shipEl.classList.toggle("is-free", ship.free);
         }
         const totEl = document.getElementById("cart-total");
-        if (totEl) totEl.textContent = window.FPShipping.money(window.FPShipping.grandTotal(subtotal)) + " USD";
+        if (totEl) totEl.textContent = "$" + window.FPShipping.money(window.FPShipping.grandTotal(netGoods)) + " USD";
 
         const nudge = document.getElementById("cart-ship-nudge");
         if (nudge) {
-          const away = window.FPShipping.toFreeShipping(subtotal);
+          const away = window.FPShipping.toFreeShipping(netGoods);
           if (away > 0) {
             nudge.hidden = false;
             nudge.textContent = "Add $" + window.FPShipping.money(away) +
               " more for free shipping.";
-          } else if (subtotal > 0) {
+          } else if (netGoods > 0) {
             nudge.hidden = false;
             nudge.textContent = "You've got free standard shipping.";
           } else {
@@ -206,6 +257,40 @@
 
       window.FPPaypal && window.FPPaypal.refreshCart();
     }
+    // ---- coupon: apply / remove / Enter --------------------------------
+    (function initCoupon() {
+      const inputEl = document.getElementById("coupon-input");
+      const applyEl = document.getElementById("coupon-apply");
+      const removeEl = document.getElementById("coupon-remove");
+      if (!inputEl || !window.FPcoupon) return;
+
+      function apply() {
+        const raw = inputEl.value;
+        const cart = load();
+        const subtotal = window.FPCart.total(cart);
+        const res = window.FPcoupon.evaluate(raw, subtotal);
+        if (res.ok) {
+          window.FPcoupon.store(res.code);
+        } else if (res.reason === "unknown") {
+          window.FPcoupon.store("");
+        } else if (res.reason === "minimum") {
+          // Keep it so the status can explain the shortfall, but don't apply.
+          window.FPcoupon.store(res.code);
+        }
+        document.dispatchEvent(new CustomEvent("fp:cart"));
+      }
+
+      applyEl && applyEl.addEventListener("click", apply);
+      inputEl.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") { e.preventDefault(); apply(); }
+      });
+      removeEl && removeEl.addEventListener("click", () => {
+        window.FPcoupon.store("");
+        if (inputEl) { inputEl.value = ""; }
+        document.dispatchEvent(new CustomEvent("fp:cart"));
+      });
+    })();
+
     document.addEventListener("fp:cart", renderCart);
     renderCart();
   }
