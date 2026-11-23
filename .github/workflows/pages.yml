@@ -79,6 +79,9 @@ jobs:
       - name: Coupon tests
         run: python3 tools/test_coupon.py
 
+      - name: Mobile layout tests
+        run: python3 tools/test_mobile_layout.py
+
       - name: Setup GitHub Pages
         id: pages
         uses: actions/configure-pages@v5

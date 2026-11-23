@@ -109,6 +109,10 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 
 /* image-with-text interstitials */
 .iwt { display: grid; grid-template-columns: 1.12fr 1fr; min-height: 540px; max-width: 1120px; margin: 0 auto; }
+/* Grid children default to min-width:auto, so a 1fr column refuses to shrink
+   below its content's minimum and can push the page wider than the phone
+   screen (which made the h2 look like it overflowed to the right). */
+.iwt > * { min-width: 0; }
 .iwt-media { position: relative; min-height: 380px; }
 .iwt-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
 .iwt-content { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; gap: 18px; padding: 56px 44px; background: #efe9df; }
@@ -119,10 +123,15 @@ body.nav-open .search-bar, .search-page .search-bar { display: flex; }
 .btn:hover { background: var(--brown-dark); color: #fff; }
 .btn--secondary { text-decoration: none; }
 @media (max-width: 860px) {
-  .iwt { grid-template-columns: 1fr; }
+  .iwt { grid-template-columns: 1fr; min-height: 0; }
   .iwt--flip .iwt-media { order: 0; }
-  .iwt-media { min-height: 340px; aspect-ratio: 4/3; }
+  /* aspect-ratio + min-height together force a MINIMUM WIDTH (340px * 4/3 =
+     453px), which is wider than a 375px phone and stretched the whole page.
+     Keep the ratio but let the width drive the height on small screens. */
+  .iwt-media { min-height: 0; aspect-ratio: 4/3; width: 100%; }
   .iwt-content { padding: 40px 24px; }
+  .iwt-content h2 { font-size: clamp(1.45rem, 7vw, 2rem); overflow-wrap: break-word; }
+  .iwt-content p { max-width: 100%; }
 }
 .strip { background: var(--sand); text-align: center; padding: 18px; }
 /* Keep the tagline on the same column as the hero and the sections below it. */
